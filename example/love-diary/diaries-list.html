@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>恋爱日记 - 日记列表</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <div class="screen" role="application" aria-label="恋爱日记 - 日记列表">
+        <div class="header">
+          <a class="icon-button" href="home.html" aria-label="返回首页">
+            <span class="material-icons">home</span>
+          </a>
+          <div class="header-title">恋爱日记</div>
+          <div class="header-action">
+            <a class="icon-button" href="confession.html" aria-label="爱的告白">
+              <span class="material-icons">favorite</span>
+            </a>
+            <a class="icon-button" href="diaries-new.html" aria-label="新建日记">
+              <span class="material-icons">add</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="content safe-pad-bottom">
+          <div class="search-bar" role="search" aria-label="搜索日记">
+            <span class="material-icons search-icon" aria-hidden="true">search</span>
+            <input
+              class="search-input"
+              type="search"
+              placeholder="搜索：心情/地点/关键词…"
+              aria-label="搜索关键词"
+            />
+          </div>
+
+          <div class="chips-row" aria-label="隐私筛选">
+            <a class="chip active" href="diaries-list.html" aria-label="筛选：全部">
+              全部
+            </a>
+            <a class="chip" href="diaries-list.html#private" aria-label="筛选：私密">
+              私密
+            </a>
+            <a class="chip" href="diaries-list.html#public" aria-label="筛选：公开">
+              公开
+            </a>
+          </div>
+
+          <div class="card">
+            <div style="font-weight: 900; margin-bottom: var(--space-sm)">
+              日期筛选
+            </div>
+            <div class="form-row">
+              <div>
+                <select aria-label="筛选：年份">
+                  <option selected>2026</option>
+                  <option>2025</option>
+                  <option>2024</option>
+                </select>
+              </div>
+              <div>
+                <select aria-label="筛选：月份">
+                  <option selected>03</option>
+                  <option>02</option>
+                  <option>01</option>
+                </select>
+              </div>
+              <div>
+                <select aria-label="筛选：日期">
+                  <option selected>25</option>
+                  <option>24</option>
+                  <option>23</option>
+                </select>
+              </div>
+            </div>
+            <div style="margin-top: var(--space-md)">
+              <a class="button ghost full" href="diaries-list.html" aria-label="应用筛选">
+                <span class="button-icon material-icons">tune</span>
+                应用筛选
+              </a>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top: var(--space-md)">
+            <div class="row-between" style="margin-bottom: var(--space-md)">
+              <div style="font-weight: 900">日记列表</div>
+              <div class="muted" style="font-size: 13px">共 8 条</div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: var(--space-md)">
+              <a class="list-item" href="diaries-detail.html" aria-label="查看日记：今天的拥抱">
+                <img
+                  class="li-avatar"
+                  src="https://randomuser.me/api/portraits/men/32.jpg"
+                  alt="头像"
+                />
+                <div class="li-main">
+                  <div class="li-title">今天的拥抱</div>
+                  <div class="li-meta">
+                    <span>2026-03-25</span>
+                    <span class="badge primary">私密</span>
+                  </div>
+                  <div class="li-preview">
+                    我们在路灯下聊了很久，心里突然就安静了。
+                  </div>
+                </div>
+                <span class="material-icons" style="color: var(--text-tertiary)">chevron_right</span>
+              </a>
+
+              <a class="list-item" href="diaries-detail.html" aria-label="查看日记：甜品和电影">
+                <img
+                  class="li-avatar"
+                  src="https://randomuser.me/api/portraits/women/52.jpg"
+                  alt="头像"
+                />
+                <div class="li-main">
+                  <div class="li-title">甜品和电影</div>
+                  <div class="li-meta">
+                    <span>2026-03-21</span>
+                    <span class="badge">公开</span>
+                  </div>
+                  <div class="li-preview">
+                    你笑起来的时候，连电影都变得更好看了。
+                  </div>
+                </div>
+                <span class="material-icons" style="color: var(--text-tertiary)">chevron_right</span>
+              </a>
+
+              <a class="list-item" href="diaries-detail.html" aria-label="查看日记：一起散步">
+                <img
+                  class="li-avatar"
+                  src="https://randomuser.me/api/portraits/men/85.jpg"
+                  alt="头像"
+                />
+                <div class="li-main">
+                  <div class="li-title">一起散步</div>
+                  <div class="li-meta">
+                    <span>2026-03-18</span>
+                    <span class="badge primary">私密</span>
+                  </div>
+                  <div class="li-preview">
+                    风有点凉，但你的手一直很暖。
+                  </div>
+                </div>
+                <span class="material-icons" style="color: var(--text-tertiary)">chevron_right</span>
+              </a>
+
+              <a class="list-item" href="diaries-detail.html" aria-label="查看日记：纪念日彩排">
+                <img
+                  class="li-avatar"
+                  src="https://randomuser.me/api/portraits/women/11.jpg"
+                  alt="头像"
+                />
+                <div class="li-main">
+                  <div class="li-title">纪念日彩排</div>
+                  <div class="li-meta">
+                    <span>2026-03-12</span>
+                    <span class="badge important">重要</span>
+                  </div>
+                  <div class="li-preview">
+                    我们把想说的话写在便利贴上，然后贴满了桌角。
+                  </div>
+                </div>
+                <span class="material-icons" style="color: var(--text-tertiary)">chevron_right</span>
+              </a>
+            </div>
+          </div>
+
+          <div style="height: 40px"></div>
+        </div>
+
+        <div class="nav-bar" role="navigation" aria-label="底部导航">
+          <a class="nav-item" href="home.html" aria-label="首页">
+            <span class="material-icons nav-icon">home</span>
+            <span>首页</span>
+          </a>
+          <a
+            class="nav-item active"
+            href="diaries-list.html"
+            aria-label="恋爱日记"
+          >
+            <span class="material-icons nav-icon">edit_note</span>
+            <span>日记</span>
+          </a>
+          <a class="nav-item" href="albums-list.html" aria-label="爱的相册">
+            <span class="material-icons nav-icon">photo_album</span>
+            <span>相册</span>
+          </a>
+          <a class="nav-item" href="milestones-timeline.html" aria-label="相爱里程碑">
+            <span class="material-icons nav-icon">timeline</span>
+            <span>里程碑</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>恋爱日记 - 日记详情</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <div class="screen" role="application" aria-label="恋爱日记 - 日记详情">
+        <div
+          style="
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            height: 220px;
+            background-image: url('https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=1000&q=70');
+            background-size: cover;
+            background-position: center;
+            filter: saturate(1.1) brightness(0.95);
+          "
+          aria-hidden="true"
+        ></div>
+        <div
+          style="
+            position: absolute;
+            inset: 0;
+            height: 220px;
+            background: linear-gradient(to bottom, rgba(15, 15, 22, 0.92) 0%, rgba(15, 15, 22, 0.70) 60%, rgba(15, 15, 22, 0) 100%);
+          "
+          aria-hidden="true"
+        ></div>
+
+        <div class="header" style="position: relative">
+          <a class="icon-button" href="diaries-list.html" aria-label="返回日记列表">
+            <span class="material-icons">arrow_back</span>
+          </a>
+          <div class="header-title">日记详情</div>
+          <div class="header-action">
+            <a class="icon-button" href="confession.html" aria-label="爱的告白">
+              <span class="material-icons">favorite</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="content safe-pad-bottom" style="padding-top: 140px">
+          <div class="card">
+            <div class="row-between" style="margin-bottom: var(--space-sm)">
+              <div>
+                <div style="font-weight: 950; font-size: 18px; margin-bottom: 6px">
+                  今天的拥抱
+                </div>
+                <div class="muted" style="font-size: 13px">2026-03-25 · 距上次 4 天</div>
+              </div>
+              <div class="badge primary">私密</div>
+            </div>
+
+            <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-md)">
+              <span class="tag highlighted">温柔</span>
+              <span class="tag">路灯</span>
+              <span class="tag">散步</span>
+            </div>
+          </div>
+
+          <div class="card" aria-label="日记内容">
+            <div style="font-weight: 900; margin-bottom: var(--space-md)">关于这一天</div>
+            <div style="color: var(--text-secondary); font-size: 14px; line-height: 1.8">
+              我想把今天写得更慢一点：我们在路灯下聊到很晚，你的笑把所有疲惫都点亮了。
+              <br /><br />
+              希望下次再见的时候，我们也能继续把喜欢说得更具体。
+            </div>
+          </div>
+
+          <div class="card" aria-label="照片预览与多图展示">
+            <div class="row-between" style="margin-bottom: var(--space-md)">
+              <div style="font-weight: 900">照片（可点开查看大图）</div>
+              <div class="muted" style="font-size: 13px">3 张</div>
+            </div>
+
+            <div class="img-grid">
+              <a class="img-tile" href="#diaryImgPreviewDetail" aria-label="预览照片1">
+                <img
+                  src="https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=800&q=70"
+                  alt="照片1"
+                />
+                <div class="count-badge">1</div>
+              </a>
+              <a class="img-tile" href="#diaryImgPreviewDetail" aria-label="预览照片2">
+                <img
+                  src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=70"
+                  alt="照片2"
+                />
+              </a>
+              <a class="img-tile" href="#diaryImgPreviewDetail" aria-label="预览照片3">
+                <img
+                  src="https://images.unsplash.com/photo-1520975916090-8e2f9a1a2b10?auto=format&fit=crop&w=800&q=70"
+                  alt="照片3"
+                />
+              </a>
+            </div>
+          </div>
+
+          <div class="card" aria-label="语音播放">
+            <div class="row-between" style="margin-bottom: var(--space-md)">
+              <div style="font-weight: 900">语音留言</div>
+              <div class="muted" style="font-size: 13px">点击播放（UI态）</div>
+            </div>
+
+            <div class="voice-row">
+              <div class="voice-play" aria-label="播放按钮（示例）">
+                <span class="material-icons" style="font-size: 22px">play_arrow</span>
+              </div>
+              <div style="flex: 1">
+                <div style="font-weight: 800; margin-bottom: 6px">给ta的一句“我在”</div>
+                <div class="voice-bars" aria-hidden="true">
+                  <span style="height: 8px"></span>
+                  <span style="height: 14px"></span>
+                  <span style="height: 10px"></span>
+                  <span style="height: 18px"></span>
+                  <span style="height: 12px"></span>
+                  <span style="height: 22px"></span>
+                  <span style="height: 16px"></span>
+                  <span style="height: 26px"></span>
+                  <span style="height: 18px"></span>
+                  <span style="height: 24px"></span>
+                  <span style="height: 16px"></span>
+                  <span style="height: 26px"></span>
+                  <span style="height: 18px"></span>
+                  <span style="height: 20px"></span>
+                  <span style="height: 14px"></span>
+                  <span style="height: 22px"></span>
+                </div>
+              </div>
+              <div class="voice-time">00:34</div>
+            </div>
+          </div>
+
+          <div style="height: 100px"></div>
+
+          <div class="card" style="position: sticky; bottom: 96px; padding: var(--space-md)">
+            <div style="display: flex; gap: var(--space-md)">
+              <a
+                class="button primary"
+                style="flex: 1"
+                href="diaries-edit.html"
+                aria-label="编辑日记"
+              >
+                <span class="button-icon material-icons">edit</span>
+                编辑
+              </a>
+              <a
+                class="button outline"
+                style="flex: 1"
+                href="diaries-list.html"
+                aria-label="返回列表"
+              >
+                返回
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-bar" role="navigation" aria-label="底部导航">
+          <a class="nav-item" href="home.html" aria-label="首页">
+            <span class="material-icons nav-icon">home</span>
+            <span>首页</span>
+          </a>
+          <a
+            class="nav-item active"
+            href="diaries-list.html"
+            aria-label="恋爱日记"
+          >
+            <span class="material-icons nav-icon">edit_note</span>
+            <span>日记</span>
+          </a>
+          <a class="nav-item" href="albums-list.html" aria-label="爱的相册">
+            <span class="material-icons nav-icon">photo_album</span>
+            <span>相册</span>
+          </a>
+          <a class="nav-item" href="milestones-timeline.html" aria-label="相爱里程碑">
+            <span class="material-icons nav-icon">timeline</span>
+            <span>里程碑</span>
+          </a>
+        </div>
+
+        <div id="diaryImgPreviewDetail" class="modal" aria-label="照片预览弹层">
+          <div class="modal-card">
+            <div class="modal-media">
+              <img
+                src="https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=900&q=70"
+                alt="预览大图"
+              />
+            </div>
+            <div class="modal-footer">
+              <a class="button ghost" href="diaries-detail.html" aria-label="关闭预览">
+                关闭
+              </a>
+              <a class="button primary" href="diaries-edit.html" aria-label="编辑日记">
+                编辑
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

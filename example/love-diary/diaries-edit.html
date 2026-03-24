@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>恋爱日记 - 编辑日记</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <div class="screen" role="application" aria-label="恋爱日记 - 编辑日记">
+        <div class="header">
+          <a class="icon-button" href="diaries-detail.html" aria-label="返回详情">
+            <span class="material-icons">arrow_back</span>
+          </a>
+          <div class="header-title">编辑日记</div>
+          <div class="header-action">
+            <a class="icon-button" href="diaries-detail.html" aria-label="预览">
+              <span class="material-icons">visibility</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="full-content safe-pad-bottom">
+          <div class="card">
+            <div style="font-weight: 900; font-size: 15px; margin-bottom: 6px">
+              让回忆保持最新的样子
+            </div>
+            <div class="muted" style="font-size: 13px; margin-bottom: var(--space-md)">
+              你可以调整标题/内容、重新排列照片、或替换语音。
+            </div>
+
+            <div class="form-group" style="margin-top: 0">
+              <label class="form-label" for="diaryTitleEdit">日记标题</label>
+              <input
+                id="diaryTitleEdit"
+                type="text"
+                value="今天的拥抱"
+                aria-label="日记标题"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="diaryDateEdit">日记日期</label>
+              <input
+                id="diaryDateEdit"
+                type="date"
+                value="2026-03-25"
+                aria-label="日记日期"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="diaryBodyEdit">内容</label>
+              <textarea id="diaryBodyEdit" aria-label="日记内容">
+我想把今天写得更慢一点：我们在路灯下聊到很晚，你的笑把所有疲惫都点亮了。
+              </textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">隐私</label>
+              <div class="chips-row" aria-label="隐私选择">
+                <a class="chip active" href="diaries-edit.html" aria-label="私密">
+                  私密（仅你们可见）
+                </a>
+                <a class="chip" href="diaries-edit.html#pub" aria-label="公开">
+                  公开（展示给你们）
+                </a>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">照片（支持拖拽排序 - UI态）</label>
+              <div class="img-grid" aria-label="照片网格">
+                <a class="img-tile" href="#diaryImgPreviewEdit" aria-label="预览照片1">
+                  <img
+                    src="https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=800&q=70"
+                    alt="照片1"
+                  />
+                  <div
+                    style="
+                      position: absolute;
+                      right: 8px;
+                      top: 8px;
+                      width: 36px;
+                      height: 36px;
+                      border-radius: var(--radius-full);
+                      background: rgba(0, 0, 0, 0.45);
+                      border: 1px solid rgba(255, 255, 255, 0.18);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                    aria-hidden="true"
+                    title="拖拽手柄（示例）"
+                  >
+                    <span class="material-icons" style="font-size: 18px; color: #fff"
+                      >drag_handle</span
+                    >
+                  </div>
+                  <div class="count-badge">1</div>
+                </a>
+                <a class="img-tile" href="#diaryImgPreviewEdit" aria-label="预览照片2">
+                  <img
+                    src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=70"
+                    alt="照片2"
+                  />
+                  <div
+                    style="
+                      position: absolute;
+                      right: 8px;
+                      top: 8px;
+                      width: 36px;
+                      height: 36px;
+                      border-radius: var(--radius-full);
+                      background: rgba(0, 0, 0, 0.45);
+                      border: 1px solid rgba(255, 255, 255, 0.18);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                    aria-hidden="true"
+                  >
+                    <span class="material-icons" style="font-size: 18px; color: #fff"
+                      >drag_handle</span
+                    >
+                  </div>
+                </a>
+                <a class="img-tile" href="#diaryImgPreviewEdit" aria-label="预览照片3">
+                  <img
+                    src="https://images.unsplash.com/photo-1520975916090-8e2f9a1a2b10?auto=format&fit=crop&w=800&q=70"
+                    alt="照片3"
+                  />
+                  <div
+                    style="
+                      position: absolute;
+                      right: 8px;
+                      top: 8px;
+                      width: 36px;
+                      height: 36px;
+                      border-radius: var(--radius-full);
+                      background: rgba(0, 0, 0, 0.45);
+                      border: 1px solid rgba(255, 255, 255, 0.18);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                    aria-hidden="true"
+                  >
+                    <span class="material-icons" style="font-size: 18px; color: #fff"
+                      >drag_handle</span
+                    >
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">语音（可播放）</label>
+              <div class="voice-row" aria-label="语音播放控件UI">
+                <div class="voice-play" aria-label="播放按钮（示例）">
+                  <span class="material-icons" style="font-size: 22px">play_arrow</span>
+                </div>
+                <div style="flex: 1">
+                  <div style="font-weight: 800; margin-bottom: 6px">已录制 · 给你的话</div>
+                  <div class="voice-bars" aria-hidden="true">
+                    <span style="height: 8px"></span>
+                    <span style="height: 16px"></span>
+                    <span style="height: 10px"></span>
+                    <span style="height: 22px"></span>
+                    <span style="height: 12px"></span>
+                    <span style="height: 26px"></span>
+                    <span style="height: 18px"></span>
+                    <span style="height: 24px"></span>
+                    <span style="height: 16px"></span>
+                    <span style="height: 26px"></span>
+                    <span style="height: 18px"></span>
+                    <span style="height: 22px"></span>
+                    <span style="height: 16px"></span>
+                    <span style="height: 24px"></span>
+                    <span style="height: 12px"></span>
+                    <span style="height: 22px"></span>
+                  </div>
+                </div>
+                <div class="voice-time">00:34</div>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: var(--space-lg)">
+              <a
+                class="button primary full"
+                href="diaries-detail.html"
+                aria-label="更新日记"
+              >
+                <span class="button-icon material-icons">check_circle</span>
+                更新日记
+              </a>
+              <div style="height: 10px"></div>
+              <a
+                class="button ghost full"
+                href="diaries-detail.html"
+                aria-label="删除日记（示例）"
+              >
+                <span class="button-icon material-icons" style="color: var(--text-secondary)">delete</span>
+                删除（仅UI态）
+              </a>
+            </div>
+          </div>
+
+          <div id="diaryImgPreviewEdit" class="modal" aria-label="照片预览弹层">
+            <div class="modal-card">
+              <div class="modal-media">
+                <img
+                  src="https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=900&q=70"
+                  alt="预览大图"
+                />
+              </div>
+              <div class="modal-footer">
+                <a class="button ghost" href="diaries-edit.html" aria-label="关闭预览">
+                  关闭
+                </a>
+                <a class="button primary" href="diaries-detail.html" aria-label="去详情">
+                  去详情
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-bar" role="navigation" aria-label="底部导航">
+          <a class="nav-item" href="home.html" aria-label="首页">
+            <span class="material-icons nav-icon">home</span>
+            <span>首页</span>
+          </a>
+          <a
+            class="nav-item active"
+            href="diaries-list.html"
+            aria-label="恋爱日记"
+          >
+            <span class="material-icons nav-icon">edit_note</span>
+            <span>日记</span>
+          </a>
+          <a class="nav-item" href="albums-list.html" aria-label="爱的相册">
+            <span class="material-icons nav-icon">photo_album</span>
+            <span>相册</span>
+          </a>
+          <a
+            class="nav-item"
+            href="milestones-timeline.html"
+            aria-label="相爱里程碑"
+          >
+            <span class="material-icons nav-icon">timeline</span>
+            <span>里程碑</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
