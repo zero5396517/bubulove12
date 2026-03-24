@@ -42,6 +42,7 @@ export type BubuMilestone = {
 }
 
 const KEY_CONFESSION = 'bubulove_v1_confession'
+const KEY_DIARY_DRAFT = 'bubulove_v1_diary_draft_payload'
 const KEY_DIARIES = 'bubulove_v1_diaries'
 const KEY_ALBUMS = 'bubulove_v1_albums'
 const KEY_PHOTOS = 'bubulove_v1_photos'
@@ -65,6 +66,51 @@ export const bubuGetConfession = (): string => {
 
 export const bubuSetConfession = (text: string): void => {
 	uni.setStorageSync(KEY_CONFESSION, text)
+}
+
+export type BubuDiaryDraftPayload = {
+	title: string
+	content: string
+}
+
+/** 从告白页跳转日记编辑前写入；编辑页读取后应 consume */
+export const bubuSetDiaryDraftPayload = (payload: BubuDiaryDraftPayload): void => {
+	uni.setStorageSync(KEY_DIARY_DRAFT, JSON.stringify({
+		title: payload.title,
+		content: payload.content,
+	} as UTSJSONObject))
+}
+
+/** 读取并清除一次性草稿 */
+export const bubuTakeDiaryDraftPayload = (): BubuDiaryDraftPayload | null => {
+	const raw = uni.getStorageSync(KEY_DIARY_DRAFT)
+	if (raw == null) {
+		return null
+	}
+	let str = ''
+	if (typeof raw === 'string') {
+		str = raw as string
+	} else {
+		str = raw.toString()
+	}
+	if (str.length == 0) {
+		return null
+	}
+	try {
+		const o = JSON.parse(str) as UTSJSONObject
+		if (o == null) {
+			return null
+		}
+		const t = o['title']
+		const c = o['content']
+		uni.removeStorageSync(KEY_DIARY_DRAFT)
+		return {
+			title: t != null ? t as string : '',
+			content: c != null ? c as string : '',
+		} as BubuDiaryDraftPayload
+	} catch (e) {
+		return null
+	}
 }
 
 const readJsonArray = (key: string): UTSJSONObject[] => {
@@ -563,6 +609,34 @@ export const bubuImportantMilestoneCount = (): number => {
 	let n = 0
 	all.forEach((x) => {
 		if (x.isImportant) {
+			n = n + 1
+		}
+	})
+	return n
+}
+
+/** 未来 days 天内（含今天）按公历日期匹配的「重要时刻」数量，用于首页提醒 */
+export const bubuImportantMilestonesUpcomingInDays = (days: number): number => {
+	if (days < 1) {
+		return 0
+	}
+	const all = bubuLoadMilestones()
+	const now = new Date()
+	const start = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime()
+	const endMs = start + days * 24 * 60 * 60 * 1000
+	let n = 0
+	all.forEach((m) => {
+		if (!m.isImportant) {
+			return
+		}
+		const d = new Date(m.dateMs)
+		const curY = now.getFullYear()
+		const ann = new Date(curY, d.getMonth(), d.getDate()).getTime()
+		let hit = ann
+		if (ann < start) {
+			hit = new Date(curY + 1, d.getMonth(), d.getDate()).getTime()
+		}
+		if (hit >= start && hit < endMs) {
 			n = n + 1
 		}
 	})

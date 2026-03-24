@@ -1,0 +1,22 @@
+/**
+ * 告白文案池（本地常量，供「换一句告白」随机展示）
+ */
+export const BUBU_CONFESSION_LINES: string[] = [
+	'一二，遇见你之后，平凡的日子也开始发光。',
+	'想把今天的风、月亮和晚安，都先存进日记里，再慢慢说给你听。',
+	'布布的世界很小，刚好装得下一二和好多好多喜欢。',
+	'和你在一起的每一刻，都值得被郑重地写下来。',
+	'一二，谢谢你出现在我的生命里。',
+	'喜欢你，是我想坚持很久很久的一件事。',
+	'想把所有温柔都留给你，像春天留给花开。',
+	'有你在身边，连等待都变得可爱起来。',
+]
+
+export const bubuRandomConfessionLine = (): string => {
+	const n = BUBU_CONFESSION_LINES.length
+	if (n == 0) {
+		return ''
+	}
+	const i = Math.floor(Math.random() * n)
+	return BUBU_CONFESSION_LINES[i]
+}

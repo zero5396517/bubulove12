@@ -2,48 +2,93 @@
 	<view class="bubu-page" style="flex:1">
 		<scroll-view class="bubu-scroll" style="flex:1" scroll-y="true" refresher-enabled="true" :refresher-triggered="refreshing"
 			@refresherrefresh="onRefresh">
-			<view class="bubu-card bubu-row" style="margin-top:12px;">
+			<view class="bubu-card" style="margin-top:12px;">
 				<input class="bubu-input" v-model="keyword" placeholder="搜索标题或正文" @confirm="applyFilter" />
 			</view>
 			<view class="bubu-card bubu-row">
-				<text class="bubu-label">年</text>
-				<input class="bubu-input" v-model="filterYear" placeholder="如 2025" type="number" />
-				<text class="bubu-label" style="width:40px;margin-left:8px;">月</text>
-				<input class="bubu-input" v-model="filterMonth" placeholder="1-12" type="number" />
+				<text class="bubu-label" style="width:72px;">年月</text>
+				<input class="bubu-input" v-model="filterYear" placeholder="年" type="number" style="flex:1;" />
+				<text class="bubu-list-meta" style="margin-left:6px;margin-right:6px;">/</text>
+				<input class="bubu-input" v-model="filterMonth" placeholder="月" type="number" style="flex:1;" />
 			</view>
-			<button class="bubu-primary-btn" type="default" style="background-color:#fce4ec;color:#c45c8b;" @click="applyFilter">筛选</button>
-			<view v-for="item in filtered" :key="item.id" class="bubu-card" @click="openDetail(item.id)">
-				<view class="bubu-row" style="justify-content:space-between;">
-					<text class="bubu-list-title">{{ item.title.length > 0 ? item.title : '无标题' }}</text>
-					<text v-if="item.isPrivate" style="font-size:12px;color:#e879a8;">私密</text>
+			<view class="bubu-card">
+				<view class="bubu-seg bubu-row">
+					<view class="bubu-seg-item" :class="privacySeg == 0 ? 'bubu-seg-item-on' : ''" @click="setPrivacy(0)">
+						<text class="bubu-seg-text" :class="privacySeg == 0 ? 'bubu-seg-text-on' : ''">全部</text>
+					</view>
+					<view class="bubu-seg-item" :class="privacySeg == 1 ? 'bubu-seg-item-on' : ''" @click="setPrivacy(1)">
+						<text class="bubu-seg-text" :class="privacySeg == 1 ? 'bubu-seg-text-on' : ''">仅私密</text>
+					</view>
+					<view class="bubu-seg-item" :class="privacySeg == 2 ? 'bubu-seg-item-on' : ''" @click="setPrivacy(2)">
+						<text class="bubu-seg-text" :class="privacySeg == 2 ? 'bubu-seg-text-on' : ''">仅公开</text>
+					</view>
 				</view>
-				<text class="bubu-list-meta">{{ formatTime(item.updatedAt) }}</text>
-				<text class="bubu-sub" style="margin-top:8px;text-align:left;">{{ clip(item.content) }}</text>
+			</view>
+			<button class="bubu-secondary-btn" type="default" style="margin-top:4px;" @click="applyFilter">
+				<text class="bubu-secondary-btn-text">应用筛选</text>
+			</button>
+			<view v-if="filtered.length == 0" class="bubu-empty">
+				<text class="bubu-empty-deco">📔</text>
+				<text class="bubu-empty-t">还没有记录，今天想和 TA 写点什么吗？</text>
+			</view>
+			<view v-for="item in filtered" :key="item.id" class="bubu-card" hover-class="bubu-card-hover" @click="openDetail(item.id)">
+				<view class="bubu-diary-row bubu-row">
+					<view class="bubu-diary-main">
+						<text class="bubu-diary-date">{{ formatDate(item.updatedAt) }}</text>
+						<text class="bubu-list-title">{{ item.title.length > 0 ? item.title : '无标题' }}</text>
+						<text class="bubu-list-meta" style="margin-top:4px;">{{ clip(item.content) }}</text>
+						<view v-if="item.isPrivate" class="bubu-tag bubu-tag-private" style="margin-top:8px;">
+							<text class="bubu-tag-private-t">私密</text>
+						</view>
+					</view>
+					<image v-if="firstThumb(item) != null" class="bubu-diary-thumb" :src="firstThumb(item)!" mode="aspectFill" />
+				</view>
 			</view>
 			<view style="height:24px;"></view>
 		</scroll-view>
-		<button class="bubu-primary-btn" type="primary" style="position:relative;" @click="goNew">新建日记</button>
+		<view class="bubu-list-footer" :style="{ paddingBottom: safeBottom + 'px' }">
+			<button class="bubu-primary-btn bubu-primary-btn-footer" type="default" @click="goNew">
+				<text class="bubu-primary-btn-text">新建日记</text>
+			</button>
+		</view>
 	</view>
 </template>
 
 <script setup lang="uts">
-	import { bubuLoadDiaries, type BubuDiary } from '@/store/bubulove-data.uts'
+	import { bubuLoadDiaries, bubuGetMedia, type BubuDiary } from '@/store/bubulove-data.uts'
 
 	const list = ref([] as BubuDiary[])
 	const filtered = ref([] as BubuDiary[])
 	const keyword = ref('')
 	const filterYear = ref('')
 	const filterMonth = ref('')
+	const privacySeg = ref(0)
 	const refreshing = ref(false)
+	const safeBottom = ref(16)
 
 	const load = () => {
 		list.value = bubuLoadDiaries()
 		applyFilter()
 	}
 
+	onMounted(() => {
+		const win = uni.getWindowInfo()
+		const bot = win.safeAreaInsets.bottom
+		if (bot > 0) {
+			safeBottom.value = bot + 8
+		} else {
+			safeBottom.value = 16
+		}
+	})
+
 	onPageShow(() => {
 		load()
 	})
+
+	const setPrivacy = (v: number) => {
+		privacySeg.value = v
+		applyFilter()
+	}
 
 	const applyFilter = () => {
 		const kw = keyword.value.trim().toLowerCase()
@@ -65,6 +110,12 @@
 		}
 		const out: BubuDiary[] = []
 		list.value.forEach((d) => {
+			if (privacySeg.value == 1 && !d.isPrivate) {
+				return
+			}
+			if (privacySeg.value == 2 && d.isPrivate) {
+				return
+			}
 			if (kw.length > 0) {
 				const t = d.title.toLowerCase()
 				const c = d.content.toLowerCase()
@@ -94,9 +145,9 @@
 		}, 400)
 	}
 
-	const formatTime = (ms: number): string => {
+	const formatDate = (ms: number): string => {
 		const d = new Date(ms)
-		return d.getFullYear().toString() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes())
+		return d.getFullYear().toString() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate())
 	}
 
 	const pad = (n: number): string => {
@@ -104,6 +155,14 @@
 			return '0' + n.toString()
 		}
 		return n.toString()
+	}
+
+	const firstThumb = (d: BubuDiary): string | null => {
+		if (d.imageMediaIds.length == 0) {
+			return null
+		}
+		const u = bubuGetMedia(d.imageMediaIds[0])
+		return u
 	}
 
 	const clip = (s: string): string => {
@@ -124,4 +183,9 @@
 
 <style>
 	@import '@/common/bubulove.css';
+
+	.bubu-card-hover {
+		opacity: 0.96;
+		transform: scale(0.99);
+	}
 </style>

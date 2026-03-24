@@ -1,9 +1,13 @@
 <template>
 	<view class="bubu-page" style="flex:1">
 		<scroll-view class="bubu-scroll" style="flex:1" scroll-y="true" v-if="albumId.length > 0">
-			<view class="bubu-card bubu-row" style="justify-content:space-between;">
+			<image v-if="heroSrc.length > 0" class="bubu-album-hero" :src="heroSrc" mode="aspectFill" />
+			<view v-else class="bubu-album-hero bubu-album-hero--empty"></view>
+			<view class="bubu-card bubu-row" style="margin-top:12px;justify-content:space-between;align-items:center;">
 				<text class="bubu-list-title">{{ albumName }}</text>
-				<button size="mini" type="primary" style="background-color:#e879a8;" @click="addPhotos">添加照片</button>
+				<button class="bubu-primary-btn bubu-primary-btn-compact" type="default" @click="addPhotos">
+					<text class="bubu-primary-btn-text">添加照片</text>
+				</button>
 			</view>
 			<view class="bubu-photo-grid" style="padding-left:16px;padding-right:16px;">
 				<view v-for="(p, idx) in photos" :key="p.id" class="bubu-photo-cell">
@@ -37,15 +41,28 @@
 	const albumId = ref('')
 	const albumName = ref('')
 	const photos = ref([] as BubuPhoto[])
+	const heroSrc = ref('')
 
 	const load = () => {
+		photos.value = bubuPhotosInAlbum(albumId.value)
 		const all = bubuLoadAlbums()
 		all.forEach((a) => {
 			if (a.id == albumId.value) {
 				albumName.value = a.name
+				let cover: string | null = null
+				if (a.coverMediaId != null) {
+					cover = bubuGetMedia(a.coverMediaId)
+				}
+				if (cover != null && cover.length > 0) {
+					heroSrc.value = cover
+				} else if (photos.value.length > 0) {
+					const u = bubuGetMedia(photos.value[0].mediaId)
+					heroSrc.value = u != null ? u : ''
+				} else {
+					heroSrc.value = ''
+				}
 			}
 		})
-		photos.value = bubuPhotosInAlbum(albumId.value)
 	}
 
 	const photoSrc = (p: BubuPhoto): string => {
@@ -94,6 +111,9 @@
 					i = i + 1
 				})
 				load()
+			},
+			fail: () => {
+				uni.showToast({ title: '需要相册/相机权限', icon: 'none' })
 			},
 		})
 	}

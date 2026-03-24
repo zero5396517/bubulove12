@@ -21,20 +21,25 @@
         "frameset" : true,
         "libVersion" : "3.7.1",
         "requiredPrivateInfos" : [ "getLocation", "onLocationChange", "startLocationUpdateBackground" ],
-        "permission" : {
-            "scope.userLocation" : {
-                "desc" : "你的位置信息将用于小程序位置接口的效果展示"
-            }
-        },
+        "permission" : {},
         "unipush" : {
-            "enable" : true
+            "enable" : false
         }
     },
     "app" : {
         "distribute" : {
             "modules" : {
-                "uni-ad" : {
-                    "gdt" : {}
+                "uni-ad" : {}
+            },
+            "icons" : {
+                "android" : {
+                    "hdpi" : "unpackage/res/icons/72x72.png",
+                    "xhdpi" : "unpackage/res/icons/96x96.png",
+                    "xxhdpi" : "unpackage/res/icons/144x144.png",
+                    "xxxhdpi" : "unpackage/res/icons/192x192.png"
+                },
+                "ios" : {
+                    "appstore" : "unpackage/res/icons/1024x1024.png"
                 }
             }
         }
@@ -50,7 +55,6 @@
                 "uni-location" : {
                     "system" : {}
                 },
-                "uni-push" : {},
                 "uni-map" : {
                     "tencent" : {}
                 },
@@ -89,14 +93,10 @@
             "mode" : ""
         },
         "sdkConfigs" : {
-            "maps" : {
-                "tencent" : {
-                    "key" : ""
-                }
-            }
+            "maps" : {}
         },
         "unipush" : {
-            "enable" : true
+            "enable" : false
         }
     },
     "app-android" : {
@@ -110,7 +110,6 @@
                     "system" : {},
                     "tencent" : {}
                 },
-                "uni-push" : {},
                 "uni-map" : {
                     "tencent" : {}
                 }

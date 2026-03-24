@@ -12,16 +12,16 @@
 			"path": "pages/bubulove/confession",
 			"style": {
 				"navigationBarTitleText": "爱的告白",
-				"navigationBarBackgroundColor": "#fff5f8",
-				"backgroundColorContent": "#fff5f8"
+				"navigationBarBackgroundColor": "#fff6fa",
+				"backgroundColorContent": "#fff6fa"
 			}
 		},
 		{
 			"path": "pages/bubulove/diary-list",
 			"style": {
 				"navigationBarTitleText": "恋爱日记",
-				"navigationBarBackgroundColor": "#fff5f8",
-				"backgroundColorContent": "#fff5f8",
+				"navigationBarBackgroundColor": "#fff6fa",
+				"backgroundColorContent": "#fff6fa",
 				"enablePullDownRefresh": false
 			}
 		},
@@ -29,56 +29,56 @@
 			"path": "pages/bubulove/diary-edit",
 			"style": {
 				"navigationBarTitleText": "编辑日记",
-				"navigationBarBackgroundColor": "#fff5f8",
-				"backgroundColorContent": "#fff5f8"
+				"navigationBarBackgroundColor": "#fff6fa",
+				"backgroundColorContent": "#fff6fa"
 			}
 		},
 		{
 			"path": "pages/bubulove/diary-detail",
 			"style": {
 				"navigationBarTitleText": "日记详情",
-				"navigationBarBackgroundColor": "#fff5f8",
-				"backgroundColorContent": "#fff5f8"
+				"navigationBarBackgroundColor": "#fff6fa",
+				"backgroundColorContent": "#fff6fa"
 			}
 		},
 		{
 			"path": "pages/bubulove/album-list",
 			"style": {
 				"navigationBarTitleText": "爱的相册",
-				"navigationBarBackgroundColor": "#fff5f8",
-				"backgroundColorContent": "#fff5f8"
+				"navigationBarBackgroundColor": "#fff6fa",
+				"backgroundColorContent": "#fff6fa"
 			}
 		},
 		{
 			"path": "pages/bubulove/album-detail",
 			"style": {
 				"navigationBarTitleText": "相册",
-				"navigationBarBackgroundColor": "#fff5f8",
-				"backgroundColorContent": "#fff5f8"
+				"navigationBarBackgroundColor": "#fff6fa",
+				"backgroundColorContent": "#fff6fa"
 			}
 		},
 		{
 			"path": "pages/bubulove/milestone-list",
 			"style": {
 				"navigationBarTitleText": "相爱里程碑",
-				"navigationBarBackgroundColor": "#fff5f8",
-				"backgroundColorContent": "#fff5f8"
+				"navigationBarBackgroundColor": "#fff6fa",
+				"backgroundColorContent": "#fff6fa"
 			}
 		},
 		{
 			"path": "pages/bubulove/milestone-edit",
 			"style": {
 				"navigationBarTitleText": "里程碑",
-				"navigationBarBackgroundColor": "#fff5f8",
-				"backgroundColorContent": "#fff5f8"
+				"navigationBarBackgroundColor": "#fff6fa",
+				"backgroundColorContent": "#fff6fa"
 			}
 		},
 		{
 			"path": "pages/bubulove/data-manage",
 			"style": {
 				"navigationBarTitleText": "数据与隐私",
-				"navigationBarBackgroundColor": "#fff5f8",
-				"backgroundColorContent": "#fff5f8"
+				"navigationBarBackgroundColor": "#fff6fa",
+				"backgroundColorContent": "#fff6fa"
 			}
 		},
 		{

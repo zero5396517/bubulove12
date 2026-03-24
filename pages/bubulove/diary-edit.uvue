@@ -16,7 +16,9 @@
 			<view class="bubu-card">
 				<button type="default" style="background-color:#fce4ec;" @click="pickImages">添加图片（多张）</button>
 				<view class="bubu-photo-grid">
-					<image v-for="(src, idx) in imageUrls" :key="idx" class="bubu-thumb" :src="src" mode="aspectFill" @click="preview(idx)" />
+					<view v-for="(src, idx) in imageUrls" :key="idx" class="bubu-diary-grid-cell" @click="onImageAction(idx)">
+						<image class="bubu-diary-grid-img" :src="src" mode="aspectFill" />
+					</view>
 				</view>
 				<button type="default" style="margin-top:12px;background-color:#fce4ec;" @click="pickVoice">选择语音文件</button>
 				<text v-if="hasVoice" class="bubu-sub" style="margin-top:8px;">已选择语音，保存后生效</text>
@@ -35,6 +37,8 @@
 		bubuPersistImagePath,
 		bubuPersistAudioPath,
 		bubuGetMedia,
+		bubuTakeDiaryDraftPayload,
+		bubuRemoveMedia,
 		type BubuDiary,
 	} from '@/store/bubulove-data.uts'
 
@@ -76,6 +80,11 @@
 			})
 		} else {
 			diaryId.value = ''
+			const draft = bubuTakeDiaryDraftPayload()
+			if (draft != null) {
+				title.value = draft.title
+				content.value = draft.content
+			}
 		}
 	})
 
@@ -123,13 +132,38 @@
 		})
 	}
 
-	const preview = (index: number) => {
+	const previewAt = (index: number) => {
 		if (imageUrls.value.length == 0) {
 			return
 		}
 		uni.previewImage({
 			current: index,
 			urls: imageUrls.value,
+		})
+	}
+
+	const onImageAction = (index: number) => {
+		uni.showActionSheet({
+			itemList: ['预览大图', '删除这张'],
+			success: (res) => {
+				const t = res.tapIndex
+				if (t == 0) {
+					previewAt(index)
+				} else if (t == 1) {
+					if (index >= 0 && index < imageMediaIds.value.length) {
+						const mid = imageMediaIds.value[index]
+						bubuRemoveMedia(mid)
+						const next: string[] = []
+						imageMediaIds.value.forEach((x, i) => {
+							if (i != index) {
+								next.push(x)
+							}
+						})
+						imageMediaIds.value = next
+						syncImages()
+					}
+				}
+			},
 		})
 	}
 

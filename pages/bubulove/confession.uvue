@@ -1,38 +1,107 @@
 <template>
-	<!-- #ifdef APP -->
-	<scroll-view class="bubu-page" style="flex:1" scroll-y="true">
-	<!-- #endif -->
-	<!-- #ifndef APP -->
 	<view class="bubu-page" style="flex:1">
-	<!-- #endif -->
-		<text class="bubu-sub" style="padding:16px;">写给一二的心里话，仅保存在本机。</text>
-		<view style="padding-left:16px;padding-right:16px;">
-			<textarea class="bubu-textarea" v-model="body" placeholder="在这里写下告白…"></textarea>
+		<scroll-view class="bubu-scroll" style="flex:1" scroll-y="true">
+			<text class="bubu-sub" style="padding-top:16px;padding-left:16px;padding-right:16px;padding-bottom:8px;">写给一二的心里话，仅保存在本机。</text>
+			<view class="bubu-confess-card">
+				<text class="bubu-confess-main">{{ mainLine }}</text>
+				<text class="bubu-confess-sub">轻触下方可续写心情，或换一句心动文案。</text>
+			</view>
+			<view style="padding-left:16px;padding-right:16px;padding-top:16px;">
+				<textarea class="bubu-textarea" v-model="extra" placeholder="在这里续写你的告白…" style="min-height:120px;"></textarea>
+			</view>
+			<view style="height:120px;"></view>
+		</scroll-view>
+		<view class="bubu-bottom-bar" :style="{ paddingBottom: safeBottom + 'px' }">
+			<button class="bubu-primary-btn" type="default" style="margin-top:0;" @click="writeNewDiary">
+				<text class="bubu-primary-btn-text">写一封新的告白</text>
+			</button>
+			<button class="bubu-secondary-btn" type="default" @click="shuffleLine">
+				<text class="bubu-secondary-btn-text">换一句告白</text>
+			</button>
+			<button class="bubu-secondary-btn" type="default" @click="saveToDiary">
+				<text class="bubu-secondary-btn-text">保存到日记</text>
+			</button>
 		</view>
-		<button class="bubu-primary-btn" type="primary" @click="save">保存</button>
-	<!-- #ifdef APP -->
-	</scroll-view>
-	<!-- #endif -->
-	<!-- #ifndef APP -->
 	</view>
-	<!-- #endif -->
 </template>
 
 <script setup lang="uts">
-	import { bubuGetConfession, bubuSetConfession } from '@/store/bubulove-data.uts'
+	import { bubuRandomConfessionLine } from '@/store/confession-quotes.uts'
+	import {
+		bubuGenerateId,
+		bubuSaveDiary,
+		bubuSetDiaryDraftPayload,
+		type BubuDiary,
+	} from '@/store/bubulove-data.uts'
 
-	const body = ref('')
+	const mainLine = ref('')
+	const extra = ref('')
+	const safeBottom = ref(16)
+	let lastShuffleAt = 0
 
-	onLoad(() => {
-		body.value = bubuGetConfession()
-		if (body.value.length == 0) {
-			body.value = '一二，谢谢你出现在我的生命里。\n——布布'
+	const composeBody = (): string => {
+		const e = extra.value.trim()
+		if (e.length == 0) {
+			return mainLine.value
+		}
+		return mainLine.value + '\n\n' + e
+	}
+
+	onMounted(() => {
+		const win = uni.getWindowInfo()
+		const bot = win.safeAreaInsets.bottom
+		if (bot > 0) {
+			safeBottom.value = bot + 12
+		} else {
+			safeBottom.value = 16
 		}
 	})
 
-	const save = () => {
-		bubuSetConfession(body.value)
-		uni.showToast({ title: '已保存', icon: 'success' })
+	onLoad(() => {
+		mainLine.value = bubuRandomConfessionLine()
+		if (mainLine.value.length == 0) {
+			mainLine.value = '一二，谢谢你出现在我的生命里。'
+		}
+	})
+
+	const shuffleLine = () => {
+		const now = Date.now()
+		if (now - lastShuffleAt < 400) {
+			return
+		}
+		lastShuffleAt = now
+		let next = bubuRandomConfessionLine()
+		let guard = 0
+		while (next == mainLine.value && guard < 8) {
+			next = bubuRandomConfessionLine()
+			guard = guard + 1
+		}
+		mainLine.value = next.length > 0 ? next : mainLine.value
+	}
+
+	const writeNewDiary = () => {
+		bubuSetDiaryDraftPayload({
+			title: '给一二的告白',
+			content: composeBody(),
+		})
+		uni.navigateTo({ url: '/pages/bubulove/diary-edit' })
+	}
+
+	const saveToDiary = () => {
+		const now = Date.now()
+		const body = composeBody()
+		const d: BubuDiary = {
+			id: bubuGenerateId(),
+			title: '爱的告白',
+			content: body,
+			createdAt: now,
+			updatedAt: now,
+			isPrivate: false,
+			imageMediaIds: [] as string[],
+			voiceMediaId: null,
+		}
+		bubuSaveDiary(d)
+		uni.showToast({ title: '已写入日记', icon: 'success' })
 	}
 </script>
 

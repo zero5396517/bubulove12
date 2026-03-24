@@ -10,12 +10,12 @@
 				<input class="bubu-input" v-model="dateStr" placeholder="2025-03-24" />
 			</view>
 			<view class="bubu-card bubu-row">
-				<text class="bubu-label" style="flex:1;">农历标记</text>
-				<switch :checked="isLunar" @change="onLunarChange" />
-			</view>
-			<view class="bubu-card bubu-row">
 				<text class="bubu-label" style="flex:1;">重要时刻（首页提醒）</text>
 				<switch :checked="isImportant" @change="onImportantChange" />
+			</view>
+			<view class="bubu-card bubu-row">
+				<text class="bubu-label" style="flex:1;">农历标记</text>
+				<switch :checked="isLunar" @change="onLunarChange" />
 			</view>
 			<view class="bubu-card">
 				<text class="bubu-label" style="width:100%;margin-bottom:8px;">说明</text>
