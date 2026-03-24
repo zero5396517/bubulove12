@@ -1,0 +1,672 @@
+/**
+ * 《布布与一二的恋爱日记》本地数据层
+ * 使用 uni 存储持久化（与需求文档「浏览器侧、无服务端」一致；Web 端对应 localStorage）。
+ */
+
+export type BubuDiary = {
+	id: string
+	title: string
+	content: string
+	createdAt: number
+	updatedAt: number
+	isPrivate: boolean
+	imageMediaIds: string[]
+	voiceMediaId: string | null
+}
+
+export type BubuAlbum = {
+	id: string
+	name: string
+	coverMediaId: string | null
+	sort: number
+	createdAt: number
+}
+
+export type BubuPhoto = {
+	id: string
+	albumId: string
+	mediaId: string
+	sort: number
+	isFavorite: boolean
+	createdAt: number
+}
+
+export type BubuMilestone = {
+	id: string
+	name: string
+	dateMs: number
+	note: string
+	isImportant: boolean
+	imageMediaIds: string[]
+	calendarType: string
+}
+
+const KEY_CONFESSION = 'bubulove_v1_confession'
+const KEY_DIARIES = 'bubulove_v1_diaries'
+const KEY_ALBUMS = 'bubulove_v1_albums'
+const KEY_PHOTOS = 'bubulove_v1_photos'
+const KEY_MILESTONES = 'bubulove_v1_milestones'
+const PREFIX_MEDIA = 'bubulove_v1_media_'
+
+export const bubuGenerateId = (): string => {
+	return 'id_' + Date.now().toString() + '_' + Math.floor(Math.random() * 100000).toString()
+}
+
+export const bubuGetConfession = (): string => {
+	const v = uni.getStorageSync(KEY_CONFESSION)
+	if (v == null) {
+		return ''
+	}
+	if (typeof v === 'string') {
+		return v as string
+	}
+	return v.toString()
+}
+
+export const bubuSetConfession = (text: string): void => {
+	uni.setStorageSync(KEY_CONFESSION, text)
+}
+
+const readJsonArray = (key: string): UTSJSONObject[] => {
+	const raw = uni.getStorageSync(key)
+	if (raw == null) {
+		return []
+	}
+	let str: string = ''
+	if (typeof raw === 'string') {
+		str = raw as string
+	} else {
+		str = JSON.stringify(raw)
+	}
+	if (str.length == 0) {
+		return []
+	}
+	try {
+		const parsed = JSON.parse(str) as any
+		if (parsed == null) {
+			return []
+		}
+		if (!Array.isArray(parsed)) {
+			return []
+		}
+		return parsed as UTSJSONObject[]
+	} catch (e) {
+		return []
+	}
+}
+
+const writeJsonArray = (key: string, arr: UTSJSONObject[]): void => {
+	uni.setStorageSync(key, JSON.stringify(arr))
+}
+
+const objToDiary = (o: UTSJSONObject): BubuDiary => {
+	const voiceRaw = o['voiceMediaId']
+	let voiceId: string | null = null
+	if (voiceRaw != null && typeof voiceRaw === 'string' && (voiceRaw as string).length > 0) {
+		voiceId = voiceRaw as string
+	}
+	const imgs = o['imageMediaIds']
+	let imageIds: string[] = []
+	if (imgs != null && Array.isArray(imgs)) {
+		const a = imgs as any[]
+		a.forEach((x) => {
+			if (typeof x === 'string') {
+				imageIds.push(x as string)
+			}
+		})
+	}
+	let priv = false
+	const pr = o['isPrivate']
+	if (pr != null && typeof pr === 'boolean') {
+		priv = pr as boolean
+	}
+	return {
+		id: o['id'] as string,
+		title: o['title'] as string,
+		content: o['content'] as string,
+		createdAt: o['createdAt'] as number,
+		updatedAt: o['updatedAt'] as number,
+		isPrivate: priv,
+		imageMediaIds: imageIds,
+		voiceMediaId: voiceId,
+	}
+}
+
+export const bubuLoadDiaries = (): BubuDiary[] => {
+	const rows = readJsonArray(KEY_DIARIES)
+	const out: BubuDiary[] = []
+	rows.forEach((o) => {
+		out.push(objToDiary(o))
+	})
+	out.sort((a, b) => {
+		return b.updatedAt - a.updatedAt
+	})
+	return out
+}
+
+export const bubuSaveDiary = (d: BubuDiary): void => {
+	const all = bubuLoadDiaries()
+	let found = false
+	const next: BubuDiary[] = []
+	all.forEach((x) => {
+		if (x.id == d.id) {
+			next.push(d)
+			found = true
+		} else {
+			next.push(x)
+		}
+	})
+	if (!found) {
+		next.push(d)
+	}
+	const jsonArr: UTSJSONObject[] = []
+	next.forEach((x) => {
+		jsonArr.push({
+			id: x.id,
+			title: x.title,
+			content: x.content,
+			createdAt: x.createdAt,
+			updatedAt: x.updatedAt,
+			isPrivate: x.isPrivate,
+			imageMediaIds: x.imageMediaIds,
+			voiceMediaId: x.voiceMediaId,
+		} as UTSJSONObject)
+	})
+	writeJsonArray(KEY_DIARIES, jsonArr)
+}
+
+export const bubuDeleteDiary = (id: string): void => {
+	const all = bubuLoadDiaries()
+	const jsonArr: UTSJSONObject[] = []
+	all.forEach((x) => {
+		if (x.id != id) {
+			jsonArr.push({
+				id: x.id,
+				title: x.title,
+				content: x.content,
+				createdAt: x.createdAt,
+				updatedAt: x.updatedAt,
+				isPrivate: x.isPrivate,
+				imageMediaIds: x.imageMediaIds,
+				voiceMediaId: x.voiceMediaId,
+			} as UTSJSONObject)
+		}
+	})
+	writeJsonArray(KEY_DIARIES, jsonArr)
+}
+
+export const bubuSaveMedia = (mediaId: string, dataUrl: string): void => {
+	uni.setStorageSync(PREFIX_MEDIA + mediaId, dataUrl)
+}
+
+export const bubuGetMedia = (mediaId: string): string | null => {
+	const v = uni.getStorageSync(PREFIX_MEDIA + mediaId)
+	if (v == null) {
+		return null
+	}
+	if (typeof v === 'string') {
+		return v as string
+	}
+	return v.toString()
+}
+
+export const bubuRemoveMedia = (mediaId: string): void => {
+	uni.removeStorageSync(PREFIX_MEDIA + mediaId)
+}
+
+/**
+ * 将本地临时路径尽量转为可持久化的 data URL（失败则原样返回路径，仅当前会话有效）。
+ */
+export const bubuPersistImagePath = (filePath: string): string => {
+	if (filePath.length == 0) {
+		return filePath
+	}
+	try {
+		const fsm = uni.getFileSystemManager()
+		const res = fsm.readFileSync(filePath, 'base64')
+		if (res == null) {
+			return filePath
+		}
+		if (typeof res === 'string') {
+			const s = res as string
+			if (s.indexOf('data:') == 0) {
+				return s
+			}
+			return 'data:image/jpeg;base64,' + s
+		}
+		return filePath
+	} catch (e) {
+		return filePath
+	}
+}
+
+export const bubuPersistAudioPath = (filePath: string): string => {
+	if (filePath.length == 0) {
+		return filePath
+	}
+	try {
+		const fsm = uni.getFileSystemManager()
+		const res = fsm.readFileSync(filePath, 'base64')
+		if (res == null) {
+			return filePath
+		}
+		if (typeof res === 'string') {
+			const s = res as string
+			if (s.indexOf('data:') == 0) {
+				return s
+			}
+			return 'data:audio/mpeg;base64,' + s
+		}
+		return filePath
+	} catch (e) {
+		return filePath
+	}
+}
+
+const objToAlbum = (o: UTSJSONObject): BubuAlbum => {
+	const c = o['coverMediaId']
+	let cover: string | null = null
+	if (c != null && typeof c === 'string' && (c as string).length > 0) {
+		cover = c as string
+	}
+	return {
+		id: o['id'] as string,
+		name: o['name'] as string,
+		coverMediaId: cover,
+		sort: o['sort'] as number,
+		createdAt: o['createdAt'] as number,
+	}
+}
+
+export const bubuLoadAlbums = (): BubuAlbum[] => {
+	const rows = readJsonArray(KEY_ALBUMS)
+	const out: BubuAlbum[] = []
+	rows.forEach((o) => {
+		out.push(objToAlbum(o))
+	})
+	out.sort((a, b) => {
+		return a.sort - b.sort
+	})
+	return out
+}
+
+export const bubuSaveAlbum = (a: BubuAlbum): void => {
+	const all = bubuLoadAlbums()
+	let found = false
+	const next: BubuAlbum[] = []
+	all.forEach((x) => {
+		if (x.id == a.id) {
+			next.push(a)
+			found = true
+		} else {
+			next.push(x)
+		}
+	})
+	if (!found) {
+		next.push(a)
+	}
+	const jsonArr: UTSJSONObject[] = []
+	next.forEach((x) => {
+		jsonArr.push({
+			id: x.id,
+			name: x.name,
+			coverMediaId: x.coverMediaId,
+			sort: x.sort,
+			createdAt: x.createdAt,
+		} as UTSJSONObject)
+	})
+	writeJsonArray(KEY_ALBUMS, jsonArr)
+}
+
+export const bubuDeleteAlbum = (id: string): void => {
+	const photos = bubuLoadPhotos()
+	photos.forEach((p) => {
+		if (p.albumId == id) {
+			bubuRemoveMedia(p.mediaId)
+		}
+	})
+	const jsonPhotos: UTSJSONObject[] = []
+	photos.forEach((p) => {
+		if (p.albumId != id) {
+			jsonPhotos.push({
+				id: p.id,
+				albumId: p.albumId,
+				mediaId: p.mediaId,
+				sort: p.sort,
+				isFavorite: p.isFavorite,
+				createdAt: p.createdAt,
+			} as UTSJSONObject)
+		}
+	})
+	writeJsonArray(KEY_PHOTOS, jsonPhotos)
+
+	const all = bubuLoadAlbums()
+	const jsonArr: UTSJSONObject[] = []
+	all.forEach((x) => {
+		if (x.id != id) {
+			jsonArr.push({
+				id: x.id,
+				name: x.name,
+				coverMediaId: x.coverMediaId,
+				sort: x.sort,
+				createdAt: x.createdAt,
+			} as UTSJSONObject)
+		}
+	})
+	writeJsonArray(KEY_ALBUMS, jsonArr)
+}
+
+const objToPhoto = (o: UTSJSONObject): BubuPhoto => {
+	let fav = false
+	const fr = o['isFavorite']
+	if (fr != null && typeof fr === 'boolean') {
+		fav = fr as boolean
+	}
+	return {
+		id: o['id'] as string,
+		albumId: o['albumId'] as string,
+		mediaId: o['mediaId'] as string,
+		sort: o['sort'] as number,
+		isFavorite: fav,
+		createdAt: o['createdAt'] as number,
+	}
+}
+
+export const bubuLoadPhotos = (): BubuPhoto[] => {
+	const rows = readJsonArray(KEY_PHOTOS)
+	const out: BubuPhoto[] = []
+	rows.forEach((o) => {
+		out.push(objToPhoto(o))
+	})
+	return out
+}
+
+export const bubuPhotosInAlbum = (albumId: string): BubuPhoto[] => {
+	const all = bubuLoadPhotos()
+	const out: BubuPhoto[] = []
+	all.forEach((p) => {
+		if (p.albumId == albumId) {
+			out.push(p)
+		}
+	})
+	out.sort((a, b) => {
+		return a.sort - b.sort
+	})
+	return out
+}
+
+export const bubuSavePhoto = (p: BubuPhoto): void => {
+	const all = bubuLoadPhotos()
+	let found = false
+	const next: BubuPhoto[] = []
+	all.forEach((x) => {
+		if (x.id == p.id) {
+			next.push(p)
+			found = true
+		} else {
+			next.push(x)
+		}
+	})
+	if (!found) {
+		next.push(p)
+	}
+	const jsonArr: UTSJSONObject[] = []
+	next.forEach((x) => {
+		jsonArr.push({
+			id: x.id,
+			albumId: x.albumId,
+			mediaId: x.mediaId,
+			sort: x.sort,
+			isFavorite: x.isFavorite,
+			createdAt: x.createdAt,
+		} as UTSJSONObject)
+	})
+	writeJsonArray(KEY_PHOTOS, jsonArr)
+}
+
+export const bubuDeletePhoto = (id: string): void => {
+	const all = bubuLoadPhotos()
+	const jsonArr: UTSJSONObject[] = []
+	all.forEach((x) => {
+		if (x.id == id) {
+			bubuRemoveMedia(x.mediaId)
+		} else {
+			jsonArr.push({
+				id: x.id,
+				albumId: x.albumId,
+				mediaId: x.mediaId,
+				sort: x.sort,
+				isFavorite: x.isFavorite,
+				createdAt: x.createdAt,
+			} as UTSJSONObject)
+		}
+	})
+	writeJsonArray(KEY_PHOTOS, jsonArr)
+}
+
+export const bubuFavoritePhotos = (): BubuPhoto[] => {
+	const all = bubuLoadPhotos()
+	const out: BubuPhoto[] = []
+	all.forEach((p) => {
+		if (p.isFavorite) {
+			out.push(p)
+		}
+	})
+	out.sort((a, b) => {
+		return b.createdAt - a.createdAt
+	})
+	return out
+}
+
+const objToMilestone = (o: UTSJSONObject): BubuMilestone => {
+	const imgs = o['imageMediaIds']
+	let imageIds: string[] = []
+	if (imgs != null && Array.isArray(imgs)) {
+		const a = imgs as any[]
+		a.forEach((x) => {
+			if (typeof x === 'string') {
+				imageIds.push(x as string)
+			}
+		})
+	}
+	let cal = 'solar'
+	const cr = o['calendarType']
+	if (cr != null && typeof cr === 'string') {
+		cal = cr as string
+	}
+	let imp = false
+	const ir = o['isImportant']
+	if (ir != null && typeof ir === 'boolean') {
+		imp = ir as boolean
+	}
+	return {
+		id: o['id'] as string,
+		name: o['name'] as string,
+		dateMs: o['dateMs'] as number,
+		note: o['note'] as string,
+		isImportant: imp,
+		imageMediaIds: imageIds,
+		calendarType: cal,
+	}
+}
+
+export const bubuLoadMilestones = (): BubuMilestone[] => {
+	const rows = readJsonArray(KEY_MILESTONES)
+	const out: BubuMilestone[] = []
+	rows.forEach((o) => {
+		out.push(objToMilestone(o))
+	})
+	out.sort((a, b) => {
+		return b.dateMs - a.dateMs
+	})
+	return out
+}
+
+export const bubuSaveMilestone = (m: BubuMilestone): void => {
+	const all = bubuLoadMilestones()
+	let found = false
+	const next: BubuMilestone[] = []
+	all.forEach((x) => {
+		if (x.id == m.id) {
+			next.push(m)
+			found = true
+		} else {
+			next.push(x)
+		}
+	})
+	if (!found) {
+		next.push(m)
+	}
+	const jsonArr: UTSJSONObject[] = []
+	next.forEach((x) => {
+		jsonArr.push({
+			id: x.id,
+			name: x.name,
+			dateMs: x.dateMs,
+			note: x.note,
+			isImportant: x.isImportant,
+			imageMediaIds: x.imageMediaIds,
+			calendarType: x.calendarType,
+		} as UTSJSONObject)
+	})
+	writeJsonArray(KEY_MILESTONES, jsonArr)
+}
+
+export const bubuDeleteMilestone = (id: string): void => {
+	const all = bubuLoadMilestones()
+	all.forEach((x) => {
+		if (x.id == id) {
+			x.imageMediaIds.forEach((mid) => {
+				bubuRemoveMedia(mid)
+			})
+		}
+	})
+	const jsonArr: UTSJSONObject[] = []
+	all.forEach((x) => {
+		if (x.id != id) {
+			jsonArr.push({
+				id: x.id,
+				name: x.name,
+				dateMs: x.dateMs,
+				note: x.note,
+				isImportant: x.isImportant,
+				imageMediaIds: x.imageMediaIds,
+				calendarType: x.calendarType,
+			} as UTSJSONObject)
+		}
+	})
+	writeJsonArray(KEY_MILESTONES, jsonArr)
+}
+
+export const bubuImportantMilestoneCount = (): number => {
+	const all = bubuLoadMilestones()
+	let n = 0
+	all.forEach((x) => {
+		if (x.isImportant) {
+			n = n + 1
+		}
+	})
+	return n
+}
+
+export type BubuMediaRow = {
+	id: string
+	data: string
+}
+
+export type BubuExportBundle = {
+	version: number
+	diaries: BubuDiary[]
+	albums: BubuAlbum[]
+	photos: BubuPhoto[]
+	milestones: BubuMilestone[]
+	media: BubuMediaRow[]
+}
+
+export const bubuExportAllJson = (): string => {
+	const mediaList: BubuMediaRow[] = []
+	const seen: Map<string, boolean> = new Map<string, boolean>()
+	const diaries = bubuLoadDiaries()
+	const albums = bubuLoadAlbums()
+	const photos = bubuLoadPhotos()
+	const milestones = bubuLoadMilestones()
+	const pushMedia = (mid: string) => {
+		if (mid.length == 0) {
+			return
+		}
+		const got = seen.get(mid)
+		if (got != null && got == true) {
+			return
+		}
+		seen.set(mid, true)
+		const d = bubuGetMedia(mid)
+		if (d != null) {
+			mediaList.push({ id: mid, data: d } as BubuMediaRow)
+		}
+	}
+	const collectIds = (ids: string[]) => {
+		ids.forEach((mid) => {
+			pushMedia(mid)
+		})
+	}
+	diaries.forEach((d) => {
+		collectIds(d.imageMediaIds)
+		if (d.voiceMediaId != null) {
+			collectIds([d.voiceMediaId])
+		}
+	})
+	photos.forEach((p) => {
+		collectIds([p.mediaId])
+	})
+	milestones.forEach((m) => {
+		collectIds(m.imageMediaIds)
+	})
+	albums.forEach((a) => {
+		if (a.coverMediaId != null) {
+			collectIds([a.coverMediaId])
+		}
+	})
+	const bundle: BubuExportBundle = {
+		version: 1,
+		diaries: diaries,
+		albums: albums,
+		photos: photos,
+		milestones: milestones,
+		media: mediaList,
+	}
+	return JSON.stringify(bundle)
+}
+
+export const bubuImportFromJson = (jsonStr: string): boolean => {
+	try {
+		const o = JSON.parse(jsonStr) as UTSJSONObject
+		if (o == null) {
+			return false
+		}
+		const v = o['version'] as number
+		if (v != 1) {
+			return false
+		}
+		const dArr = o['diaries'] as UTSJSONObject[]
+		const aArr = o['albums'] as UTSJSONObject[]
+		const pArr = o['photos'] as UTSJSONObject[]
+		const mArr = o['milestones'] as UTSJSONObject[]
+		const medArr = o['media'] as UTSJSONObject[]
+		writeJsonArray(KEY_DIARIES, dArr != null ? dArr : [])
+		writeJsonArray(KEY_ALBUMS, aArr != null ? aArr : [])
+		writeJsonArray(KEY_PHOTOS, pArr != null ? pArr : [])
+		writeJsonArray(KEY_MILESTONES, mArr != null ? mArr : [])
+		if (medArr != null) {
+			medArr.forEach((row) => {
+				const id = row['id'] as string
+				const data = row['data'] as string
+				if (id.length > 0 && data.length > 0) {
+					uni.setStorageSync(PREFIX_MEDIA + id, data)
+				}
+			})
+		}
+		return true
+	} catch (e) {
+		return false
+	}
+}

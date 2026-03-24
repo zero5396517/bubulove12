@@ -1,0 +1,54 @@
+<template>
+	<view class="bubu-page" style="flex:1">
+		<scroll-view class="bubu-scroll" style="flex:1" scroll-y="true">
+			<view v-for="m in list" :key="m.id" class="bubu-card" @click="openEdit(m.id)">
+				<view class="bubu-row" style="justify-content:space-between;">
+					<text class="bubu-list-title">{{ m.name }}</text>
+					<text v-if="m.isImportant" style="font-size:12px;color:#e879a8;">重要</text>
+				</view>
+				<text class="bubu-list-meta">{{ dateStr(m) }} · {{ m.calendarType == 'lunar' ? '农历' : '公历' }}</text>
+				<text v-if="m.note.length > 0" class="bubu-sub" style="margin-top:8px;text-align:left;">{{ m.note }}</text>
+			</view>
+			<view style="height:24px;"></view>
+		</scroll-view>
+		<button class="bubu-primary-btn" type="primary" @click="goNew">添加里程碑</button>
+	</view>
+</template>
+
+<script setup lang="uts">
+	import { bubuLoadMilestones, type BubuMilestone } from '@/store/bubulove-data.uts'
+
+	const list = ref([] as BubuMilestone[])
+
+	const refresh = () => {
+		list.value = bubuLoadMilestones()
+	}
+
+	onPageShow(() => {
+		refresh()
+	})
+
+	const dateStr = (m: BubuMilestone): string => {
+		const d = new Date(m.dateMs)
+		return d.getFullYear().toString() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate())
+	}
+
+	const pad2 = (n: number): string => {
+		if (n < 10) {
+			return '0' + n.toString()
+		}
+		return n.toString()
+	}
+
+	const openEdit = (id: string) => {
+		uni.navigateTo({ url: '/pages/bubulove/milestone-edit?id=' + encodeURIComponent(id) })
+	}
+
+	const goNew = () => {
+		uni.navigateTo({ url: '/pages/bubulove/milestone-edit' })
+	}
+</script>
+
+<style>
+	@import '@/common/bubulove.css';
+</style>

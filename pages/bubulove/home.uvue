@@ -1,0 +1,86 @@
+<template>
+	<view class="bubu-page" :style="{ paddingTop: statusPad + 'px', paddingBottom: safeBottom + 'px' }">
+		<scroll-view class="bubu-scroll" style="flex:1" scroll-y="true">
+			<text class="bubu-slogan">布布与一二的恋爱日记</text>
+			<text class="bubu-sub">记录日常、相册与每一个值得纪念的日子</text>
+			<text v-if="importantCount > 0" class="bubu-sub" style="color:#e879a8;margin-top:8px;">重要时刻 {{ importantCount }} 条 · 去里程碑看看</text>
+			<view class="bubu-grid">
+				<view class="bubu-tile" hover-class="bubu-tile-hover" @click="goConfession">
+					<text class="bubu-tile-text">爱的告白</text>
+					<text class="bubu-tile-sub">写给对方的话</text>
+				</view>
+				<view class="bubu-tile" hover-class="bubu-tile-hover" @click="goDiary">
+					<text class="bubu-tile-text">恋爱日记</text>
+					<text class="bubu-tile-sub">图文与语音</text>
+				</view>
+				<view class="bubu-tile" hover-class="bubu-tile-hover" @click="goAlbum">
+					<text class="bubu-tile-text">爱的相册</text>
+					<text class="bubu-tile-sub">相册与收藏</text>
+				</view>
+				<view class="bubu-tile" hover-class="bubu-tile-hover" @click="goMilestone">
+					<text class="bubu-tile-text">相爱里程碑</text>
+					<text class="bubu-tile-sub">时间线</text>
+				</view>
+			</view>
+			<view class="bubu-foot">
+				<text class="bubu-link" @click="goData">数据与隐私 · 导入导出</text>
+			</view>
+		</scroll-view>
+	</view>
+</template>
+
+<script setup lang="uts">
+	import { bubuImportantMilestoneCount } from '@/store/bubulove-data.uts'
+
+	const statusPad = ref(44)
+	const safeBottom = ref(20)
+	const importantCount = ref(0)
+
+	const refreshBadge = () => {
+		importantCount.value = bubuImportantMilestoneCount()
+	}
+
+	onMounted(() => {
+		const win = uni.getWindowInfo()
+		const sb = win.statusBarHeight
+		if (sb > 0) {
+			statusPad.value = sb + 12
+		}
+		const bot = win.safeAreaInsets.bottom
+		if (bot > 0) {
+			safeBottom.value = bot + 8
+		} else {
+			safeBottom.value = 20
+		}
+		refreshBadge()
+	})
+
+	onPageShow(() => {
+		refreshBadge()
+	})
+
+	const goConfession = () => {
+		uni.navigateTo({ url: '/pages/bubulove/confession' })
+	}
+	const goDiary = () => {
+		uni.navigateTo({ url: '/pages/bubulove/diary-list' })
+	}
+	const goAlbum = () => {
+		uni.navigateTo({ url: '/pages/bubulove/album-list' })
+	}
+	const goMilestone = () => {
+		uni.navigateTo({ url: '/pages/bubulove/milestone-list' })
+	}
+	const goData = () => {
+		uni.navigateTo({ url: '/pages/bubulove/data-manage' })
+	}
+</script>
+
+<style>
+	@import '@/common/bubulove.css';
+
+	.bubu-tile-hover {
+		opacity: 0.88;
+		transform: scale(0.98);
+	}
+</style>

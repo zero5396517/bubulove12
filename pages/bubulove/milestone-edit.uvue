@@ -1,0 +1,187 @@
+<template>
+	<view class="bubu-page" style="flex:1">
+		<scroll-view class="bubu-scroll" style="flex:1" scroll-y="true">
+			<view class="bubu-card">
+				<text class="bubu-label" style="width:100%;margin-bottom:8px;">名称</text>
+				<input class="bubu-input" v-model="name" placeholder="例如：第一次牵手" />
+			</view>
+			<view class="bubu-card">
+				<text class="bubu-label" style="width:100%;margin-bottom:8px;">日期（YYYY-MM-DD）</text>
+				<input class="bubu-input" v-model="dateStr" placeholder="2025-03-24" />
+			</view>
+			<view class="bubu-card bubu-row">
+				<text class="bubu-label" style="flex:1;">农历标记</text>
+				<switch :checked="isLunar" @change="onLunarChange" />
+			</view>
+			<view class="bubu-card bubu-row">
+				<text class="bubu-label" style="flex:1;">重要时刻（首页提醒）</text>
+				<switch :checked="isImportant" @change="onImportantChange" />
+			</view>
+			<view class="bubu-card">
+				<text class="bubu-label" style="width:100%;margin-bottom:8px;">说明</text>
+				<textarea class="bubu-textarea" style="min-height:100px;" v-model="note" placeholder="补充回忆…"></textarea>
+			</view>
+			<view class="bubu-card">
+				<button type="default" style="background-color:#fce4ec;" @click="pickImages">添加配图</button>
+				<view class="bubu-photo-grid">
+					<image v-for="(src, idx) in imageUrls" :key="idx" class="bubu-thumb" :src="src" mode="aspectFill" @click="preview(idx)" />
+				</view>
+			</view>
+		</scroll-view>
+		<button class="bubu-primary-btn" type="primary" @click="save">保存</button>
+		<button v-if="milestoneId.length > 0" class="bubu-danger-btn" type="warn" @click="remove">删除</button>
+	</view>
+</template>
+
+<script setup lang="uts">
+	import {
+		bubuGenerateId,
+		bubuLoadMilestones,
+		bubuSaveMilestone,
+		bubuDeleteMilestone,
+		bubuSaveMedia,
+		bubuPersistImagePath,
+		bubuGetMedia,
+		type BubuMilestone,
+	} from '@/store/bubulove-data.uts'
+
+	const milestoneId = ref('')
+	const name = ref('')
+	const dateStr = ref('')
+	const note = ref('')
+	const isLunar = ref(false)
+	const isImportant = ref(false)
+	const imageMediaIds = ref([] as string[])
+	const imageUrls = ref([] as string[])
+
+	const syncImages = () => {
+		const urls: string[] = []
+		imageMediaIds.value.forEach((mid) => {
+			const u = bubuGetMedia(mid)
+			if (u != null) {
+				urls.push(u)
+			}
+		})
+		imageUrls.value = urls
+	}
+
+	const parseDate = (): number => {
+		const s = dateStr.value.trim()
+		const parts = s.split('-')
+		if (parts.length != 3) {
+			return Date.now()
+		}
+		const y = parseInt(parts[0])
+		const mo = parseInt(parts[1])
+		const d = parseInt(parts[2])
+		if (isNaN(y) || isNaN(mo) || isNaN(d)) {
+			return Date.now()
+		}
+		const dt = new Date(y, mo - 1, d)
+		return dt.getTime()
+	}
+
+	onLoad((options: OnLoadOptions) => {
+		const raw = options['id'] as string | null
+		if (raw != null && raw.length > 0) {
+			milestoneId.value = raw
+			const all = bubuLoadMilestones()
+			all.forEach((m) => {
+				if (m.id == raw) {
+					name.value = m.name
+					note.value = m.note
+					isImportant.value = m.isImportant
+					isLunar.value = m.calendarType == 'lunar'
+					imageMediaIds.value = m.imageMediaIds
+					const d = new Date(m.dateMs)
+					dateStr.value = d.getFullYear().toString() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate())
+					syncImages()
+				}
+			})
+		} else {
+			milestoneId.value = ''
+			const n = new Date()
+			dateStr.value = n.getFullYear().toString() + '-' + pad2(n.getMonth() + 1) + '-' + pad2(n.getDate())
+		}
+	})
+
+	const pad2 = (n: number): string => {
+		if (n < 10) {
+			return '0' + n.toString()
+		}
+		return n.toString()
+	}
+
+	const onLunarChange = (e: UniSwitchChangeEvent) => {
+		isLunar.value = e.detail.value
+	}
+
+	const onImportantChange = (e: UniSwitchChangeEvent) => {
+		isImportant.value = e.detail.value
+	}
+
+	const pickImages = () => {
+		uni.chooseImage({
+			count: 6,
+			sizeType: ['compressed'],
+			sourceType: ['album', 'camera'],
+			success: (res) => {
+				res.tempFilePaths.forEach((p) => {
+					const mid = bubuGenerateId()
+					bubuSaveMedia(mid, bubuPersistImagePath(p))
+					imageMediaIds.value.push(mid)
+				})
+				syncImages()
+			},
+		})
+	}
+
+	const preview = (index: number) => {
+		if (imageUrls.value.length > 0) {
+			uni.previewImage({ current: index, urls: imageUrls.value })
+		}
+	}
+
+	const save = () => {
+		if (name.value.trim().length == 0) {
+			uni.showToast({ title: '请填写名称', icon: 'none' })
+			return
+		}
+		let id = milestoneId.value
+		if (id.length == 0) {
+			id = bubuGenerateId()
+		}
+		const cal = isLunar.value ? 'lunar' : 'solar'
+		const m: BubuMilestone = {
+			id: id,
+			name: name.value.trim(),
+			dateMs: parseDate(),
+			note: note.value,
+			isImportant: isImportant.value,
+			imageMediaIds: imageMediaIds.value,
+			calendarType: cal,
+		}
+		bubuSaveMilestone(m)
+		uni.showToast({ title: '已保存', icon: 'success' })
+		setTimeout(() => {
+			uni.navigateBack({})
+		}, 400)
+	}
+
+	const remove = () => {
+		uni.showModal({
+			title: '删除里程碑',
+			content: '确定删除？',
+			success: (res) => {
+				if (res.confirm) {
+					bubuDeleteMilestone(milestoneId.value)
+					uni.navigateBack({})
+				}
+			},
+		})
+	}
+</script>
+
+<style>
+	@import '@/common/bubulove.css';
+</style>

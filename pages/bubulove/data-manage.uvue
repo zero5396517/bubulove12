@@ -1,0 +1,59 @@
+<template>
+	<view class="bubu-page" style="flex:1">
+		<scroll-view class="bubu-scroll" style="flex:1" scroll-y="true">
+			<view class="bubu-card">
+				<text class="bubu-sub" style="text-align:left;color:#333333;line-height:22px;">恋爱日记、相册与里程碑等数据仅保存在本机浏览器或 App 沙盒中，不会上传到我们的服务器。清除站点数据或卸载应用会导致数据丢失，请定期导出备份。</text>
+			</view>
+			<button class="bubu-primary-btn" type="primary" @click="doExport">导出 JSON 到剪贴板</button>
+			<view class="bubu-card">
+				<text class="bubu-label" style="width:100%;margin-bottom:8px;">从备份恢复（粘贴 JSON）</text>
+				<textarea class="bubu-textarea" style="min-height:200px;" v-model="importText" placeholder="粘贴此前导出的 JSON"></textarea>
+			</view>
+			<button class="bubu-primary-btn" type="warn" @click="doImport">导入（覆盖当前数据）</button>
+			<view style="height:32px;"></view>
+		</scroll-view>
+	</view>
+</template>
+
+<script setup lang="uts">
+	import { bubuExportAllJson, bubuImportFromJson } from '@/store/bubulove-data.uts'
+
+	const importText = ref('')
+
+	const doExport = () => {
+		const json = bubuExportAllJson()
+		uni.setClipboardData({
+			data: json,
+			success: () => {
+				uni.showToast({ title: '已复制到剪贴板', icon: 'success' })
+			},
+		})
+	}
+
+	const doImport = () => {
+		const t = importText.value.trim()
+		if (t.length == 0) {
+			uni.showToast({ title: '请先粘贴 JSON', icon: 'none' })
+			return
+		}
+		uni.showModal({
+			title: '确认导入',
+			content: '将覆盖当前所有日记、相册与里程碑，是否继续？',
+			success: (res) => {
+				if (res.confirm) {
+					const ok = bubuImportFromJson(t)
+					if (ok) {
+						uni.showToast({ title: '导入成功', icon: 'success' })
+						importText.value = ''
+					} else {
+						uni.showToast({ title: 'JSON 无效', icon: 'none' })
+					}
+				}
+			},
+		})
+	}
+</script>
+
+<style>
+	@import '@/common/bubulove.css';
+</style>

@@ -1,0 +1,175 @@
+/* 恋爱日记主题：触控与移动端安全区 */
+
+.bubu-page {
+	flex-direction: column;
+	flex: 1;
+	background-color: #fff5f8;
+}
+
+.bubu-scroll {
+	flex: 1;
+	flex-direction: column;
+}
+
+.bubu-slogan {
+	font-size: 22px;
+	color: #c45c8b;
+	text-align: center;
+	font-weight: bold;
+	padding-left: 24px;
+	padding-right: 24px;
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+
+.bubu-sub {
+	font-size: 15px;
+	color: #9b6b86;
+	text-align: center;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.bubu-grid {
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 24px;
+	justify-content: space-between;
+}
+
+.bubu-tile {
+	width: 47%;
+	min-height: 96px;
+	margin-bottom: 16px;
+	background-color: #ffffff;
+	border-radius: 16px;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding-top: 16px;
+	padding-bottom: 16px;
+	box-shadow: 0px 4px 12px rgba(196, 92, 139, 0.12);
+}
+
+.bubu-tile-text {
+	font-size: 17px;
+	color: #5c3d4a;
+	font-weight: bold;
+}
+
+.bubu-tile-sub {
+	font-size: 12px;
+	color: #a08090;
+	margin-top: 4px;
+}
+
+.bubu-foot {
+	padding-top: 12px;
+	padding-bottom: 24px;
+	padding-left: 20px;
+	padding-right: 20px;
+	flex-direction: column;
+	align-items: center;
+}
+
+.bubu-link {
+	font-size: 14px;
+	color: #b565a7;
+}
+
+.bubu-card {
+	margin-left: 16px;
+	margin-right: 16px;
+	margin-top: 12px;
+	padding: 16px;
+	background-color: #ffffff;
+	border-radius: 12px;
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.06);
+	flex-direction: column;
+}
+
+.bubu-row {
+	flex-direction: row;
+	align-items: center;
+}
+
+.bubu-label {
+	font-size: 14px;
+	color: #666666;
+	width: 80px;
+}
+
+.bubu-input {
+	flex: 1;
+	font-size: 16px;
+	color: #333333;
+	border-width: 1px;
+	border-color: #f0d6e4;
+	border-radius: 8px;
+	padding: 10px;
+	background-color: #fffafb;
+}
+
+.bubu-textarea {
+	font-size: 16px;
+	color: #333333;
+	min-height: 160px;
+	border-width: 1px;
+	border-color: #f0d6e4;
+	border-radius: 8px;
+	padding: 10px;
+	background-color: #fffafb;
+}
+
+.bubu-primary-btn {
+	margin-top: 16px;
+	margin-left: 16px;
+	margin-right: 16px;
+	height: 48px;
+	border-radius: 24px;
+	background-color: #e879a8;
+}
+
+.bubu-danger-btn {
+	margin-top: 8px;
+	margin-left: 16px;
+	margin-right: 16px;
+	height: 44px;
+}
+
+.bubu-list-title {
+	font-size: 17px;
+	color: #333333;
+	font-weight: bold;
+}
+
+.bubu-list-meta {
+	font-size: 12px;
+	color: #999999;
+	margin-top: 6px;
+}
+
+.bubu-thumb {
+	width: 72px;
+	height: 72px;
+	border-radius: 8px;
+	margin-right: 8px;
+	margin-top: 8px;
+}
+
+.bubu-photo-grid {
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding-top: 8px;
+}
+
+.bubu-photo-cell {
+	width: 31%;
+	margin-right: 2%;
+	margin-bottom: 8px;
+	height: 110px;
+	border-radius: 8px;
+	overflow: hidden;
+}

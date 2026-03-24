@@ -1,0 +1,41 @@
+<template>
+	<!-- #ifdef APP -->
+	<scroll-view class="bubu-page" style="flex:1" scroll-y="true">
+	<!-- #endif -->
+	<!-- #ifndef APP -->
+	<view class="bubu-page" style="flex:1">
+	<!-- #endif -->
+		<text class="bubu-sub" style="padding:16px;">写给一二的心里话，仅保存在本机。</text>
+		<view style="padding-left:16px;padding-right:16px;">
+			<textarea class="bubu-textarea" v-model="body" placeholder="在这里写下告白…"></textarea>
+		</view>
+		<button class="bubu-primary-btn" type="primary" @click="save">保存</button>
+	<!-- #ifdef APP -->
+	</scroll-view>
+	<!-- #endif -->
+	<!-- #ifndef APP -->
+	</view>
+	<!-- #endif -->
+</template>
+
+<script setup lang="uts">
+	import { bubuGetConfession, bubuSetConfession } from '@/store/bubulove-data.uts'
+
+	const body = ref('')
+
+	onLoad(() => {
+		body.value = bubuGetConfession()
+		if (body.value.length == 0) {
+			body.value = '一二，谢谢你出现在我的生命里。\n——布布'
+		}
+	})
+
+	const save = () => {
+		bubuSetConfession(body.value)
+		uni.showToast({ title: '已保存', icon: 'success' })
+	}
+</script>
+
+<style>
+	@import '@/common/bubulove.css';
+</style>
