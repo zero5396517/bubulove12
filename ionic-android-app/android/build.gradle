@@ -1,0 +1,65 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.7.3'
+        classpath 'com.google.gms:google-services:4.4.4'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+apply from: "variables.gradle"
+
+// Capacitor reads project.hasProperty('androidx*Version'); child projects don't inherit root ext, so inject before their build.gradle runs.
+gradle.beforeProject { proj ->
+    if (proj != rootProject) {
+        proj.ext.compileSdkVersion = rootProject.ext.compileSdkVersion
+        proj.ext.minSdkVersion = rootProject.ext.minSdkVersion
+        proj.ext.targetSdkVersion = rootProject.ext.targetSdkVersion
+        proj.ext.androidxActivityVersion = rootProject.ext.androidxActivityVersion
+        proj.ext.androidxAppCompatVersion = rootProject.ext.androidxAppCompatVersion
+        proj.ext.androidxCoordinatorLayoutVersion = rootProject.ext.androidxCoordinatorLayoutVersion
+        proj.ext.androidxCoreVersion = rootProject.ext.androidxCoreVersion
+        proj.ext.androidxFragmentVersion = rootProject.ext.androidxFragmentVersion
+        proj.ext.androidxWebkitVersion = rootProject.ext.androidxWebkitVersion
+        proj.ext.coreSplashScreenVersion = rootProject.ext.coreSplashScreenVersion
+        proj.ext.junitVersion = rootProject.ext.junitVersion
+        proj.ext.androidxJunitVersion = rootProject.ext.androidxJunitVersion
+        proj.ext.androidxEspressoCoreVersion = rootProject.ext.androidxEspressoCoreVersion
+        proj.ext.cordovaAndroidVersion = rootProject.ext.cordovaAndroidVersion
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+subprojects { sub ->
+    sub.configurations.configureEach { cfg ->
+        def cv = rootProject.ext.androidxCoreVersion
+        cfg.resolutionStrategy {
+            force "androidx.core:core:${cv}"
+            force "androidx.core:core-ktx:${cv}"
+            eachDependency { details ->
+                if (details.requested.group == 'androidx.core' &&
+                        (details.requested.name == 'core' || details.requested.name == 'core-ktx')) {
+                    details.useVersion(cv)
+                }
+            }
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

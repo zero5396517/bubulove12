@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>恋爱日记 - 里程碑详情</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <div class="screen" role="application" aria-label="恋爱日记 - 里程碑详情">
+        <div
+          style="
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            height: 220px;
+            background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=70');
+            background-size: cover;
+            background-position: center;
+            filter: saturate(1.05) brightness(0.95);
+          "
+          aria-hidden="true"
+        ></div>
+        <div
+          style="
+            position: absolute;
+            inset: 0;
+            height: 220px;
+            background: linear-gradient(to bottom, rgba(15, 15, 22, 0.92) 0%, rgba(15, 15, 22, 0.74) 60%, rgba(15, 15, 22, 0) 100%);
+          "
+          aria-hidden="true"
+        ></div>
+
+        <div class="header" style="position: relative">
+          <a class="icon-button" href="milestones-timeline.html" aria-label="返回时间线">
+            <span class="material-icons">arrow_back</span>
+          </a>
+          <div class="header-title">里程碑详情</div>
+          <div class="header-action">
+            <a class="icon-button" href="milestones-edit.html" aria-label="编辑里程碑">
+              <span class="material-icons">edit</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="content safe-pad-bottom" style="padding-top: 140px">
+          <div class="card">
+            <div class="row-between" style="margin-bottom: var(--space-sm)">
+              <div>
+                <div style="font-weight: 950; font-size: 18px; margin-bottom: 6px">
+                  第一次牵手纪念日
+                </div>
+                <div class="muted" style="font-size: 13px">公历 · 2026-04-05</div>
+              </div>
+              <div class="badge important">重要</div>
+            </div>
+
+            <div style="margin-top: var(--space-md)">
+              <div class="muted" style="font-size: 13px; margin-bottom: 10px">
+                倒计时（示例）
+              </div>
+              <div style="display: flex; gap: var(--space-md); justify-content: space-between">
+                <div style="flex: 1; text-align: center; padding: 12px 0; border-radius: var(--radius-md); background: rgba(255, 227, 90, 0.10); border: 1px solid rgba(255, 227, 90, 0.25)">
+                  <div style="font-weight: 950; font-size: 26px; color: var(--neon-yellow)">11</div>
+                  <div class="muted" style="font-size: 12px">天</div>
+                </div>
+                <div style="flex: 1; text-align: center; padding: 12px 0; border-radius: var(--radius-md); background: rgba(255, 79, 166, 0.10); border: 1px solid rgba(255, 79, 166, 0.22)">
+                  <div style="font-weight: 950; font-size: 26px; color: var(--primary)">03</div>
+                  <div class="muted" style="font-size: 12px">时</div>
+                </div>
+                <div style="flex: 1; text-align: center; padding: 12px 0; border-radius: var(--radius-md); background: rgba(61, 231, 255, 0.10); border: 1px solid rgba(61, 231, 255, 0.22)">
+                  <div style="font-weight: 950; font-size: 26px; color: var(--neon-blue)">22</div>
+                  <div class="muted" style="font-size: 12px">分</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" aria-label="提醒设置">
+            <div class="row-between" style="margin-bottom: var(--space-md)">
+              <div style="font-weight: 900">提醒设置</div>
+              <div class="badge primary">已启用</div>
+            </div>
+            <div style="color: var(--text-secondary); font-size: 14px; line-height: 1.8">
+              已设置：提前 <span style="color: var(--primary); font-weight: 900">3</span> 天提醒。
+              <br />
+              到期前，首页与里程碑详情会展示重要时刻卡片。
+            </div>
+            <div style="margin-top: var(--space-md)" class="row-between">
+              <a class="button ghost" href="milestones-detail.html" aria-label="测试提醒（UI态）">
+                <span class="button-icon material-icons">notifications_active</span>
+                测试提醒
+              </a>
+            </div>
+          </div>
+
+          <div class="card" aria-label="里程碑说明">
+            <div style="font-weight: 900; margin-bottom: var(--space-md)">故事说明</div>
+            <div style="color: var(--text-secondary); font-size: 14px; line-height: 1.8">
+              那天的风有点冷，但你握住我手的瞬间，我就知道这份喜欢会一直延续下去。
+              <br /><br />
+              我想在每一次“将要到来的日子”里，把对ta的喜欢重新写一遍。
+            </div>
+          </div>
+
+          <div class="card" aria-label="媒体展示">
+            <div class="row-between" style="margin-bottom: var(--space-md)">
+              <div style="font-weight: 900">媒体</div>
+              <div class="muted" style="font-size: 13px">封面图（示例）</div>
+            </div>
+            <div
+              style="
+                height: 160px;
+                border-radius: var(--radius-md);
+                background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=70');
+                background-size: cover;
+                background-position: center;
+                border: 1px solid rgba(255, 255, 255, 0.10);
+              "
+            ></div>
+          </div>
+
+          <div style="height: 20px"></div>
+
+          <div class="card" style="padding: var(--space-md)" aria-label="操作按钮区">
+            <div class="row-between" style="gap: var(--space-md)">
+              <a class="button primary" style="flex: 1" href="milestones-edit.html" aria-label="编辑">
+                <span class="button-icon material-icons">edit</span>
+                编辑
+              </a>
+              <a class="button outline" style="flex: 1" href="milestones-timeline.html" aria-label="返回时间线">
+                返回
+              </a>
+            </div>
+          </div>
+
+          <div style="height: 40px"></div>
+        </div>
+
+        <div class="nav-bar" role="navigation" aria-label="底部导航">
+          <a class="nav-item" href="home.html" aria-label="首页">
+            <span class="material-icons nav-icon">home</span>
+            <span>首页</span>
+          </a>
+          <a class="nav-item" href="diaries-list.html" aria-label="恋爱日记">
+            <span class="material-icons nav-icon">edit_note</span>
+            <span>日记</span>
+          </a>
+          <a class="nav-item" href="albums-list.html" aria-label="爱的相册">
+            <span class="material-icons nav-icon">photo_album</span>
+            <span>相册</span>
+          </a>
+          <a
+            class="nav-item active"
+            href="milestones-timeline.html"
+            aria-label="相爱里程碑"
+          >
+            <span class="material-icons nav-icon">timeline</span>
+            <span>里程碑</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

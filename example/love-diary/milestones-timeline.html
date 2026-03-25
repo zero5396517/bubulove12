@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>恋爱日记 - 相爱里程碑</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <div class="screen" role="application" aria-label="恋爱日记 - 相爱里程碑">
+        <div class="header">
+          <a class="icon-button" href="home.html" aria-label="返回首页">
+            <span class="material-icons">home</span>
+          </a>
+          <div class="header-title">相爱里程碑</div>
+          <div class="header-action">
+            <a class="icon-button" href="milestones-new.html" aria-label="添加里程碑">
+              <span class="material-icons">add</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="content safe-pad-bottom">
+          <div class="card">
+            <div class="row-between" style="margin-bottom: var(--space-md)">
+              <div style="font-weight: 950">时间线</div>
+              <div class="muted" style="font-size: 13px">倒序展示</div>
+            </div>
+            <div style="color: var(--text-secondary); font-size: 13px; line-height: 1.7">
+              重要时刻会在首页提醒。纪念日支持提前 N 天提醒（此处为 UI/UX 状态示例）。
+            </div>
+          </div>
+
+          <div style="height: var(--space-md)"></div>
+
+          <div class="timeline" aria-label="里程碑时间线列表">
+            <a class="timeline-item" href="milestones-detail.html" style="text-decoration:none;">
+              <div class="card">
+                <div class="row-between" style="margin-bottom: var(--space-sm)">
+                  <div class="milestone-card-title">第一次牵手纪念日</div>
+                  <div class="badge important">重要</div>
+                </div>
+                <div class="milestone-card-meta">
+                  <span>2026-04-05</span>
+                  <span>提前 3 天提醒</span>
+                </div>
+                <div style="margin-top: var(--space-md); display:flex; align-items:center; justify-content:space-between;">
+                  <div class="muted" style="font-size: 13px">距离开始</div>
+                  <div style="font-weight: 950; font-size: 20px; color: var(--neon-yellow)">还有 11 天</div>
+                </div>
+              </div>
+            </a>
+
+            <a class="timeline-item" href="milestones-detail.html" style="text-decoration:none;">
+              <div class="card">
+                <div class="row-between" style="margin-bottom: var(--space-sm)">
+                  <div class="milestone-card-title">一起看海</div>
+                  <div class="badge primary">提醒中</div>
+                </div>
+                <div class="milestone-card-meta">
+                  <span>2026-03-30</span>
+                  <span>提前 1 天提醒</span>
+                </div>
+                <div style="margin-top: var(--space-md); display:flex; align-items:center; justify-content:space-between;">
+                  <div class="muted" style="font-size: 13px">距离开始</div>
+                  <div style="font-weight: 950; font-size: 20px; color: var(--primary)"><span style="color: var(--primary)">还有 5 天</span></div>
+                </div>
+              </div>
+            </a>
+
+            <a class="timeline-item" href="milestones-detail.html" style="text-decoration:none;">
+              <div class="card">
+                <div class="row-between" style="margin-bottom: var(--space-sm)">
+                  <div class="milestone-card-title">每月约会日</div>
+                  <div class="badge">循环</div>
+                </div>
+                <div class="milestone-card-meta">
+                  <span>2026-03-25</span>
+                  <span>提前 0 天提醒</span>
+                </div>
+                <div style="margin-top: var(--space-md); display:flex; align-items:center; justify-content:space-between;">
+                  <div class="muted" style="font-size: 13px">已到达</div>
+                  <div style="font-weight: 950; font-size: 20px; color: var(--neon-green)">今天</div>
+                </div>
+              </div>
+            </a>
+
+            <a class="timeline-item" href="milestones-detail.html" style="text-decoration:none;">
+              <div class="card">
+                <div class="row-between" style="margin-bottom: var(--space-sm)">
+                  <div class="milestone-card-title">第一次共度周末</div>
+                  <div class="badge important">重要</div>
+                </div>
+                <div class="milestone-card-meta">
+                  <span>2026-02-18</span>
+                  <span>提前 7 天提醒</span>
+                </div>
+                <div style="margin-top: var(--space-md); display:flex; align-items:center; justify-content:space-between;">
+                  <div class="muted" style="font-size: 13px">已过去</div>
+                  <div style="font-weight: 950; font-size: 20px; color: var(--text-secondary)">36 天</div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div style="height: 40px"></div>
+        </div>
+
+        <div class="nav-bar" role="navigation" aria-label="底部导航">
+          <a class="nav-item" href="home.html" aria-label="首页">
+            <span class="material-icons nav-icon">home</span>
+            <span>首页</span>
+          </a>
+          <a class="nav-item" href="diaries-list.html" aria-label="恋爱日记">
+            <span class="material-icons nav-icon">edit_note</span>
+            <span>日记</span>
+          </a>
+          <a class="nav-item" href="albums-list.html" aria-label="爱的相册">
+            <span class="material-icons nav-icon">photo_album</span>
+            <span>相册</span>
+          </a>
+          <a class="nav-item active" href="milestones-timeline.html" aria-label="相爱里程碑">
+            <span class="material-icons nav-icon">timeline</span>
+            <span>里程碑</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>恋爱日记 - 爱的告白</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <div class="screen" role="application" aria-label="恋爱日记 - 爱的告白">
+        <div class="header">
+          <a class="icon-button" href="home.html" aria-label="返回首页">
+            <span class="material-icons">arrow_back</span>
+          </a>
+          <div class="header-title">爱的告白</div>
+          <div class="header-action">
+            <a class="icon-button" href="diaries-list.html" aria-label="去恋爱日记">
+              <span class="material-icons">edit_note</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="content safe-pad-bottom">
+          <div class="card">
+            <div style="font-weight: 900; font-size: 15px; margin-bottom: 6px">
+              给一二的一段心动
+            </div>
+            <div class="muted" style="font-size: 13px; margin-bottom: var(--space-md)">
+              小小一段话，也能把回忆保存在最甜的时间。
+            </div>
+
+            <div class="form-group" style="margin-top: 0">
+              <label class="form-label" for="confTitle">告白标题（可选）</label>
+              <input
+                id="confTitle"
+                type="text"
+                placeholder="比如：今天也喜欢你"
+                aria-label="告白标题"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="confBody">告白内容</label>
+              <textarea
+                id="confBody"
+                placeholder="写下你想说的话：感谢、想念、期待……"
+                aria-label="告白内容"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">心动标签（可多选）</label>
+              <div class="chips-row" aria-label="心动标签">
+                <button type="button" class="chip active" aria-label="标签：甜甜的">
+                  甜甜的
+                </button>
+                <button type="button" class="chip" aria-label="标签：勇敢的">
+                  勇敢的
+                </button>
+                <button type="button" class="chip" aria-label="标签：温柔的">
+                  温柔的
+                </button>
+                <button type="button" class="chip" aria-label="标签：搞笑的">
+                  搞笑的
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">可见性</label>
+              <div class="chips-row" aria-label="可见性选择">
+                <button type="button" class="chip active" aria-label="私密告白">
+                  私密（仅你们可见）
+                </button>
+                <button type="button" class="chip" aria-label="公开告白">
+                  公开（展示给你们）
+                </button>
+              </div>
+              <div class="muted" style="font-size: 12px; margin-top: 8px">
+                提示：本页面为 UI/UX 设计稿，默认显示“私密”态。
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: var(--space-lg)">
+              <a class="button primary full" href="diaries-list.html" aria-label="发布告白">
+                <span class="button-icon material-icons">celebration</span>
+                发布告白
+              </a>
+            </div>
+          </div>
+
+          <div class="card" aria-label="历史告白列表">
+            <div class="row-between" style="margin-bottom: var(--space-md)">
+              <div style="font-weight: 900">历史告白</div>
+              <div class="muted" style="font-size: 13px">最近三条</div>
+            </div>
+
+            <a class="list-item" href="confession.html#confPreview" aria-label="查看告白：今天也喜欢你">
+              <img
+                class="li-avatar"
+                src="https://randomuser.me/api/portraits/men/47.jpg"
+                alt="头像"
+              />
+              <div class="li-main">
+                <div class="li-title">今天也喜欢你</div>
+                <div class="li-meta">
+                  <span>3天前</span>
+                  <span class="badge primary">私密</span>
+                </div>
+                <div class="li-preview">
+                  你认真生活的样子真的很迷人，我想把这份喜欢一直写下去。
+                </div>
+              </div>
+              <span class="material-icons" style="color: var(--text-tertiary)">
+                chevron_right
+              </span>
+            </a>
+
+            <a class="list-item" href="confession.html" aria-label="查看告白：谢谢你一直在">
+              <img
+                class="li-avatar"
+                src="https://randomuser.me/api/portraits/women/65.jpg"
+                alt="头像"
+              />
+              <div class="li-main">
+                <div class="li-title">谢谢你一直在</div>
+                <div class="li-meta">
+                  <span>1周前</span>
+                  <span class="badge">公开</span>
+                </div>
+                <div class="li-preview">
+                  有你在，所有的疲惫都变得不那么难熬。希望未来也能并肩走下去。
+                </div>
+              </div>
+              <span class="material-icons" style="color: var(--text-tertiary)">
+                chevron_right
+              </span>
+            </a>
+
+            <a class="list-item" href="confession.html" aria-label="查看告白：晚安">
+              <img
+                class="li-avatar"
+                src="https://randomuser.me/api/portraits/men/21.jpg"
+                alt="头像"
+              />
+              <div class="li-main">
+                <div class="li-title">晚安</div>
+                <div class="li-meta">
+                  <span>2周前</span>
+                  <span class="badge primary">私密</span>
+                </div>
+                <div class="li-preview">
+                  今天也很想你。等你睡着，我再把这份心动轻轻收好。
+                </div>
+              </div>
+              <span class="material-icons" style="color: var(--text-tertiary)">
+                chevron_right
+              </span>
+            </a>
+          </div>
+
+          <!-- Preview mock: shown via :target -->
+          <div id="confPreview" class="modal" aria-label="告白预览弹层">
+            <div class="modal-card">
+              <div style="padding: var(--space-md)">
+                <div class="badge important" style="margin-bottom: var(--space-sm)">告白预览</div>
+                <div style="font-weight: 950; font-size: 18px; margin-bottom: 8px">
+                  今天也喜欢你
+                </div>
+                <div class="muted" style="font-size: 13px; margin-bottom: var(--space-md)">
+                  3天前 · 私密
+                </div>
+                <div style="color: var(--text-secondary); font-size: 14px; line-height: 1.7">
+                  你认真生活的样子真的很迷人，我想把这份喜欢一直写下去。
+                </div>
+              </div>
+              <div class="modal-footer">
+                <a class="button ghost" href="confession.html" aria-label="关闭预览">
+                  关闭
+                </a>
+                <a
+                  class="button primary"
+                  href="diaries-new.html"
+                  aria-label="去写日记"
+                >
+                  去写日记
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-bar" role="navigation" aria-label="底部导航">
+          <a class="nav-item active" href="home.html" aria-label="首页">
+            <span class="material-icons nav-icon">home</span>
+            <span>首页</span>
+          </a>
+          <a class="nav-item" href="diaries-list.html" aria-label="恋爱日记">
+            <span class="material-icons nav-icon">edit_note</span>
+            <span>日记</span>
+          </a>
+          <a class="nav-item" href="albums-list.html" aria-label="爱的相册">
+            <span class="material-icons nav-icon">photo_album</span>
+            <span>相册</span>
+          </a>
+          <a class="nav-item" href="milestones-timeline.html" aria-label="相爱里程碑">
+            <span class="material-icons nav-icon">timeline</span>
+            <span>里程碑</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
