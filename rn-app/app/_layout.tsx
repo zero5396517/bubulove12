@@ -5,6 +5,7 @@ import { Text, View } from 'react-native';
 import { useEffect } from 'react';
 import { useAuthStore } from '../store/authStore';
 import { useDownloadStore } from '../store/downloadStore';
+import { useLoveStore } from '../store/loveStore';
 import { useSettingsStore } from '../store/settingsStore';
 import { useTheme } from '../utils/theme';
 import { MiniPlayer } from '../components/MiniPlayer';
@@ -24,6 +25,7 @@ Sentry.init({
 function RootLayout() {
   const restore = useAuthStore(s => s.restore);
   const loadDownloads = useDownloadStore(s => s.loadFromStorage);
+  const loadLoveData = useLoveStore(s => s.loadFromStorage);
   const restoreSettings = useSettingsStore(s => s.restore);
   const darkMode = useSettingsStore(s => s.darkMode);
 
@@ -34,6 +36,7 @@ function RootLayout() {
   useEffect(() => {
     restore();
     loadDownloads();
+    loadLoveData();
     restoreSettings();
   }, []);
 
@@ -46,6 +49,8 @@ function RootLayout() {
         <ErrorBoundary fallback={<Text style={{ padding: 32, textAlign: 'center' }}>发生错误，请重启 App</Text>}>
           <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="index" />
+            <Stack.Screen name="love" />
+            <Stack.Screen name="bili-home" />
             <Stack.Screen
               name="video"
               options={{
