@@ -1,0 +1,65 @@
+<ion-page>
+  <ion-header translucent="true">
+    <ion-toolbar>
+      <ion-title>爱的相册</ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" routerLink="/confession">
+          <ion-icon name="heart" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding safe-pad-bottom">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>上传照片（Mock）</ion-card-title>
+        <ion-card-subtitle>选择多张，生成一个新的相册</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="stacked">相册名称（可选）</ion-label>
+          <ion-input [(ngModel)]="albumName" placeholder="比如：周末的甜蜜"></ion-input>
+        </ion-item>
+
+        <input
+          #fileInput
+          type="file"
+          accept="image/*"
+          multiple
+          style="display: none"
+          (change)="onSelectPhotos($event)"
+        />
+
+        <ion-button expand="block" fill="outline" color="primary" (click)="fileInput.click()">
+          <ion-icon slot="start" name="add-photo-alternate" aria-hidden="true"></ion-icon>
+          选择照片/拍照
+        </ion-button>
+
+        <div *ngIf="photos.length" class="preview-row">
+          <div *ngFor="let p of photos" class="preview-tile">
+            <ion-img [src]="p" alt="预览"></ion-img>
+          </div>
+        </div>
+
+        <ion-button expand="block" color="primary" [disabled]="!photos.length" (click)="createAlbumMock()">
+          创建相册并查看
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-list inset="true" class="mt-16">
+      <ion-item *ngFor="let a of albums" button (click)="openAlbum(a.id)" lines="none">
+        <ion-img [src]="a.coverUrl" class="cover" alt="封面"></ion-img>
+        <ion-label>
+          <div class="row-between">
+            <div class="album-title">{{ a.name }}</div>
+            <ion-badge color="primary" class="count">{{ a.photos.length }} 张</ion-badge>
+          </div>
+          <div class="meta">已在相册中保存（Mock）</div>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-page>
+

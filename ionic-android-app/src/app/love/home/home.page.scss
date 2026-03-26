@@ -1,0 +1,72 @@
+.safe-pad {
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+}
+
+.hero {
+  margin-top: 8px;
+  padding: 16px 12px;
+  border-radius: 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--ion-color-primary-rgb), 0.18),
+    rgba(var(--ion-color-dark-rgb), 0.04)
+  );
+}
+
+.hero-title {
+  text-align: center;
+}
+
+.gradient-text {
+  font-weight: 950;
+  font-size: 28px;
+  background: linear-gradient(90deg, var(--ion-color-primary), var(--ion-color-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-sub {
+  margin-top: 8px;
+  text-align: center;
+  color: rgba(var(--ion-color-medium-rgb), 0.9);
+  font-size: 13px;
+}
+
+.important-card {
+  margin-top: 16px;
+}
+
+.ml-8 {
+  margin-left: 8px;
+}
+
+.meta {
+  color: rgba(var(--ion-color-medium-rgb), 0.95);
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.countdown {
+  margin-top: 8px;
+}
+
+.count {
+  font-weight: 950;
+  font-size: 20px;
+}
+
+.sub {
+  color: rgba(var(--ion-color-medium-rgb), 0.9);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.mt-16 {
+  margin-top: 16px;
+}
+
+.entry-grid {
+  margin-top: 16px;
+}
+

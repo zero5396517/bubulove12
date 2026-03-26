@@ -1,2 +1,17 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+
+/**
+ * Love theme tuning (used by the custom pages in this repo).
+ * All component styling should prefer Ionic variables (e.g. --ion-color-primary).
+ */
+:root {
+  --ion-color-primary: #ff4fa6;
+  --ion-color-primary-contrast: #ffffff;
+
+  --ion-color-secondary: #3de7ff;
+  --ion-color-secondary-contrast: #0b0b0f;
+
+  --ion-color-tertiary: #2dffb3;
+  --ion-color-tertiary-contrast: #0b0b0f;
+}

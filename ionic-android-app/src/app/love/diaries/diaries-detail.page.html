@@ -1,0 +1,87 @@
+<ion-page>
+  <ion-header translucent="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button fill="clear" (click)="backToList()">
+          <ion-icon name="arrow-back" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>日记详情</ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="edit()">
+          <ion-icon name="create" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding safe-pad-bottom">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          {{ diary.title }}
+          <ion-badge
+            *ngIf="diary.privacy === 'private'"
+            color="tertiary"
+            class="ml-8"
+            >私密</ion-badge
+          >
+          <ion-badge
+            *ngIf="diary.privacy === 'public'"
+            color="primary"
+            class="ml-8"
+            >公开</ion-badge
+          >
+        </ion-card-title>
+        <div class="meta">{{ diary.date }}</div>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="tags-row">
+          <ion-badge class="tag">心动</ion-badge>
+          <ion-badge class="tag">回看</ion-badge>
+          <ion-badge class="tag">故事</ion-badge>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="mt-16">
+      <ion-card-header>
+        <ion-card-title>这一天</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="body" [innerText]="diary.body"></div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="diary.photos.length" class="mt-16">
+      <ion-card-header>
+        <ion-card-title>照片</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="photo-grid">
+          <div *ngFor="let p of diary.photos" class="photo-tile">
+            <ion-img [src]="p" alt="照片"></ion-img>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="diary.voiceUrl" class="mt-16">
+      <ion-card-header>
+        <ion-card-title>语音</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <audio [src]="diary.voiceUrl" controls class="audio"></audio>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="mt-16">
+      <ion-card-content>
+        <ion-button expand="block" color="primary" [routerLink]="['/tabs/diaries']">
+          返回日记列表
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+</ion-page>
+

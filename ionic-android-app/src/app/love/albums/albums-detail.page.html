@@ -1,0 +1,56 @@
+<ion-page>
+  <ion-header translucent="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button fill="clear" (click)="back()">
+          <ion-icon name="arrow-back" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>相册详情</ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="shareMock()">
+          <ion-icon name="share-social" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding safe-pad-bottom">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          {{ album.name }}
+          <ion-badge color="primary" class="ml-8">{{ album.photos.length }} 张</ion-badge>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="cover-wrap">
+          <ion-img [src]="album.coverUrl" alt="封面"></ion-img>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="mt-16">
+      <ion-card-header>
+        <ion-card-title>图片网格</ion-card-title>
+        <div class="muted">长按拖拽排序（UI mock 后续接真实逻辑）</div>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="grid">
+          <div *ngFor="let p of album.photos" class="tile">
+            <ion-img [src]="p" alt="照片"></ion-img>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="mt-16">
+      <ion-card-content>
+        <ion-button expand="block" fill="outline" (click)="back()">
+          返回相册列表
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+</ion-page>
+

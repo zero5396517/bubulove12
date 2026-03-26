@@ -1,0 +1,93 @@
+<ion-page>
+  <ion-header translucent="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button fill="clear" routerLink="/tabs/home">
+          <ion-icon name="arrow-back" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>爱的告白</ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" routerLink="/tabs/diaries">
+          <ion-icon name="create" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding safe-pad-bottom">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>给一二的一段心动</ion-card-title>
+        <ion-card-subtitle>写得越具体，未来越好回看</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-label position="stacked">告白标题（可选）</ion-label>
+          <ion-input
+            [(ngModel)]="title"
+            placeholder="比如：今天也喜欢你"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label position="stacked">告白内容</ion-label>
+          <ion-textarea
+            [(ngModel)]="body"
+            placeholder="写下你想说的话：感谢、想念、期待……"
+            auto-grow="true"
+          ></ion-textarea>
+        </ion-item>
+
+        <ion-label class="section-label">心动标签（可多选）</ion-label>
+        <div class="chips">
+          <ion-button
+            *ngFor="let tag of tags"
+            fill="outline"
+            size="small"
+            [color]="selectedTags.has(tag) ? 'primary' : undefined"
+            (click)="toggleTag(tag)"
+            class="chip"
+          >
+            {{ tag }}
+          </ion-button>
+        </div>
+
+        <ion-label class="section-label">可见性</ion-label>
+        <ion-segment [(ngModel)]="privacy" aria-label="选择告白可见性">
+          <ion-segment-button value="private">
+            私密（仅你们可见）
+          </ion-segment-button>
+          <ion-segment-button value="public">
+            公开（展示给你们）
+          </ion-segment-button>
+        </ion-segment>
+
+        <ion-button expand="block" color="primary" class="mt-16" (click)="publish()">
+          发布告白（Mock）
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="history-card">
+      <ion-card-header>
+        <ion-card-title>历史告白</ion-card-title>
+        <ion-card-subtitle>最近三条</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list inset="true">
+          <ion-item *ngFor="let h of history">
+            <ion-label>
+              <div class="hist-title">{{ h.title }}</div>
+              <div class="hist-meta">
+                <span>{{ h.when }}</span>
+                <span class="badge">{{ h.privacy }}</span>
+              </div>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+</ion-page>
+

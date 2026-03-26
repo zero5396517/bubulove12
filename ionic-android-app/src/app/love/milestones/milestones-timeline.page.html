@@ -1,0 +1,38 @@
+<ion-page>
+  <ion-header translucent="true">
+    <ion-toolbar>
+      <ion-title>相爱里程碑</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding safe-pad-bottom">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>时间线（Mock 展示）</ion-card-title>
+        <ion-card-content class="muted">
+          里程碑支持倒计时与“重要时刻”优先展示。真实数据与提醒在下一阶段接入 IndexedDB。
+        </ion-card-content>
+      </ion-card-header>
+    </ion-card>
+
+    <div class="timeline">
+      <ion-card *ngFor="let m of milestones" class="mt-16">
+        <ion-card-header>
+          <ion-card-title>
+            <span>{{ m.title }}</span>
+            <ion-badge [color]="badgeColor(m.badge)" class="ml-8">
+              {{ m.badge === 'normal' ? '记录' : m.badge === 'primary' ? '提醒中' : '重要' }}
+            </ion-badge>
+          </ion-card-title>
+          <div class="meta">{{ m.dateText }}</div>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="countdown">
+            <span class="count">{{ m.countdownText }}</span>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-content>
+</ion-page>
+

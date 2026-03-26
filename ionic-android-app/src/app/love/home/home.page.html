@@ -1,0 +1,84 @@
+<ion-page>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>恋爱日记</ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" [routerLink]="['/confession']">
+          <ion-icon name="heart" aria-hidden="true"></ion-icon>
+          告白
+        </ion-button>
+        <ion-button fill="clear" [routerLink]="['/settings']">
+          <ion-icon name="settings" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding safe-pad">
+    <div class="hero">
+      <div class="hero-title">
+        <span class="gradient-text">布布与一二</span>
+        <div class="hero-sub">把心动记成可回看的证据</div>
+      </div>
+    </div>
+
+    <ion-card class="important-card">
+      <ion-card-header>
+        <ion-card-title>
+          重要时刻提醒
+          <ion-badge color="tertiary" class="ml-8">重要</ion-badge>
+        </ion-card-title>
+        <div class="meta">纪念日：第一次牵手</div>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="countdown">
+          <div class="count">还有 5 天</div>
+          <div class="sub">提前提醒，让喜欢按时抵达</div>
+        </div>
+
+        <ion-button
+          expand="block"
+          color="primary"
+          class="mt-16"
+          [routerLink]="['/tabs/milestones']"
+        >
+          查看时间线
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-grid class="entry-grid">
+      <ion-row>
+        <ion-col size="6">
+          <ion-button expand="block" color="primary" [routerLink]="['/tabs/diaries']">
+            <ion-icon slot="start" name="create-outline" aria-hidden="true"></ion-icon>
+            恋爱日记
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" color="primary" [routerLink]="['/tabs/albums']">
+            <ion-icon slot="start" name="images-outline" aria-hidden="true"></ion-icon>
+            爱的相册
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-button expand="block" color="primary" [routerLink]="['/tabs/milestones']">
+            <ion-icon slot="start" name="time-outline" aria-hidden="true"></ion-icon>
+            相爱里程碑
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" fill="outline" color="primary" [routerLink]="['/tabs/diaries']">
+            <ion-icon slot="start" name="add-circle-outline" aria-hidden="true"></ion-icon>
+            新建记录
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+</ion-page>
+

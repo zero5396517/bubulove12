@@ -1,0 +1,66 @@
+<ion-page>
+  <ion-header translucent="true">
+    <ion-toolbar>
+      <ion-title>恋爱日记</ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="newDiary()">
+          <ion-icon name="add-circle-outline" aria-hidden="true"></ion-icon>
+          新建
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding safe-pad-bottom">
+    <ion-searchbar
+      placeholder="搜索心情/地点/关键词…"
+      (ionInput)="onQueryInput($event)"
+    ></ion-searchbar>
+
+    <ion-segment class="mt-12" [value]="privacy" aria-label="隐私筛选" mode="md">
+      <ion-segment-button value="all" (click)="privacy = 'all'">全部</ion-segment-button>
+      <ion-segment-button value="private" (click)="privacy = 'private'">私密</ion-segment-button>
+      <ion-segment-button value="public" (click)="privacy = 'public'">公开</ion-segment-button>
+    </ion-segment>
+
+    <ion-item lines="none" class="mt-8">
+      <ion-label position="stacked">日期（示例）</ion-label>
+      <ion-select interface="popover" [(ngModel)]="year" aria-label="年份选择">
+        <ion-select-option value="2026">2026</ion-select-option>
+        <ion-select-option value="2025">2025</ion-select-option>
+        <ion-select-option value="2024">2024</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-list inset="true" class="mt-12">
+      <ion-item
+        *ngFor="let d of diaries"
+        [routerLink]="['/diaries/detail', d.id]"
+        button
+      >
+        <ion-label>
+          <div class="row-between">
+            <div class="title">{{ d.title }}</div>
+            <ion-badge
+              *ngIf="d.privacy === 'private'"
+              color="tertiary"
+              class="badge"
+              >私密</ion-badge
+            >
+            <ion-badge *ngIf="d.privacy === 'public'" color="primary" class="badge"
+              >公开</ion-badge
+            >
+          </div>
+          <div class="meta">
+            <span>{{ d.date }}</span>
+            <span>·</span>
+            <span>{{ d.photoCount }} 张</span>
+            <span *ngIf="d.hasVoice">· 语音</span>
+          </div>
+          <div class="preview">{{ d.preview }}</div>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-page>
+

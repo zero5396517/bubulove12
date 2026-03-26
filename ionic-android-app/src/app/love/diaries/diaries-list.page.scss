@@ -1,0 +1,49 @@
+.safe-pad-bottom {
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+}
+
+.mt-12 {
+  margin-top: 12px;
+}
+
+.mt-8 {
+  margin-top: 8px;
+}
+
+.row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.title {
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 4px 10px;
+}
+
+.meta {
+  margin-top: 6px;
+  color: rgba(var(--ion-color-medium-rgb), 0.95);
+  font-size: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.preview {
+  margin-top: 8px;
+  color: rgba(var(--ion-color-medium-rgb), 0.9);
+  font-size: 13px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+

@@ -1,0 +1,111 @@
+<ion-page>
+  <ion-header translucent="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button fill="clear" routerLink="/tabs/diaries">
+          <ion-icon name="arrow-back" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>新建日记</ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" routerLink="/confession">
+          <ion-icon name="heart" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding safe-pad-bottom">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>把今天写给ta</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="stacked">标题</ion-label>
+          <ion-input
+            [(ngModel)]="title"
+            placeholder="比如：我们在灯光下慢慢走"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">日期</ion-label>
+          <ion-input type="date" [(ngModel)]="date"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">内容</ion-label>
+          <ion-textarea
+            [(ngModel)]="body"
+            placeholder="写下你想记录的：心情、地点、对ta说的话……"
+            auto-grow="true"
+          ></ion-textarea>
+        </ion-item>
+
+        <ion-label class="section-label">隐私</ion-label>
+        <ion-segment [(ngModel)]="privacy" aria-label="选择隐私">
+          <ion-segment-button value="private">私密</ion-segment-button>
+          <ion-segment-button value="public">公开</ion-segment-button>
+        </ion-segment>
+
+        <ion-label class="section-label">添加照片（多选）</ion-label>
+        <input
+          #fileInput
+          type="file"
+          accept="image/*"
+          multiple
+          style="display: none"
+          (change)="onSelectPhotos($event)"
+        />
+
+        <ion-button expand="block" fill="outline" color="primary" (click)="fileInput.click()">
+          <ion-icon slot="start" name="add-photo-alternate" aria-hidden="true"></ion-icon>
+          选择照片/拍照
+        </ion-button>
+
+        <div *ngIf="photos.length" class="photo-grid">
+          <div *ngFor="let p of photos; let i = index" class="photo-tile">
+            <ion-img [src]="p" alt="照片预览"></ion-img>
+            <ion-button
+              class="remove-btn"
+              fill="clear"
+              color="danger"
+              size="small"
+              (click)="removePhoto(p)"
+              aria-label="删除照片"
+            >
+              <ion-icon name="close" aria-hidden="true"></ion-icon>
+            </ion-button>
+            <div class="cover-mark" *ngIf="i === 0">封面</div>
+          </div>
+        </div>
+
+        <ion-label class="section-label">语音（可选）</ion-label>
+        <ion-card class="voice-card">
+          <ion-card-content>
+            <div class="voice-row">
+              <ion-button
+                expand="block"
+                color="primary"
+                (click)="toggleRecording()"
+              >
+                <ion-icon slot="start" name="mic" aria-hidden="true"></ion-icon>
+                {{ recording ? '正在录制…' : '录制语音' }}
+              </ion-button>
+              <div class="voice-hint">
+                {{ voiceUrl ? '已录制：可播放' : '提示：若设备不支持录音，页面将保持 UI 态' }}
+              </div>
+            </div>
+            <audio *ngIf="voiceUrl" [src]="voiceUrl" controls class="audio"></audio>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-button expand="block" color="primary" class="mt-16" (click)="submitMock()">
+          保存并预览（Mock）
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+</ion-page>
+

@@ -1,0 +1,52 @@
+<ion-page>
+  <ion-header translucent="true">
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="goPaywall()">跳过</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding-0">
+    <div class="bg">
+      <video
+        class="bg-video"
+        [src]="videoUrl"
+        autoplay
+        loop
+        muted
+        playsinline
+      ></video>
+      <div class="bg-gradient"></div>
+    </div>
+
+    <div class="slides" aria-label="入门引导滑动页">
+      <div class="slide">
+        <div class="hero-title">
+          <span class="gradient-text">布布与一二</span>
+          <div class="hero-sub">把恋爱日常收进心里</div>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="hero-card">
+          <div class="hero-card-title">写下每个心动</div>
+          <div class="hero-card-sub">
+            图文与语音都能记录，随时回看。
+          </div>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="hero-card">
+          <div class="hero-card-title">相册与里程碑</div>
+          <div class="hero-card-sub">
+            照片整理更有仪式感，重要日子不会错过。
+          </div>
+          <ion-button class="cta" expand="block" (click)="goPaywall()">
+            开始体验
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-page>
+

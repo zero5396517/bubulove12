@@ -1,0 +1,61 @@
+<ion-page>
+  <ion-header translucent="true">
+    <ion-toolbar>
+      <ion-title>去除限制 / 开启甜蜜</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <div class="title">选择订阅方案</div>
+
+    <ion-card
+      class="option-card"
+      [class.selected]="selectedPlan === 'weekly'"
+      (click)="selectedPlan = 'weekly'"
+      aria-label="每周订阅"
+    >
+      <ion-card-header>
+        <ion-card-title>每周订阅</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="price">$4.99 / 周</div>
+        <div class="muted">适合想先试试的你</div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card
+      class="option-card"
+      [class.selected]="selectedPlan === 'yearly'"
+      (click)="selectedPlan = 'yearly'"
+      aria-label="每年订阅"
+    >
+      <ion-card-header>
+        <ion-card-title>
+          每年订阅
+          <ion-badge color="danger" class="badge">50% OFF</ion-badge>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="price">$129.99 / 年</div>
+        <div class="muted">一年更划算，陪伴更久</div>
+      </ion-card-content>
+    </ion-card>
+
+    <div class="actions">
+      <ion-button expand="block" color="primary" (click)="goMainApp()">
+        订阅（Mock）
+      </ion-button>
+      <ion-button fill="clear" expand="block" (click)="goMainApp()">
+        暂时继续使用（Mock 广告）
+      </ion-button>
+      <ion-button fill="clear" size="small" expand="block" (click)="goMainApp()">
+        恢复购买（Mock）
+      </ion-button>
+    </div>
+
+    <div class="privacy">
+      提示：当前为 UI/UX 开发占位页，订阅与广告逻辑将在下一阶段接入真实 SDK。
+    </div>
+  </ion-content>
+</ion-page>
+

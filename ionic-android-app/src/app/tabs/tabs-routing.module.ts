@@ -4,32 +4,31 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        path: 'home',
+        loadComponent: () => import('../love/home/home.page').then(m => m.LoveHomePage),
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'diaries',
+        loadComponent: () => import('../love/diaries/diaries-list.page').then(m => m.DiariesListPage),
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'albums',
+        loadComponent: () => import('../love/albums/albums-list.page').then(m => m.AlbumsListPage),
+      },
+      {
+        path: 'milestones',
+        loadComponent: () => import('../love/milestones/milestones-timeline.page').then(m => m.MilestonesTimelinePage),
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: 'home',
         pathMatch: 'full'
       }
-    ]
-  },
-  {
-    path: '',
-    redirectTo: '/tabs/tab1',
-    pathMatch: 'full'
+    ],
   }
 ];
 

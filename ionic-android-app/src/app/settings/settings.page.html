@@ -1,0 +1,56 @@
+<ion-page>
+  <ion-header translucent="true">
+    <ion-toolbar>
+      <ion-title>设置</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <ion-list inset="true">
+      <ion-item>
+        <ion-label>语言</ion-label>
+        <ion-select
+          slot="end"
+          interface="popover"
+          aria-label="选择语言"
+          [(ngModel)]="currentLang"
+        >
+          <ion-select-option value="zh">中文</ion-select-option>
+          <ion-select-option value="en">English</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>主题</ion-label>
+        <ion-select
+          slot="end"
+          interface="popover"
+          aria-label="选择主题"
+          [(ngModel)]="currentTheme"
+        >
+          <ion-select-option value="system">系统</ion-select-option>
+          <ion-select-option value="light">浅色</ion-select-option>
+          <ion-select-option value="dark">深色</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>通知</ion-label>
+        <ion-toggle
+          slot="end"
+          [(ngModel)]="notificationsEnabled"
+          aria-label="通知开关"
+        ></ion-toggle>
+      </ion-item>
+
+      <ion-item button (click)="resetOnboarding()">
+        <ion-label>重置引导（Mock）</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <div class="hint">
+      说明：当前为 UI/UX + 路由开发占位页。真实语言/主题/订阅逻辑将在下一阶段接入。
+    </div>
+  </ion-content>
+</ion-page>
+
