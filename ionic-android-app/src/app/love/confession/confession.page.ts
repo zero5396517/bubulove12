@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import {
   IonCard,
   IonCardContent,
   IonCardHeader,
   IonCardSubtitle,
+  IonCardTitle,
   IonButton,
   IonContent,
   IonHeader,
@@ -14,24 +16,25 @@ import {
   IonItem,
   IonLabel,
   IonList,
-  IonPage,
   IonSegment,
   IonSegmentButton,
   IonTextarea,
   IonTitle,
   IonToolbar,
   IonButtons,
-} from '@ionic/angular';
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-confession',
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule,
     IonCard,
     IonCardContent,
     IonCardHeader,
     IonCardSubtitle,
+    IonCardTitle,
     IonButton,
     IonContent,
     IonHeader,
@@ -41,7 +44,6 @@ import {
     IonLabel,
     IonList,
     IonButtons,
-    IonPage,
     IonSegment,
     IonSegmentButton,
     IonTextarea,

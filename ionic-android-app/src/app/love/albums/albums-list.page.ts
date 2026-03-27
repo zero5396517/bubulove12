@@ -16,11 +16,10 @@ import {
   IonItem,
   IonLabel,
   IonList,
-  IonPage,
   IonTitle,
   IonToolbar,
   IonImg,
-} from '@ionic/angular';
+} from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -53,7 +52,6 @@ type Album = {
     IonItem,
     IonLabel,
     IonList,
-    IonPage,
     IonTitle,
     IonToolbar,
     IonImg,

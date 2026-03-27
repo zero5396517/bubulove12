@@ -8,13 +8,12 @@ import {
   IonItem,
   IonLabel,
   IonList,
-  IonPage,
   IonSelect,
   IonSelectOption,
   IonTitle,
   IonToolbar,
   IonToggle,
-} from '@ionic/angular';
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-settings',
@@ -26,7 +25,6 @@ import {
     IonItem,
     IonLabel,
     IonList,
-    IonPage,
     IonSelect,
     IonSelectOption,
     IonTitle,

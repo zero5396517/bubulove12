@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
   IonButton,
+  IonButtons,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -9,15 +10,17 @@ import {
   IonContent,
   IonHeader,
   IonIcon,
+  IonImg,
   IonInput,
   IonItem,
   IonLabel,
   IonList,
-  IonPage,
   IonSegment,
   IonSegmentButton,
   IonTextarea,
-} from '@ionic/angular';
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -39,6 +42,7 @@ type DiaryDraft = {
     CommonModule,
     FormsModule,
     IonButton,
+    IonButtons,
     IonCard,
     IonCardContent,
     IonCardHeader,
@@ -46,14 +50,16 @@ type DiaryDraft = {
     IonContent,
     IonHeader,
     IonIcon,
+    IonImg,
     IonInput,
     IonItem,
     IonLabel,
     IonList,
-    IonPage,
     IonSegment,
     IonSegmentButton,
     IonTextarea,
+    IonTitle,
+    IonToolbar,
     RouterLink,
   ],
   templateUrl: './diaries-new.page.html',
@@ -72,7 +78,7 @@ export class DiariesNewPage {
 
   // MediaRecorder can be missing on some browsers; we handle gracefully.
   private mediaRecorder: MediaRecorder | null = null;
-  private recording = false;
+  recording = false;
   private voiceChunks: Blob[] = [];
 
   constructor(private router: Router) {}

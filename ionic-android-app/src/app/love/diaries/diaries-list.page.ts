@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import {
   IonBadge,
   IonButton,
+  IonButtons,
   IonContent,
   IonHeader,
   IonItem,
   IonLabel,
   IonList,
-  IonPage,
   IonSearchbar,
   IonSelect,
   IonSelectOption,
@@ -18,7 +18,7 @@ import {
   IonTitle,
   IonToolbar,
   IonIcon,
-} from '@ionic/angular';
+} from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 
 type Privacy = 'private' | 'public';
@@ -41,13 +41,13 @@ type Diary = {
     FormsModule,
     IonBadge,
     IonButton,
+    IonButtons,
     IonContent,
     IonHeader,
     IonIcon,
     IonItem,
     IonLabel,
     IonList,
-    IonPage,
     IonSearchbar,
     IonSelect,
     IonSelectOption,

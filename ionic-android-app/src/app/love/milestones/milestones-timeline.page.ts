@@ -9,10 +9,9 @@ import {
   IonHeader,
   IonItem,
   IonLabel,
-  IonPage,
   IonTitle,
   IonToolbar,
-} from '@ionic/angular';
+} from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 
 type Milestone = {
@@ -37,7 +36,6 @@ type Milestone = {
     IonHeader,
     IonItem,
     IonLabel,
-    IonPage,
     IonTitle,
     IonToolbar,
   ],

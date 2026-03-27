@@ -3,19 +3,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   IonBadge,
   IonButton,
+  IonButtons,
   IonCard,
   IonCardContent,
   IonCardHeader,
+  IonCardTitle,
   IonContent,
   IonHeader,
   IonIcon,
   IonImg,
   IonLabel,
   IonList,
-  IonPage,
   IonTitle,
   IonToolbar,
-} from '@ionic/angular';
+} from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 
 type AlbumDisplay = {
@@ -32,16 +33,17 @@ type AlbumDisplay = {
     CommonModule,
     IonBadge,
     IonButton,
+    IonButtons,
     IonCard,
     IonCardContent,
     IonCardHeader,
+    IonCardTitle,
     IonContent,
     IonHeader,
     IonIcon,
     IonImg,
     IonLabel,
     IonList,
-    IonPage,
     IonTitle,
     IonToolbar,
   ],

@@ -15,11 +15,10 @@ import {
   IonIcon,
   IonButtons,
   IonLabel,
-  IonPage,
   IonRow,
   IonTitle,
   IonToolbar,
-} from '@ionic/angular';
+} from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -40,7 +39,6 @@ import { CommonModule } from '@angular/common';
     IonIcon,
     IonButtons,
     IonLabel,
-    IonPage,
     IonRow,
     IonTitle,
     IonToolbar,

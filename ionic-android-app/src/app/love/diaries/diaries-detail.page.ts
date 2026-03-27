@@ -2,20 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
   IonButton,
+  IonButtons,
   IonCard,
   IonCardContent,
   IonCardHeader,
+  IonCardTitle,
   IonContent,
   IonHeader,
   IonIcon,
   IonImg,
   IonLabel,
   IonList,
-  IonPage,
   IonTitle,
   IonToolbar,
   IonBadge,
-} from '@ionic/angular';
+} from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 
 type Privacy = 'private' | 'public';
@@ -35,16 +36,17 @@ type DiaryDisplay = {
   imports: [
     CommonModule,
     IonButton,
+    IonButtons,
     IonCard,
     IonCardContent,
     IonCardHeader,
+    IonCardTitle,
     IonContent,
     IonHeader,
     IonIcon,
     IonImg,
     IonLabel,
     IonList,
-    IonPage,
     IonTitle,
     IonToolbar,
     IonBadge,

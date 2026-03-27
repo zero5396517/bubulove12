@@ -5,10 +5,9 @@ import {
   IonContent,
   IonHeader,
   IonButtons,
-  IonPage,
   IonTitle,
   IonToolbar,
-} from '@ionic/angular';
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-onboarding',
@@ -18,7 +17,6 @@ import {
     IonContent,
     IonHeader,
     IonButtons,
-    IonPage,
     IonTitle,
     IonToolbar,
   ],

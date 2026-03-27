@@ -11,7 +11,7 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
-} from '@ionic/angular';
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-paywall',
