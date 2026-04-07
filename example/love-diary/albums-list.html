@@ -7,12 +7,10 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <title>恋爱日记 - 爱的相册</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
@@ -22,23 +20,34 @@
       <div class="screen" role="application" aria-label="恋爱日记 - 相册列表">
         <div class="header">
           <a class="icon-button" href="home.html" aria-label="返回首页">
-            <span class="material-icons">home</span>
+            <span class="ico ico-home" aria-hidden="true"></span>
           </a>
-          <div class="header-title">爱的相册</div>
+          <div class="header-center">
+            <img
+              class="header-mini-logo"
+              src="assets/logo-mark.png"
+              width="28"
+              height="28"
+              alt=""
+            />
+            <div class="header-title">爱的相册</div>
+          </div>
           <div class="header-action">
             <a
               class="icon-button"
               href="albums-list.html#createAlbumModal"
               aria-label="创建相册"
             >
-              <span class="material-icons">add</span>
+              <span class="ico ico-add" aria-hidden="true"></span>
             </a>
           </div>
         </div>
 
         <div class="content safe-pad-bottom">
           <div class="search-bar" role="search" aria-label="搜索相册">
-            <span class="material-icons search-icon" aria-hidden="true">search</span>
+            <span class="search-icon" aria-hidden="true"
+              ><span class="ico ico-search"></span
+            ></span>
             <input
               class="search-input"
               type="search"
@@ -84,9 +93,7 @@
                   </div>
                   <div class="li-preview">下次还想一起吃同一家，最好再看一次。</div>
                 </div>
-                <span class="material-icons" style="color: var(--text-tertiary)">
-                  chevron_right
-                </span>
+                <span class="ico ico-chevron ico--muted" aria-hidden="true"></span>
               </a>
 
               <a class="list-item" href="albums-detail.html" aria-label="打开相册：牵手的路灯">
@@ -104,9 +111,7 @@
                   </div>
                   <div class="li-preview">夜色把我们包得刚刚好，心也变得很近。</div>
                 </div>
-                <span class="material-icons" style="color: var(--text-tertiary)">
-                  chevron_right
-                </span>
+                <span class="ico ico-chevron ico--muted" aria-hidden="true"></span>
               </a>
 
               <a class="list-item" href="albums-detail.html" aria-label="打开相册：旅行碎片">
@@ -124,9 +129,7 @@
                   </div>
                   <div class="li-preview">风、海和你。每一张都像一段没说完的故事。</div>
                 </div>
-                <span class="material-icons" style="color: var(--text-tertiary)">
-                  chevron_right
-                </span>
+                <span class="ico ico-chevron ico--muted" aria-hidden="true"></span>
               </a>
             </div>
 
@@ -136,7 +139,7 @@
                 href="albums-list.html#createAlbumModal"
                 aria-label="创建相册按钮"
               >
-                <span class="button-icon material-icons">photo_add</span>
+                <span class="button-icon"><span class="ico ico-plus-box"></span></span>
                 创建相册
               </a>
             </div>
@@ -154,7 +157,7 @@
           <div class="modal-card">
             <div style="padding: var(--space-md)">
               <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-sm)">
-                <span class="material-icons" style="color: var(--primary)">photo_album</span>
+                <span class="ico ico-album" style="color: var(--accent)"></span>
                 <div style="font-weight: 950; font-size: 18px">创建新相册</div>
               </div>
               <div class="muted" style="font-size: 13px; margin-bottom: var(--space-md)">
@@ -189,11 +192,11 @@
 
         <div class="nav-bar" role="navigation" aria-label="底部导航">
           <a class="nav-item" href="home.html" aria-label="首页">
-            <span class="material-icons nav-icon">home</span>
+            <span class="ico ico-home" aria-hidden="true"></span>
             <span>首页</span>
           </a>
           <a class="nav-item" href="diaries-list.html" aria-label="恋爱日记">
-            <span class="material-icons nav-icon">edit_note</span>
+            <span class="ico ico-diary" aria-hidden="true"></span>
             <span>日记</span>
           </a>
           <a
@@ -201,11 +204,11 @@
             href="albums-list.html"
             aria-label="爱的相册"
           >
-            <span class="material-icons nav-icon">photo_album</span>
+            <span class="ico ico-album" aria-hidden="true"></span>
             <span>相册</span>
           </a>
           <a class="nav-item" href="milestones-timeline.html" aria-label="相爱里程碑">
-            <span class="material-icons nav-icon">timeline</span>
+            <span class="ico ico-milestone" aria-hidden="true"></span>
             <span>里程碑</span>
           </a>
         </div>

@@ -7,12 +7,10 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <title>恋爱日记 - 编辑日记</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
@@ -22,12 +20,12 @@
       <div class="screen" role="application" aria-label="恋爱日记 - 编辑日记">
         <div class="header">
           <a class="icon-button" href="diaries-detail.html" aria-label="返回详情">
-            <span class="material-icons">arrow_back</span>
+            <span class="ico ico-back" aria-hidden="true"></span>
           </a>
           <div class="header-title">编辑日记</div>
           <div class="header-action">
             <a class="icon-button" href="diaries-detail.html" aria-label="预览">
-              <span class="material-icons">visibility</span>
+              <span class="ico ico-eye" aria-hidden="true"></span>
             </a>
           </div>
         </div>
@@ -105,9 +103,7 @@
                     aria-hidden="true"
                     title="拖拽手柄（示例）"
                   >
-                    <span class="material-icons" style="font-size: 18px; color: #fff"
-                      >drag_handle</span
-                    >
+                    <span class="ico ico-grip ico--sm ico--on-dark" aria-hidden="true"></span>
                   </div>
                   <div class="count-badge">1</div>
                 </a>
@@ -132,9 +128,7 @@
                     "
                     aria-hidden="true"
                   >
-                    <span class="material-icons" style="font-size: 18px; color: #fff"
-                      >drag_handle</span
-                    >
+                    <span class="ico ico-grip ico--sm ico--on-dark" aria-hidden="true"></span>
                   </div>
                 </a>
                 <a class="img-tile" href="#diaryImgPreviewEdit" aria-label="预览照片3">
@@ -158,9 +152,7 @@
                     "
                     aria-hidden="true"
                   >
-                    <span class="material-icons" style="font-size: 18px; color: #fff"
-                      >drag_handle</span
-                    >
+                    <span class="ico ico-grip ico--sm ico--on-dark" aria-hidden="true"></span>
                   </div>
                 </a>
               </div>
@@ -170,7 +162,7 @@
               <label class="form-label">语音（可播放）</label>
               <div class="voice-row" aria-label="语音播放控件UI">
                 <div class="voice-play" aria-label="播放按钮（示例）">
-                  <span class="material-icons" style="font-size: 22px">play_arrow</span>
+                  <span class="ico ico-play" aria-hidden="true"></span>
                 </div>
                 <div style="flex: 1">
                   <div style="font-weight: 800; margin-bottom: 6px">已录制 · 给你的话</div>
@@ -203,7 +195,7 @@
                 href="diaries-detail.html"
                 aria-label="更新日记"
               >
-                <span class="button-icon material-icons">check_circle</span>
+                <span class="button-icon"><span class="ico ico-check"></span></span>
                 更新日记
               </a>
               <div style="height: 10px"></div>
@@ -212,7 +204,9 @@
                 href="diaries-detail.html"
                 aria-label="删除日记（示例）"
               >
-                <span class="button-icon material-icons" style="color: var(--text-secondary)">delete</span>
+                <span class="button-icon" style="color: var(--text-secondary)"
+                  ><span class="ico ico-trash"></span
+                ></span>
                 删除（仅UI态）
               </a>
             </div>
@@ -240,7 +234,7 @@
 
         <div class="nav-bar" role="navigation" aria-label="底部导航">
           <a class="nav-item" href="home.html" aria-label="首页">
-            <span class="material-icons nav-icon">home</span>
+            <span class="ico ico-home" aria-hidden="true"></span>
             <span>首页</span>
           </a>
           <a
@@ -248,11 +242,11 @@
             href="diaries-list.html"
             aria-label="恋爱日记"
           >
-            <span class="material-icons nav-icon">edit_note</span>
+            <span class="ico ico-diary" aria-hidden="true"></span>
             <span>日记</span>
           </a>
           <a class="nav-item" href="albums-list.html" aria-label="爱的相册">
-            <span class="material-icons nav-icon">photo_album</span>
+            <span class="ico ico-album" aria-hidden="true"></span>
             <span>相册</span>
           </a>
           <a
@@ -260,7 +254,7 @@
             href="milestones-timeline.html"
             aria-label="相爱里程碑"
           >
-            <span class="material-icons nav-icon">timeline</span>
+            <span class="ico ico-milestone" aria-hidden="true"></span>
             <span>里程碑</span>
           </a>
         </div>

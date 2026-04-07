@@ -1,8 +1,8 @@
 # 恋爱日记移动端 WEBAPP - UI/UX 设计稿记录
 
-日期：2026-03-25  
+日期：2026-03-27（UI v3 亮暖色）  
 来源：`docs/移动端WEBAPP需求文档.md`（恋爱日记模块）  
-视觉参考：`example/ui.html`（暗色 + 霓虹风格与移动端布局骨架）
+视觉方向：奶油/杏粉亮底、玫瑰强调色；`assets/logo-mark.png` 与 `hero-soft.png` 为 AI 生成插图；`deco-hearts.svg` 为矢量装饰；多页顶栏含缩小标志。
 
 ## 1. 交付内容
 
@@ -11,7 +11,7 @@
 ## 2. 通用样式与交互规范
 
 - 通用样式入口：`example/love-diary/styles.css`
-- Mobile First：禁止横向溢出，布局以竖屏 360x720 预览为基准
+- Mobile First：禁止横向溢出，设备预览框约 **375×780**（`styles.css` 中 `.screen`）
 - 触控热区：按钮/图标/可点击控件最低满足 `min-height: 44px`
 - 安全区域：适配 `env(safe-area-inset-*)`（顶部/底部补偿）
 - 焦点态：为 `:focus-visible` 增加高对比描边，提升可访问性
@@ -47,6 +47,7 @@
 
 ## 5. 备注
 
+- 一二 & 布布角色/IP 设定合集：`example/love-diary/一二布布设定.md`
 - 当前为 UI/UX 展示稿：表单控件、上传/权限引导、拖拽排序、语音录制/播放等均以**界面态**呈现。
 - 如进入下一阶段接入 `localStorage/IndexedDB` 并实现真实数据流，可在此记录基础上逐页替换为可运行版本。
 

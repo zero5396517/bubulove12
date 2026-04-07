@@ -7,12 +7,10 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <title>恋爱日记 - 首页</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
@@ -20,158 +18,161 @@
   <body>
     <div class="app-container">
       <div class="screen" role="application" aria-label="恋爱日记 - 首页">
-        <div class="header">
-          <div class="header-title">恋爱日记</div>
+        <header class="header">
+          <div class="header-brand">
+            <img
+              class="header-logo"
+              src="assets/logo-mark.png"
+              width="40"
+              height="40"
+              alt="恋爱日记应用标志"
+            />
+            <div class="header-title-stack">
+              <div class="header-title">恋爱日记</div>
+              <span class="header-tagline">布布 × 一二</span>
+            </div>
+          </div>
           <div class="header-action">
             <a class="icon-button" href="confession.html" aria-label="去爱的告白">
-              <span class="material-icons">favorite</span>
+              <span class="ico ico-heart" aria-hidden="true"></span>
             </a>
             <a
               class="icon-button"
               href="milestones-timeline.html"
               aria-label="查看里程碑"
             >
-              <span class="material-icons">timeline</span>
+              <span class="ico ico-milestone" aria-hidden="true"></span>
             </a>
           </div>
-        </div>
+        </header>
 
         <div class="content safe-pad-bottom">
-          <div class="hero">
-            <div style="font-size: 22px; line-height: 1.1; margin-bottom: 10px">
-              <span class="gradient-text">布布与一二</span> 的甜蜜时刻
+          <section class="hero" aria-labelledby="hero-heading">
+            <p class="hero-eyebrow">今天也要好好相爱</p>
+            <h1 id="hero-heading" class="hero-title">
+              把日常，写成<br /><em>只属于你们</em> 的编年史
+            </h1>
+            <p class="hero-lead">本地保存 · 单手好用 · 碎片时间就能记一笔</p>
+            <div class="hero-visual">
+              <img
+                src="assets/hero-soft.png"
+                width="640"
+                height="400"
+                alt=""
+                decoding="async"
+              />
+              <div class="hero-visual-badge">
+                <span class="ico ico-sparkles" aria-hidden="true"></span>
+                AI 插画 · 你的专属封面氛围
+              </div>
             </div>
-            <div style="color: var(--text-secondary); font-size: 13px">
-              Mobile First · 本地存储 · 随时记录
-            </div>
-          </div>
+          </section>
 
-          <div class="form-group" style="margin-top: var(--space-md)">
-            <div class="row-between">
-              <div style="font-weight: 800">重要时刻提醒</div>
+          <section aria-labelledby="reminders-heading">
+            <div class="section-head">
+              <h2 id="reminders-heading">接下来</h2>
+              <a class="link-quiet" href="milestones-timeline.html">全部</a>
+            </div>
+
+            <div class="reminder-stack">
               <a
-                href="milestones-timeline.html"
-                style="
-                  color: var(--primary);
-                  text-decoration: none;
-                  font-weight: 700;
-                  font-size: 13px;
-                "
+                class="reminder-item reminder-item--featured"
+                href="milestones-detail.html"
+                aria-label="纪念日：第一次牵手，还有5天"
               >
-                查看全部 >
+                <div>
+                  <div class="reminder-kicker">纪念日</div>
+                  <div class="reminder-title">第一次牵手</div>
+                  <div class="reminder-meta">
+                    还有 <strong>5</strong> 天 · 已开启提醒
+                  </div>
+                </div>
+                <span class="badge important">重要</span>
+              </a>
+              <a class="reminder-item" href="diaries-new.html" aria-label="去写日记">
+                <div>
+                  <div class="reminder-kicker">今天</div>
+                  <div class="reminder-title">写一条日记</div>
+                  <div class="reminder-meta">照片与语音可一并保存</div>
+                </div>
+                <div class="notif-hit" aria-hidden="true">
+                  <span class="ico ico-bell"></span>
+                </div>
               </a>
             </div>
+          </section>
 
-            <div class="card" style="margin-top: var(--space-md)">
-              <div class="row-between">
-                <div>
-                  <div style="font-weight: 800; margin-bottom: 6px">
-                    纪念日：第一次牵手
-                  </div>
-                  <div class="muted" style="font-size: 13px">
-                    还有 <span style="color: var(--neon-yellow); font-weight: 900">5</span
-                    > 天 · 重要时刻
-                  </div>
-                </div>
-                <div class="badge important">重要</div>
-              </div>
-
-              <div class="hr"></div>
-
-              <div class="row-between">
-                <div>
-                  <div style="font-weight: 800; margin-bottom: 6px">
-                    今天：写下你的日记
-                  </div>
-                  <div class="muted" style="font-size: 13px">
-                    建议记录心情与照片，让回忆更鲜活
-                  </div>
-                </div>
-                <div
-                  style="
-                    width: 44px;
-                    height: 44px;
-                    border-radius: var(--radius-full);
-                    background: rgba(255, 79, 166, 0.16);
-                    border: 1px solid rgba(255, 79, 166, 0.40);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                  "
-                  aria-label="未读"
-                  title="未读"
-                >
-                  <span class="material-icons" style="color: var(--primary)"
-                    >notifications</span
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-top: var(--space-lg)">
-            <div style="font-weight: 800; margin-bottom: var(--space-sm)">
-              快速入口
-            </div>
-
+          <section style="margin-top: var(--space-section)" aria-labelledby="entries-heading">
+            <p id="entries-heading" class="section-label">入口</p>
             <div class="grid-4">
-              <a class="entry" href="diaries-list.html" aria-label="去恋爱日记">
-                <div class="entry-icon">
-                  <span class="material-icons">edit_note</span>
+              <a
+                class="entry entry--primary"
+                href="diaries-list.html"
+                aria-label="去恋爱日记"
+              >
+                <div class="entry-icon entry-icon--photo" aria-hidden="true">
+                  <img src="assets/logo-mark.png" alt="" width="48" height="48" />
                 </div>
-                <div class="entry-title">恋爱日记</div>
-                <div class="entry-sub">写、找、回看</div>
+                <div>
+                  <div class="entry-title">恋爱日记</div>
+                  <div class="entry-sub">写、搜、按日期筛选</div>
+                </div>
               </a>
 
               <a class="entry" href="albums-list.html" aria-label="去爱的相册">
-                <div class="entry-icon" style="background: rgba(61, 231, 255, 0.14); border-color: rgba(61, 231, 255, 0.25)">
-                  <span class="material-icons" style="color: var(--neon-blue)">photo_album</span>
+                <div class="entry-icon" aria-hidden="true">
+                  <span class="ico ico-album"></span>
                 </div>
                 <div class="entry-title">爱的相册</div>
-                <div class="entry-sub">多图整理与封面</div>
+                <div class="entry-sub">多图、封面与收藏</div>
               </a>
 
               <a class="entry" href="milestones-timeline.html" aria-label="去相爱里程碑">
-                <div class="entry-icon" style="background: rgba(45, 255, 179, 0.12); border-color: rgba(45, 255, 179, 0.22)">
-                  <span class="material-icons" style="color: var(--neon-green)">timeline</span>
+                <div class="entry-icon" aria-hidden="true">
+                  <span class="ico ico-milestone"></span>
                 </div>
                 <div class="entry-title">相爱里程碑</div>
-                <div class="entry-sub">倒计时与重要提醒</div>
+                <div class="entry-sub">时间线与倒数</div>
               </a>
 
-              <a class="entry" href="confession.html" aria-label="去爱的告白">
-                <div class="entry-icon" style="background: rgba(255, 229, 90, 0.10); border-color: rgba(255, 229, 90, 0.22)">
-                  <span class="material-icons" style="color: var(--neon-yellow)">favorite</span>
+              <a
+                class="entry entry--wide"
+                href="confession.html"
+                aria-label="去爱的告白"
+              >
+                <div class="entry-icon" aria-hidden="true">
+                  <span class="ico ico-heart"></span>
                 </div>
-                <div class="entry-title">爱的告白</div>
-                <div class="entry-sub">写给ta的心动话</div>
+                <div>
+                  <div class="entry-title">爱的告白</div>
+                  <div class="entry-sub">写给 Ta 的一段话</div>
+                </div>
               </a>
             </div>
-          </div>
+          </section>
 
-          <div style="height: 40px"></div>
+          <div style="height: 48px" aria-hidden="true"></div>
         </div>
 
-        <div class="nav-bar" role="navigation" aria-label="底部导航">
+        <nav class="nav-bar" aria-label="底部导航">
           <a class="nav-item active" href="home.html" aria-label="首页">
-            <span class="material-icons nav-icon">home</span>
+            <span class="ico ico-home" aria-hidden="true"></span>
             <span>首页</span>
           </a>
           <a class="nav-item" href="diaries-list.html" aria-label="恋爱日记">
-            <span class="material-icons nav-icon">edit_note</span>
+            <span class="ico ico-diary" aria-hidden="true"></span>
             <span>日记</span>
           </a>
           <a class="nav-item" href="albums-list.html" aria-label="爱的相册">
-            <span class="material-icons nav-icon">photo_album</span>
+            <span class="ico ico-album" aria-hidden="true"></span>
             <span>相册</span>
           </a>
           <a class="nav-item" href="milestones-timeline.html" aria-label="相爱里程碑">
-            <span class="material-icons nav-icon">timeline</span>
+            <span class="ico ico-milestone" aria-hidden="true"></span>
             <span>里程碑</span>
           </a>
-        </div>
+        </nav>
       </div>
     </div>
   </body>
 </html>
-

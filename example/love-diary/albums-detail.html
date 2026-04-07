@@ -7,12 +7,10 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <title>恋爱日记 - 相册详情</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
@@ -21,45 +19,29 @@
     <div class="app-container">
       <div class="screen" role="application" aria-label="恋爱日记 - 相册详情">
         <div
+          class="media-hero"
           style="
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 0;
-            height: 220px;
             background-image: url('https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1000&q=70');
-            background-size: cover;
-            background-position: center;
-            filter: saturate(1.1) brightness(0.95);
-          "
-          aria-hidden="true"
-        ></div>
-        <div
-          style="
-            position: absolute;
-            inset: 0;
-            height: 220px;
-            background: linear-gradient(to bottom, rgba(15, 15, 22, 0.92) 0%, rgba(15, 15, 22, 0.72) 60%, rgba(15, 15, 22, 0) 100%);
           "
           aria-hidden="true"
         ></div>
 
-        <div class="header" style="position: relative">
+        <div class="header header--on-media" style="position: relative">
           <a class="icon-button" href="albums-list.html" aria-label="返回相册列表">
-            <span class="material-icons">arrow_back</span>
+            <span class="ico ico-back" aria-hidden="true"></span>
           </a>
           <div class="header-title">相册详情</div>
           <div class="header-action">
             <a class="icon-button" href="albums-detail.html#shareSheetModal" aria-label="分享">
-              <span class="material-icons">share</span>
+              <span class="ico ico-share" aria-hidden="true"></span>
             </a>
             <a class="icon-button" href="albums-detail.html" aria-label="收藏（UI态）">
-              <span class="material-icons">star</span>
+              <span class="ico ico-star" aria-hidden="true"></span>
             </a>
           </div>
         </div>
 
-        <div class="content safe-pad-bottom" style="padding-top: 140px">
+        <div class="content safe-pad-bottom content-below-hero">
           <div class="card">
             <div class="row-between" style="margin-bottom: var(--space-sm)">
               <div>
@@ -73,11 +55,11 @@
 
             <div style="margin-top: var(--space-md)" class="row-between">
               <a class="button outline" style="flex: 1; margin-right: var(--space-md)" href="albums-detail.html" aria-label="封面设置">
-                <span class="button-icon material-icons">image</span>
+                <span class="button-icon"><span class="ico ico-image"></span></span>
                 设为封面
               </a>
               <a class="button ghost" style="flex: 1; margin-left: 0" href="albums-detail.html#shareSheetModal" aria-label="分享按钮">
-                <span class="button-icon material-icons">share</span>
+                <span class="button-icon"><span class="ico ico-share"></span></span>
                 分享
               </a>
             </div>
@@ -95,16 +77,16 @@
 
             <div class="row-between" style="gap: var(--space-md)">
               <a class="button ghost" style="flex: 1" href="albums-detail.html" aria-label="选择相册">
-                <span class="button-icon material-icons">photo_library</span>
+                <span class="button-icon"><span class="ico ico-library"></span></span>
                 选择相册
               </a>
               <a class="button ghost" style="flex: 1" href="albums-detail.html" aria-label="拍照">
-                <span class="button-icon material-icons">photo_camera</span>
+                <span class="button-icon"><span class="ico ico-camera"></span></span>
                 拍照
               </a>
             </div>
 
-            <div style="margin-top: var(--space-md); padding: var(--space-md); border-radius: var(--radius-md); background: rgba(255, 79, 166, 0.08); border: 1px solid rgba(255, 79, 166, 0.20)">
+            <div style="margin-top: var(--space-md); padding: var(--space-md); border-radius: var(--radius-md); background: var(--bg-screen); border: 1px solid var(--border-strong)">
               <div style="font-weight: 800; margin-bottom: 6px">如果权限被拒绝</div>
               <div class="muted" style="font-size: 13px">
                 提示用户去设置开启相册/相机权限；同时提供“仅展示已上传内容”的降级方案。
@@ -145,7 +127,7 @@
                   "
                   aria-hidden="true"
                 >
-                  <span class="material-icons" style="font-size: 18px; color: #fff">drag_handle</span>
+                  <span class="ico ico-grip ico--sm ico--on-dark" aria-hidden="true"></span>
                 </div>
               </a>
               <a class="img-tile" href="albums-detail.html#albumImgPreview" aria-label="预览照片2">
@@ -169,7 +151,7 @@
                   "
                   aria-hidden="true"
                 >
-                  <span class="material-icons" style="font-size: 18px; color: #fff">drag_handle</span>
+                  <span class="ico ico-grip ico--sm ico--on-dark" aria-hidden="true"></span>
                 </div>
               </a>
               <a class="img-tile" href="albums-detail.html#albumImgPreview" aria-label="预览照片3">
@@ -193,7 +175,7 @@
                   "
                   aria-hidden="true"
                 >
-                  <span class="material-icons" style="font-size: 18px; color: #fff">drag_handle</span>
+                  <span class="ico ico-grip ico--sm ico--on-dark" aria-hidden="true"></span>
                 </div>
               </a>
             </div>
@@ -206,7 +188,9 @@
           <div style="height: 24px"></div>
 
           <a class="button ghost full" href="albums-list.html" aria-label="删除相册（UI态）">
-            <span class="button-icon material-icons" style="color: var(--text-secondary)">delete</span>
+            <span class="button-icon" style="color: var(--text-secondary)"
+              ><span class="ico ico-trash"></span
+            ></span>
             删除相册（仅UI态）
           </a>
 
@@ -215,11 +199,11 @@
 
         <div class="nav-bar" role="navigation" aria-label="底部导航">
           <a class="nav-item" href="home.html" aria-label="首页">
-            <span class="material-icons nav-icon">home</span>
+            <span class="ico ico-home" aria-hidden="true"></span>
             <span>首页</span>
           </a>
           <a class="nav-item" href="diaries-list.html" aria-label="恋爱日记">
-            <span class="material-icons nav-icon">edit_note</span>
+            <span class="ico ico-diary" aria-hidden="true"></span>
             <span>日记</span>
           </a>
           <a
@@ -227,11 +211,11 @@
             href="albums-list.html"
             aria-label="爱的相册"
           >
-            <span class="material-icons nav-icon">photo_album</span>
+            <span class="ico ico-album" aria-hidden="true"></span>
             <span>相册</span>
           </a>
           <a class="nav-item" href="milestones-timeline.html" aria-label="相爱里程碑">
-            <span class="material-icons nav-icon">timeline</span>
+            <span class="ico ico-milestone" aria-hidden="true"></span>
             <span>里程碑</span>
           </a>
         </div>
@@ -266,8 +250,8 @@
             <div style="padding: var(--space-md)">
               <div class="row-between" style="margin-bottom: var(--space-md)">
                 <div style="font-weight: 950; font-size: 18px">分享</div>
-                <a class="icon-button" href="albums-detail.html" aria-label="关闭分享" style="width:44px;height:44px;background:rgba(255,255,255,0.06)">
-                  <span class="material-icons">close</span>
+                <a class="icon-button" href="albums-detail.html" aria-label="关闭分享">
+                  <span class="ico ico-close" aria-hidden="true"></span>
                 </a>
               </div>
               <div class="muted" style="font-size: 13px; margin-bottom: var(--space-md)">
@@ -275,15 +259,15 @@
               </div>
               <div style="display: flex; flex-direction: column; gap: var(--space-sm)">
                 <a class="button ghost" href="albums-detail.html" aria-label="分享：微信">
-                  <span class="button-icon material-icons">chat</span>
+                  <span class="button-icon"><span class="ico ico-message"></span></span>
                   微信
                 </a>
                 <a class="button ghost" href="albums-detail.html" aria-label="分享：微博">
-                  <span class="button-icon material-icons">alternate_email</span>
+                  <span class="button-icon"><span class="ico ico-at"></span></span>
                   微博
                 </a>
                 <a class="button ghost" href="albums-detail.html" aria-label="复制链接">
-                  <span class="button-icon material-icons">link</span>
+                  <span class="button-icon"><span class="ico ico-link"></span></span>
                   复制链接（兜底）
                 </a>
               </div>

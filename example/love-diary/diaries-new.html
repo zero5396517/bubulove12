@@ -7,12 +7,10 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <title>恋爱日记 - 新建日记</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
@@ -22,12 +20,12 @@
       <div class="screen" role="application" aria-label="恋爱日记 - 新建日记">
         <div class="header">
           <a class="icon-button" href="diaries-list.html" aria-label="返回日记列表">
-            <span class="material-icons">arrow_back</span>
+            <span class="ico ico-back" aria-hidden="true"></span>
           </a>
           <div class="header-title">新建日记</div>
           <div class="header-action">
             <a class="icon-button" href="confession.html" aria-label="去爱的告白">
-              <span class="material-icons">favorite</span>
+              <span class="ico ico-heart" aria-hidden="true"></span>
             </a>
           </div>
         </div>
@@ -121,9 +119,7 @@
                   class="entry-icon"
                   style="width: 54px; height: 54px; border-radius: 18px"
                 >
-                  <span class="material-icons" style="font-size: 26px"
-                    >add_photo_alternate</span
-                  >
+                  <span class="ico ico-plus-box ico--lg" aria-hidden="true"></span>
                 </div>
                 <div class="entry-sub">从相册选择 / 拍照</div>
               </a>
@@ -133,7 +129,7 @@
               <label class="form-label">语音（可选）</label>
               <div class="voice-row" aria-label="语音录制控件UI">
                 <div class="voice-play" aria-label="录音按钮">
-                  <span class="material-icons" style="font-size: 22px">mic</span>
+                  <span class="ico ico-mic" aria-hidden="true"></span>
                 </div>
                 <div style="flex: 1">
                   <div style="font-weight: 800; margin-bottom: 6px">正在录制…</div>
@@ -162,7 +158,7 @@
 
             <div class="form-group" style="margin-top: var(--space-lg)">
               <a class="button primary full" href="diaries-detail.html" aria-label="保存日记">
-                <span class="button-icon material-icons">check_circle</span>
+                <span class="button-icon"><span class="ico ico-check"></span></span>
                 保存并预览
               </a>
               <div style="height: 10px"></div>
@@ -194,7 +190,7 @@
 
         <div class="nav-bar" role="navigation" aria-label="底部导航">
           <a class="nav-item" href="home.html" aria-label="首页">
-            <span class="material-icons nav-icon">home</span>
+            <span class="ico ico-home" aria-hidden="true"></span>
             <span>首页</span>
           </a>
           <a
@@ -202,11 +198,11 @@
             href="diaries-list.html"
             aria-label="恋爱日记"
           >
-            <span class="material-icons nav-icon">edit_note</span>
+            <span class="ico ico-diary" aria-hidden="true"></span>
             <span>日记</span>
           </a>
           <a class="nav-item" href="albums-list.html" aria-label="爱的相册">
-            <span class="material-icons nav-icon">photo_album</span>
+            <span class="ico ico-album" aria-hidden="true"></span>
             <span>相册</span>
           </a>
           <a
@@ -214,7 +210,7 @@
             href="milestones-timeline.html"
             aria-label="相爱里程碑"
           >
-            <span class="material-icons nav-icon">timeline</span>
+            <span class="ico ico-milestone" aria-hidden="true"></span>
             <span>里程碑</span>
           </a>
         </div>

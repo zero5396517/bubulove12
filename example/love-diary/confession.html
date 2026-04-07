@@ -7,12 +7,10 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <title>恋爱日记 - 爱的告白</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
@@ -22,12 +20,21 @@
       <div class="screen" role="application" aria-label="恋爱日记 - 爱的告白">
         <div class="header">
           <a class="icon-button" href="home.html" aria-label="返回首页">
-            <span class="material-icons">arrow_back</span>
+            <span class="ico ico-back" aria-hidden="true"></span>
           </a>
-          <div class="header-title">爱的告白</div>
+          <div class="header-center">
+            <img
+              class="header-mini-logo"
+              src="assets/logo-mark.png"
+              width="28"
+              height="28"
+              alt=""
+            />
+            <div class="header-title">爱的告白</div>
+          </div>
           <div class="header-action">
             <a class="icon-button" href="diaries-list.html" aria-label="去恋爱日记">
-              <span class="material-icons">edit_note</span>
+              <span class="ico ico-diary" aria-hidden="true"></span>
             </a>
           </div>
         </div>
@@ -95,7 +102,7 @@
 
             <div class="form-group" style="margin-top: var(--space-lg)">
               <a class="button primary full" href="diaries-list.html" aria-label="发布告白">
-                <span class="button-icon material-icons">celebration</span>
+                <span class="button-icon"><span class="ico ico-sparkles"></span></span>
                 发布告白
               </a>
             </div>
@@ -123,9 +130,7 @@
                   你认真生活的样子真的很迷人，我想把这份喜欢一直写下去。
                 </div>
               </div>
-              <span class="material-icons" style="color: var(--text-tertiary)">
-                chevron_right
-              </span>
+              <span class="ico ico-chevron ico--muted" aria-hidden="true"></span>
             </a>
 
             <a class="list-item" href="confession.html" aria-label="查看告白：谢谢你一直在">
@@ -144,9 +149,7 @@
                   有你在，所有的疲惫都变得不那么难熬。希望未来也能并肩走下去。
                 </div>
               </div>
-              <span class="material-icons" style="color: var(--text-tertiary)">
-                chevron_right
-              </span>
+              <span class="ico ico-chevron ico--muted" aria-hidden="true"></span>
             </a>
 
             <a class="list-item" href="confession.html" aria-label="查看告白：晚安">
@@ -165,9 +168,7 @@
                   今天也很想你。等你睡着，我再把这份心动轻轻收好。
                 </div>
               </div>
-              <span class="material-icons" style="color: var(--text-tertiary)">
-                chevron_right
-              </span>
+              <span class="ico ico-chevron ico--muted" aria-hidden="true"></span>
             </a>
           </div>
 
@@ -203,20 +204,20 @@
         </div>
 
         <div class="nav-bar" role="navigation" aria-label="底部导航">
-          <a class="nav-item active" href="home.html" aria-label="首页">
-            <span class="material-icons nav-icon">home</span>
+          <a class="nav-item" href="home.html" aria-label="首页">
+            <span class="ico ico-home" aria-hidden="true"></span>
             <span>首页</span>
           </a>
           <a class="nav-item" href="diaries-list.html" aria-label="恋爱日记">
-            <span class="material-icons nav-icon">edit_note</span>
+            <span class="ico ico-diary" aria-hidden="true"></span>
             <span>日记</span>
           </a>
           <a class="nav-item" href="albums-list.html" aria-label="爱的相册">
-            <span class="material-icons nav-icon">photo_album</span>
+            <span class="ico ico-album" aria-hidden="true"></span>
             <span>相册</span>
           </a>
           <a class="nav-item" href="milestones-timeline.html" aria-label="相爱里程碑">
-            <span class="material-icons nav-icon">timeline</span>
+            <span class="ico ico-milestone" aria-hidden="true"></span>
             <span>里程碑</span>
           </a>
         </div>
