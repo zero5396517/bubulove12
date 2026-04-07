@@ -1,63 +1,76 @@
 <ion-header translucent="true">
-    <ion-toolbar>
-      <ion-title>爱的相册</ion-title>
-      <ion-buttons slot="end">
-        <ion-button fill="clear" routerLink="/confession">
-          <ion-icon name="heart" aria-hidden="true"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-title>爱的相册</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="openCreate()">
+        <ion-icon name="add-circle" color="primary" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-content class="ion-padding safe-pad-bottom">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>上传照片（Mock）</ion-card-title>
-        <ion-card-subtitle>选择多张，生成一个新的相册</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item>
-          <ion-label position="stacked">相册名称（可选）</ion-label>
-          <ion-input [(ngModel)]="albumName" placeholder="比如：周末的甜蜜"></ion-input>
-        </ion-item>
+<ion-content class="ion-padding">
+  <ion-searchbar placeholder="搜索相册名…" (ionInput)="onQueryInput($event)"></ion-searchbar>
 
-        <input
-          #fileInput
-          type="file"
-          accept="image/*"
-          multiple
-          style="display: none"
-          (change)="onSelectPhotos($event)"
-        />
+  <div class="list-header">
+    <span class="list-title">相册列表</span>
+    <span class="list-count">共 {{ filteredAlbums.length }} 个</span>
+  </div>
 
-        <ion-button expand="block" fill="outline" color="primary" (click)="fileInput.click()">
-          <ion-icon slot="start" name="add-photo-alternate" aria-hidden="true"></ion-icon>
-          选择照片/拍照
-        </ion-button>
-
-        <div *ngIf="photos.length" class="preview-row">
-          <div *ngFor="let p of photos" class="preview-tile">
-            <ion-img [src]="p" alt="预览"></ion-img>
-          </div>
+  <div class="album-list">
+    <a *ngFor="let a of filteredAlbums" class="album-item" [routerLink]="['/albums/detail', a.id]">
+      <div class="album-cover" *ngIf="a.coverUrl">
+        <img [src]="a.coverUrl" alt="封面" />
+      </div>
+      <div class="album-cover album-cover-empty" *ngIf="!a.coverUrl">
+        <ion-icon name="images-outline"></ion-icon>
+      </div>
+      <div class="album-main">
+        <div class="album-title">{{ a.name }}</div>
+        <div class="album-meta">
+          <span>{{ a.photoCount }} 张</span>
         </div>
+      </div>
+      <ion-icon name="chevron-forward" color="medium"></ion-icon>
+    </a>
+  </div>
 
-        <ion-button expand="block" color="primary" [disabled]="!photos.length" (click)="createAlbumMock()">
-          创建相册并查看
-        </ion-button>
-      </ion-card-content>
-    </ion-card>
+  <ion-button expand="block" color="primary" class="mt-16" (click)="openCreate()">
+    <ion-icon slot="start" name="add-circle"></ion-icon>
+    创建相册
+  </ion-button>
 
-    <ion-list inset="true" class="mt-16">
-      <ion-item *ngFor="let a of albums" button (click)="openAlbum(a.id)" lines="none">
-        <ion-img [src]="a.coverUrl" class="cover" alt="封面"></ion-img>
-        <ion-label>
-          <div class="row-between">
-            <div class="album-title">{{ a.name }}</div>
-            <ion-badge color="primary" class="count">{{ a.photos.length }} 张</ion-badge>
-          </div>
-          <div class="meta">已在相册中保存（Mock）</div>
-        </ion-label>
+  <div class="empty-state" *ngIf="filteredAlbums.length === 0">
+    <ion-icon name="images-outline" class="empty-icon"></ion-icon>
+    <p>还没有相册</p>
+  </div>
+
+  <!-- Create modal -->
+  <div class="modal-overlay" *ngIf="showCreateModal" (click)="closeCreate()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-head">
+        <ion-icon name="images" color="primary" class="modal-icon"></ion-icon>
+        <div class="modal-title">创建新相册</div>
+      </div>
+      <div class="modal-hint">支持多图上传。</div>
+      <ion-item lines="none">
+        <ion-label position="stacked">相册名称</ion-label>
+        <ion-input [(ngModel)]="newAlbumName" placeholder="比如：周末的甜蜜"></ion-input>
       </ion-item>
-    </ion-list>
-  </ion-content>
-
+      <input #fileInput type="file" accept="image/*" multiple style="display: none" (change)="onSelectPhotos($event)" />
+      <ion-button expand="block" fill="outline" (click)="fileInput.click()" class="mt-8">
+        <ion-icon slot="start" name="images-outline"></ion-icon>
+        选择照片
+      </ion-button>
+      <div *ngIf="newAlbumPhotos.length" class="preview-row">
+        <div *ngFor="let p of newAlbumPhotos" class="preview-tile">
+          <img [src]="p.url" alt="预览" />
+        </div>
+      </div>
+      <div class="modal-actions">
+        <ion-button fill="outline" (click)="closeCreate()">取消</ion-button>
+        <ion-button color="primary" (click)="createAlbum()">确认创建</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

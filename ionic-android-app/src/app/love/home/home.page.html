@@ -1,82 +1,90 @@
 <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-title>恋爱日记</ion-title>
-      <ion-buttons slot="end">
-        <ion-button fill="clear" [routerLink]="['/confession']">
-          <ion-icon name="heart" aria-hidden="true"></ion-icon>
-          告白
-        </ion-button>
-        <ion-button fill="clear" [routerLink]="['/settings']">
-          <ion-icon name="settings" aria-hidden="true"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <span class="header-title">恋爱日记</span>
+      <span class="header-sub">布布 × 一二</span>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" routerLink="/confession" aria-label="爱的告白">
+        <ion-icon name="heart" color="primary" aria-hidden="true"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" routerLink="/tabs/milestones" aria-label="里程碑">
+        <ion-icon name="location" color="primary" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-content class="ion-padding safe-pad">
-    <div class="hero">
-      <div class="hero-title">
-        <span class="gradient-text">布布与一二</span>
-        <div class="hero-sub">把心动记成可回看的证据</div>
-      </div>
+<ion-content class="ion-padding">
+  <section class="hero">
+    <p class="hero-eyebrow">今天也要好好相爱</p>
+    <h1 class="hero-title">把日常，写成<br><em>只属于你们</em> 的编年史</h1>
+    <p class="hero-lead">本地保存 · 单手好用 · 碎片时间就能记一笔</p>
+  </section>
+
+  <section class="reminders" *ngIf="upcomingMilestones.length">
+    <div class="section-head">
+      <h2>接下来</h2>
+      <a class="link-quiet" routerLink="/tabs/milestones">全部</a>
     </div>
-
-    <ion-card class="important-card">
-      <ion-card-header>
-        <ion-card-title>
-          重要时刻提醒
-          <ion-badge color="tertiary" class="ml-8">重要</ion-badge>
-        </ion-card-title>
-        <div class="meta">纪念日：第一次牵手</div>
-      </ion-card-header>
-
-      <ion-card-content>
-        <div class="countdown">
-          <div class="count">还有 5 天</div>
-          <div class="sub">提前提醒，让喜欢按时抵达</div>
+    <div class="reminder-stack">
+      <a
+        *ngFor="let m of upcomingMilestones; let i = index"
+        class="reminder-item"
+        [class.reminder-featured]="m.important"
+        [routerLink]="['/milestones/detail', m.id]"
+      >
+        <div class="reminder-content">
+          <div class="reminder-kicker">{{ m.important ? '纪念日' : '记录' }}</div>
+          <div class="reminder-title">{{ m.title }}</div>
+          <div class="reminder-meta">
+            {{ countdownText(m.daysLeft) }}
+            <span *ngIf="m.remindDays > 0"> · 已开启提醒</span>
+          </div>
         </div>
+        <ion-badge [color]="m.important ? 'tertiary' : 'medium'">
+          {{ m.important ? '重要' : '记录' }}
+        </ion-badge>
+      </a>
+    </div>
+  </section>
 
-        <ion-button
-          expand="block"
-          color="primary"
-          class="mt-16"
-          [routerLink]="['/tabs/milestones']"
-        >
-          查看时间线
-        </ion-button>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-grid class="entry-grid">
-      <ion-row>
-        <ion-col size="6">
-          <ion-button expand="block" color="primary" [routerLink]="['/tabs/diaries']">
-            <ion-icon slot="start" name="create-outline" aria-hidden="true"></ion-icon>
-            恋爱日记
-          </ion-button>
-        </ion-col>
-        <ion-col size="6">
-          <ion-button expand="block" color="primary" [routerLink]="['/tabs/albums']">
-            <ion-icon slot="start" name="images-outline" aria-hidden="true"></ion-icon>
-            爱的相册
-          </ion-button>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col size="6">
-          <ion-button expand="block" color="primary" [routerLink]="['/tabs/milestones']">
-            <ion-icon slot="start" name="time-outline" aria-hidden="true"></ion-icon>
-            相爱里程碑
-          </ion-button>
-        </ion-col>
-        <ion-col size="6">
-          <ion-button expand="block" fill="outline" color="primary" [routerLink]="['/tabs/diaries']">
-            <ion-icon slot="start" name="add-circle-outline" aria-hidden="true"></ion-icon>
-            新建记录
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-content>
-
+  <section class="entries">
+    <p class="section-label">入口</p>
+    <div class="grid-4">
+      <a class="entry entry-primary" routerLink="/tabs/diaries">
+        <div class="entry-icon">
+          <ion-icon name="document-text" color="primary"></ion-icon>
+        </div>
+        <div>
+          <div class="entry-title">恋爱日记</div>
+          <div class="entry-sub">写、搜、按日期筛选</div>
+        </div>
+      </a>
+      <a class="entry" routerLink="/tabs/albums">
+        <div class="entry-icon">
+          <ion-icon name="images" color="primary"></ion-icon>
+        </div>
+        <div class="entry-title">爱的相册</div>
+        <div class="entry-sub">多图、封面与收藏</div>
+      </a>
+      <a class="entry" routerLink="/tabs/milestones">
+        <div class="entry-icon">
+          <ion-icon name="location" color="primary"></ion-icon>
+        </div>
+        <div class="entry-title">相爱里程碑</div>
+        <div class="entry-sub">时间线与倒数</div>
+      </a>
+      <a class="entry entry-wide" routerLink="/confession">
+        <div class="entry-icon">
+          <ion-icon name="heart" color="primary"></ion-icon>
+        </div>
+        <div>
+          <div class="entry-title">爱的告白</div>
+          <div class="entry-sub">写给 Ta 的一段话</div>
+        </div>
+      </a>
+    </div>
+  </section>
+  <div style="height: 48px"></div>
+</ion-content>

@@ -1,111 +1,93 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
-  IonBadge,
-  IonButton,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
-  IonContent,
-  IonHeader,
-  IonButtons,
-  IonIcon,
-  IonInput,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonTitle,
-  IonToolbar,
-  IonImg,
+  IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle,
+  IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonSearchbar,
+  IonTitle, IonToolbar,
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-type Album = {
-  id: string;
-  name: string;
-  coverUrl: string;
-  photos: string[];
-  createdAt: number;
-};
+import { DbService, Album, Photo } from '../../services/db.service';
 
 @Component({
   selector: 'app-albums-list',
   standalone: true,
   imports: [
-    CommonModule,
-    FormsModule,
-    IonBadge,
-    IonButton,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardSubtitle,
-    IonContent,
-    IonHeader,
-    IonButtons,
-    IonIcon,
-    IonInput,
-    IonItem,
-    IonLabel,
-    IonList,
-    IonTitle,
-    IonToolbar,
-    IonImg,
-    RouterLink,
+    CommonModule, FormsModule, RouterLink,
+    IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle,
+    IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonSearchbar,
+    IonTitle, IonToolbar,
   ],
   templateUrl: './albums-list.page.html',
   styleUrls: ['./albums-list.page.scss'],
 })
-export class AlbumsListPage {
-  albumName = '';
-  photos: string[] = [];
+export class AlbumsListPage implements OnInit {
+  albums: (Album & { coverUrl: string; photoCount: number })[] = [];
+  query = '';
+  showCreateModal = false;
+  newAlbumName = '';
+  newAlbumPhotos: { url: string; blob: Blob }[] = [];
 
-  albums: Album[] = [
-    {
-      id: 'a1',
-      name: '甜品与电影',
-      coverUrl:
-        'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=800&q=70',
-      photos: [
-        'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=800&q=70',
-        'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=70',
-      ],
-      createdAt: Date.now() - 86400000 * 3,
-    },
-  ];
+  constructor(private router: Router, private db: DbService) {}
 
-  constructor(private router: Router) {}
+  async ngOnInit() { await this.load(); }
+  async ionViewWillEnter() { await this.load(); }
 
-  openAlbum(id: string) {
-    this.router.navigateByUrl(`/albums/detail/${id}`);
+  async load() {
+    const all = await this.db.getAllAlbums();
+    this.albums = [];
+    for (const a of all) {
+      let coverUrl = '';
+      if (a.coverPhotoKey) {
+        const p = await this.db.getPhoto(a.coverPhotoKey);
+        if (p) coverUrl = URL.createObjectURL(p.blob);
+      } else if (a.photoKeys.length) {
+        const p = await this.db.getPhoto(a.photoKeys[0]);
+        if (p) coverUrl = URL.createObjectURL(p.blob);
+      }
+      this.albums.push({ ...a, coverUrl, photoCount: a.photoKeys.length });
+    }
   }
+
+  get filteredAlbums() {
+    if (!this.query.trim()) return this.albums;
+    const q = this.query.toLowerCase();
+    return this.albums.filter(a => a.name.toLowerCase().includes(q));
+  }
+
+  onQueryInput(ev: CustomEvent) {
+    this.query = (ev.detail as { value?: string }).value ?? '';
+  }
+
+  openCreate() { this.showCreateModal = true; }
+  closeCreate() { this.showCreateModal = false; this.newAlbumName = ''; this.newAlbumPhotos = []; }
 
   onSelectPhotos(ev: Event) {
     const input = ev.target as HTMLInputElement;
     const files = input.files ? Array.from(input.files) : [];
-    const urls: string[] = [];
     for (const f of files) {
       if (!f.type.startsWith('image/')) continue;
-      urls.push(URL.createObjectURL(f));
+      this.newAlbumPhotos.push({ url: URL.createObjectURL(f), blob: f });
     }
-    this.photos = urls.slice(0, 9);
   }
 
-  createAlbumMock() {
-    if (!this.photos.length) return;
-    const id = `a_${Date.now()}`;
+  async createAlbum() {
+    const id = this.db.genId();
+    const now = Date.now();
+    const photoKeys: string[] = [];
+    for (const pf of this.newAlbumPhotos) {
+      const pid = this.db.genId();
+      await this.db.addPhoto({ id: pid, albumId: id, blob: pf.blob, thumbnailBlob: null, createdAt: now });
+      photoKeys.push(pid);
+    }
     const album: Album = {
-      id,
-      name: this.albumName || '新的相册',
-      coverUrl: this.photos[0],
-      photos: this.photos,
-      createdAt: Date.now(),
+      id, name: this.newAlbumName || '新的相册',
+      coverPhotoKey: photoKeys[0] || null,
+      photoKeys, tags: [],
+      createdAt: now, updatedAt: now,
     };
-    this.router.navigateByUrl(`/albums/detail/${id}`, { state: { album } });
+    await this.db.addAlbum(album);
+    this.closeCreate();
+    this.router.navigateByUrl(`/albums/detail/${id}`);
   }
 }
-

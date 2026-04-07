@@ -1,36 +1,52 @@
 <ion-header translucent="true">
-    <ion-toolbar>
-      <ion-title>相爱里程碑</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-title>相爱里程碑</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" routerLink="/milestones/new">
+        <ion-icon name="add-circle" color="primary" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-content class="ion-padding safe-pad-bottom">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>时间线（Mock 展示）</ion-card-title>
-        <ion-card-content class="muted">
-          里程碑支持倒计时与“重要时刻”优先展示。真实数据与提醒在下一阶段接入 IndexedDB。
-        </ion-card-content>
-      </ion-card-header>
-    </ion-card>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <div class="row-between">
+        <ion-card-title style="font-weight: 900">时间线</ion-card-title>
+        <span class="meta">倒序展示</span>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="hint">重要时刻会在首页提醒。纪念日支持提前 N 天提醒。</div>
+    </ion-card-content>
+  </ion-card>
 
-    <div class="timeline">
-      <ion-card *ngFor="let m of milestones" class="mt-16">
-        <ion-card-header>
-          <ion-card-title>
-            <span>{{ m.title }}</span>
-            <ion-badge [color]="badgeColor(m.badge)" class="ml-8">
-              {{ m.badge === 'normal' ? '记录' : m.badge === 'primary' ? '提醒中' : '重要' }}
-            </ion-badge>
-          </ion-card-title>
-          <div class="meta">{{ m.dateText }}</div>
-        </ion-card-header>
+  <div class="timeline">
+    <a *ngFor="let m of milestones" class="timeline-item" [routerLink]="['/milestones/detail', m.id]">
+      <div class="timeline-dot"></div>
+      <ion-card class="timeline-card">
         <ion-card-content>
-          <div class="countdown">
-            <span class="count">{{ m.countdownText }}</span>
+          <div class="row-between">
+            <div class="ms-title">{{ m.title }}</div>
+            <ion-badge [color]="badgeColor(m)">{{ badgeText(m) }}</ion-badge>
+          </div>
+          <div class="ms-meta">
+            <span>{{ m.date }}</span>
+            <span *ngIf="m.remindDays > 0">提前 {{ m.remindDays }} 天提醒</span>
+          </div>
+          <div class="countdown-row">
+            <span class="countdown-label">{{ m.daysLeft >= 0 ? '距离开始' : '已过去' }}</span>
+            <span class="countdown-value" [style.color]="countdownColor(m.daysLeft)">{{ countdownText(m.daysLeft) }}</span>
           </div>
         </ion-card-content>
       </ion-card>
-    </div>
-  </ion-content>
+    </a>
+  </div>
 
+  <div class="empty-state" *ngIf="milestones.length === 0">
+    <ion-icon name="location-outline" class="empty-icon"></ion-icon>
+    <p>还没有里程碑</p>
+    <ion-button fill="outline" color="primary" routerLink="/milestones/new">添加里程碑</ion-button>
+  </div>
+</ion-content>

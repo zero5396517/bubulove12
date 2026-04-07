@@ -1,0 +1,63 @@
+.detail-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.ms-title { font-weight: 900; font-size: 18px; }
+.ms-date {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--love-text-tertiary);
+}
+.countdown-label {
+  font-size: 13px;
+  color: var(--love-text-tertiary);
+  margin-bottom: 10px;
+}
+.countdown-grid {
+  display: flex;
+  gap: 12px;
+}
+.countdown-box {
+  flex: 1;
+  text-align: center;
+  padding: 12px 0;
+  border-radius: 12px;
+  background: var(--ion-background-color);
+  border: 1px solid var(--love-border-subtle);
+}
+.countdown-box-accent {
+  border-color: var(--love-accent-border);
+}
+.countdown-num {
+  font-weight: 700;
+  font-size: 26px;
+}
+.countdown-unit {
+  font-size: 12px;
+  color: var(--love-text-tertiary);
+}
+.countdown-status {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--love-text-tertiary);
+}
+.remind-text {
+  font-size: 14px;
+  color: var(--love-text-secondary);
+  line-height: 1.8;
+  strong { color: var(--love-accent); font-weight: 700; }
+}
+.description {
+  font-size: 14px;
+  color: var(--love-text-secondary);
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+.action-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+.action-btn { flex: 1; }

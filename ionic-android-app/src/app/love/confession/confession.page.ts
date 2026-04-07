@@ -1,83 +1,77 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonButton,
-  IonContent,
-  IonHeader,
-  IonInput,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonSegment,
-  IonSegmentButton,
-  IonTextarea,
-  IonTitle,
-  IonToolbar,
-  IonButtons,
+  IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle,
+  IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList,
+  IonSegment, IonSegmentButton, IonTextarea, IonTitle, IonToolbar,
 } from '@ionic/angular/standalone';
+import { DbService, Confession } from '../../services/db.service';
 
 @Component({
   selector: 'app-confession',
   standalone: true,
   imports: [
-    CommonModule,
-    FormsModule,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
-    IonButton,
-    IonContent,
-    IonHeader,
-    IonInput,
-    IonIcon,
-    IonItem,
-    IonLabel,
-    IonList,
-    IonButtons,
-    IonSegment,
-    IonSegmentButton,
-    IonTextarea,
-    IonTitle,
-    IonToolbar,
-    RouterLink,
+    CommonModule, FormsModule, RouterLink,
+    IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle,
+    IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList,
+    IonSegment, IonSegmentButton, IonTextarea, IonTitle, IonToolbar,
   ],
   templateUrl: './confession.page.html',
   styleUrls: ['./confession.page.scss'],
 })
-export class ConfessionPage {
+export class ConfessionPage implements OnInit {
   title = '';
   body = '';
   privacy: 'private' | 'public' = 'private';
-
-  tags = ['甜甜的', '勇敢的', '温柔的', '搞笑的', '仪式感'];
+  tags = ['甜甜的', '勇敢的', '温柔的', '搞笑的'];
   selectedTags = new Set<string>();
+  history: Confession[] = [];
+  previewItem: Confession | null = null;
 
-  history = [
-    { title: '今天也喜欢你', when: '3天前', privacy: '私密' as const },
-    { title: '谢谢你一直在', when: '1周前', privacy: '公开' as const },
-    { title: '晚安', when: '2周前', privacy: '私密' as const },
-  ];
+  constructor(private router: Router, private db: DbService) {}
 
-  constructor(private router: Router) {}
+  async ngOnInit() {
+    this.history = await this.db.getAllConfessions();
+  }
 
   toggleTag(tag: string) {
     if (this.selectedTags.has(tag)) this.selectedTags.delete(tag);
     else this.selectedTags.add(tag);
   }
 
-  publish() {
-    // MVP：先走 UI 流程，后续接 IndexedDB 写入
-    this.router.navigateByUrl('/tabs/diaries');
+  async publish() {
+    if (!this.body.trim()) return;
+    const c: Confession = {
+      id: this.db.genId(),
+      title: this.title || '无标题告白',
+      content: this.body,
+      tags: Array.from(this.selectedTags),
+      privacy: this.privacy,
+      createdAt: Date.now(),
+    };
+    await this.db.addConfession(c);
+    this.title = '';
+    this.body = '';
+    this.selectedTags.clear();
+    this.history = await this.db.getAllConfessions();
+  }
+
+  showPreview(c: Confession) {
+    this.previewItem = c;
+  }
+
+  closePreview() {
+    this.previewItem = null;
+  }
+
+  timeAgo(ts: number): string {
+    const diff = Date.now() - ts;
+    const days = Math.floor(diff / 86400000);
+    if (days === 0) return '今天';
+    if (days < 7) return `${days}天前`;
+    if (days < 30) return `${Math.floor(days / 7)}周前`;
+    return `${Math.floor(days / 30)}月前`;
   }
 }
-

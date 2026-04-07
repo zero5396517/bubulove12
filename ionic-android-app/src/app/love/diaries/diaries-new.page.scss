@@ -1,78 +1,74 @@
-.safe-pad-bottom {
-  padding-bottom: calc(16px + env(safe-area-inset-bottom));
-}
-
-.section-label {
-  margin-top: 14px;
-  margin-bottom: 8px;
-  font-weight: 800;
-  color: rgba(var(--ion-color-medium-rgb), 0.95);
+.hint {
   font-size: 13px;
+  color: var(--love-text-tertiary);
+  margin-bottom: 12px;
 }
-
+.section-label {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--love-text-secondary);
+}
 .photo-grid {
   margin-top: 12px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 8px;
 }
-
 .photo-tile {
   position: relative;
-  border-radius: 14px;
+  border-radius: 10px;
   overflow: hidden;
-  border: 1px solid rgba(var(--ion-color-medium-rgb), 0.18);
-  background: rgba(var(--ion-color-dark-rgb), 0.1);
-  min-height: 100px;
+  border: 1px solid var(--love-border-subtle);
+  aspect-ratio: 1;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 }
-
-.photo-tile ion-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .remove-btn {
   position: absolute;
-  top: 6px;
-  right: 6px;
-  z-index: 2;
+  top: 4px;
+  right: 4px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 .cover-mark {
   position: absolute;
-  left: 6px;
-  bottom: 6px;
-  z-index: 2;
-  padding: 4px 10px;
+  left: 4px;
+  bottom: 4px;
+  padding: 2px 8px;
   border-radius: 999px;
-  background: rgba(var(--ion-color-primary-rgb), 0.22);
-  border: 1px solid rgba(var(--ion-color-primary-rgb), 0.35);
-  font-weight: 800;
-  font-size: 12px;
+  background: var(--love-accent-muted);
+  border: 1px solid var(--love-accent-border);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--love-accent);
 }
-
-.voice-card {
-  margin-top: 8px;
-}
-
 .voice-row {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
-
 .voice-hint {
-  color: rgba(var(--ion-color-medium-rgb), 0.9);
   font-size: 12px;
+  color: var(--love-text-tertiary);
 }
-
 .audio {
   width: 100%;
   margin-top: 8px;
 }
-
-.mt-16 {
-  margin-top: 16px;
-}
-
+.mt-16 { margin-top: 16px; }
+.mt-8 { margin-top: 8px; }

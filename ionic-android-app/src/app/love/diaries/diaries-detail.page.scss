@@ -1,60 +1,103 @@
-.safe-pad-bottom {
-  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+.detail-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
-
-.ml-8 {
-  margin-left: 8px;
+.detail-title {
+  font-weight: 900;
+  font-size: 18px;
 }
-
-.meta {
-  margin-top: 6px;
-  color: rgba(var(--ion-color-medium-rgb), 0.95);
+.detail-meta {
+  margin-top: 4px;
   font-size: 13px;
+  color: var(--love-text-tertiary);
 }
-
+.meta {
+  font-size: 13px;
+  color: var(--love-text-tertiary);
+}
 .tags-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 6px;
+  gap: 8px;
 }
-
 .tag {
+  padding: 4px 12px;
   border-radius: 999px;
+  font-size: 12px;
+  background: var(--love-accent-wash);
+  border: 1px solid var(--love-accent-border);
+  color: var(--love-accent-hover);
+  font-weight: 600;
 }
-
 .body {
   white-space: pre-wrap;
-  color: rgba(var(--ion-color-medium-rgb), 0.95);
+  color: var(--love-text-secondary);
   line-height: 1.8;
   font-size: 14px;
 }
-
-.mt-16 {
-  margin-top: 16px;
-}
-
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 8px;
 }
-
 .photo-tile {
-  border-radius: 14px;
+  position: relative;
+  border-radius: 8px;
   overflow: hidden;
-  border: 1px solid rgba(var(--ion-color-medium-rgb), 0.18);
-  background: rgba(var(--ion-color-dark-rgb), 0.1);
-  min-height: 90px;
+  aspect-ratio: 1;
+  border: 1px solid var(--love-border-subtle);
+  cursor: pointer;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 }
+.count-badge {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+.audio { width: 100%; }
+.action-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+.action-btn { flex: 1; }
 
-.photo-tile ion-img {
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(58, 36, 40, 0.48);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 16px;
+}
+.modal-card {
+  max-width: 360px;
   width: 100%;
-  height: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.modal-img {
+  width: 100%;
+  aspect-ratio: 1;
   object-fit: cover;
 }
-
-.audio {
-  width: 100%;
+.modal-footer {
+  padding: 12px;
+  display: flex;
+  justify-content: center;
 }
-

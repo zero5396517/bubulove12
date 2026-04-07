@@ -1,0 +1,58 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="diary ? router.navigateByUrl('/diaries/detail/' + diary.id) : null">
+        <ion-icon name="arrow-back" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>编辑日记</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="diary">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>让回忆保持最新的样子</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="hint">你可以调整标题/内容、重新排列照片、或替换语音。</div>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">日记标题</ion-label>
+        <ion-input [(ngModel)]="title"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">日记日期</ion-label>
+        <ion-input type="date" [(ngModel)]="date"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">内容</ion-label>
+        <ion-textarea [(ngModel)]="body" auto-grow="true"></ion-textarea>
+      </ion-item>
+
+      <div class="section-label">隐私</div>
+      <ion-segment [(ngModel)]="privacy">
+        <ion-segment-button value="private">私密</ion-segment-button>
+        <ion-segment-button value="public">公开</ion-segment-button>
+      </ion-segment>
+
+      <div *ngIf="existingPhotoUrls.length" class="section-label">现有照片</div>
+      <div *ngIf="existingPhotoUrls.length" class="photo-grid">
+        <div *ngFor="let p of existingPhotoUrls" class="photo-tile">
+          <img [src]="p" alt="照片" />
+        </div>
+      </div>
+
+      <ion-button expand="block" color="primary" class="mt-16" (click)="save()">
+        <ion-icon slot="start" name="checkmark-circle"></ion-icon>
+        更新日记
+      </ion-button>
+      <ion-button expand="block" fill="outline" color="danger" class="mt-8" (click)="deleteDiary()">
+        <ion-icon slot="start" name="trash"></ion-icon>
+        删除日记
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

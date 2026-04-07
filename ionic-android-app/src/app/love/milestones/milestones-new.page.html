@@ -1,0 +1,59 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" routerLink="/tabs/milestones">
+        <ion-icon name="arrow-back" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>添加里程碑</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>记录一个对你们很重要的日子</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="hint">支持公历/农历选择、设置重要时刻与提前提醒。</div>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">名称</ion-label>
+        <ion-input [(ngModel)]="title" placeholder="比如：第一次牵手"></ion-input>
+      </ion-item>
+
+      <div class="section-label">日期类型</div>
+      <ion-segment [(ngModel)]="dateType">
+        <ion-segment-button value="solar">公历</ion-segment-button>
+        <ion-segment-button value="lunar">农历</ion-segment-button>
+      </ion-segment>
+
+      <ion-item lines="none" class="mt-8">
+        <ion-label position="stacked">日期</ion-label>
+        <ion-input type="date" [(ngModel)]="date"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">说明</ion-label>
+        <ion-textarea [(ngModel)]="description" placeholder="可以写一句你们的故事" auto-grow="true"></ion-textarea>
+      </ion-item>
+
+      <div class="section-label">是否重要时刻</div>
+      <ion-segment [value]="important ? 'yes' : 'no'" (ionChange)="important = $event.detail.value === 'yes'">
+        <ion-segment-button value="yes">重要时刻</ion-segment-button>
+        <ion-segment-button value="no">普通</ion-segment-button>
+      </ion-segment>
+
+      <ion-item lines="none" class="mt-8">
+        <ion-label position="stacked">提前 N 天提醒</ion-label>
+        <ion-input type="number" [(ngModel)]="remindDays" min="0" max="365" placeholder="3"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" color="primary" class="mt-16" (click)="save()">
+        <ion-icon slot="start" name="checkmark-circle"></ion-icon>
+        保存并查看倒计时
+      </ion-button>
+      <ion-button expand="block" fill="outline" class="mt-8" routerLink="/tabs/milestones">取消</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,64 +1,60 @@
 <ion-header translucent="true">
-    <ion-toolbar>
-      <ion-title>恋爱日记</ion-title>
-      <ion-buttons slot="end">
-        <ion-button fill="clear" (click)="newDiary()">
-          <ion-icon name="add-circle-outline" aria-hidden="true"></ion-icon>
-          新建
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-title>恋爱日记</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" routerLink="/confession">
+        <ion-icon name="heart" color="primary" aria-hidden="true"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="newDiary()">
+        <ion-icon name="add-circle" color="primary" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-content class="ion-padding safe-pad-bottom">
-    <ion-searchbar
-      placeholder="搜索心情/地点/关键词…"
-      (ionInput)="onQueryInput($event)"
-    ></ion-searchbar>
+<ion-content class="ion-padding">
+  <ion-searchbar
+    placeholder="搜索：心情/地点/关键词…"
+    (ionInput)="onQueryInput($event)"
+  ></ion-searchbar>
 
-    <ion-segment class="mt-12" [value]="privacy" aria-label="隐私筛选" mode="md">
-      <ion-segment-button value="all" (click)="privacy = 'all'">全部</ion-segment-button>
-      <ion-segment-button value="private" (click)="privacy = 'private'">私密</ion-segment-button>
-      <ion-segment-button value="public" (click)="privacy = 'public'">公开</ion-segment-button>
-    </ion-segment>
+  <ion-segment [value]="privacy" (ionChange)="onPrivacyChange($event)" class="mt-12">
+    <ion-segment-button value="all">全部</ion-segment-button>
+    <ion-segment-button value="private">私密</ion-segment-button>
+    <ion-segment-button value="public">公开</ion-segment-button>
+  </ion-segment>
 
-    <ion-item lines="none" class="mt-8">
-      <ion-label position="stacked">日期（示例）</ion-label>
-      <ion-select interface="popover" [(ngModel)]="year" aria-label="年份选择">
-        <ion-select-option value="2026">2026</ion-select-option>
-        <ion-select-option value="2025">2025</ion-select-option>
-        <ion-select-option value="2024">2024</ion-select-option>
-      </ion-select>
-    </ion-item>
+  <div class="filter-row" *ngIf="years.length">
+    <ion-select interface="popover" [(ngModel)]="year" placeholder="年份" class="filter-select">
+      <ion-select-option value="">全部年份</ion-select-option>
+      <ion-select-option *ngFor="let y of years" [value]="y">{{ y }}</ion-select-option>
+    </ion-select>
+  </div>
 
-    <ion-list inset="true" class="mt-12">
-      <ion-item
-        *ngFor="let d of diaries"
-        [routerLink]="['/diaries/detail', d.id]"
-        button
-      >
-        <ion-label>
-          <div class="row-between">
-            <div class="title">{{ d.title }}</div>
-            <ion-badge
-              *ngIf="d.privacy === 'private'"
-              color="tertiary"
-              class="badge"
-              >私密</ion-badge
-            >
-            <ion-badge *ngIf="d.privacy === 'public'" color="primary" class="badge"
-              >公开</ion-badge
-            >
-          </div>
-          <div class="meta">
-            <span>{{ d.date }}</span>
-            <span>·</span>
-            <span>{{ d.photoCount }} 张</span>
-            <span *ngIf="d.hasVoice">· 语音</span>
-          </div>
-          <div class="preview">{{ d.preview }}</div>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-content>
+  <div class="list-header">
+    <span class="list-title">日记列表</span>
+    <span class="list-count">共 {{ filteredDiaries.length }} 条</span>
+  </div>
 
+  <div class="diary-list">
+    <a *ngFor="let d of filteredDiaries" class="diary-item" [routerLink]="['/diaries/detail', d.id]">
+      <div class="diary-main">
+        <div class="diary-title">{{ d.title }}</div>
+        <div class="diary-meta">
+          <span>{{ d.date }}</span>
+          <ion-badge [color]="d.privacy === 'private' ? 'primary' : 'medium'" class="diary-badge">
+            {{ d.privacy === 'private' ? '私密' : '公开' }}
+          </ion-badge>
+        </div>
+        <div class="diary-preview">{{ d.content }}</div>
+      </div>
+      <ion-icon name="chevron-forward" color="medium"></ion-icon>
+    </a>
+  </div>
+
+  <div class="empty-state" *ngIf="filteredDiaries.length === 0">
+    <ion-icon name="document-text-outline" class="empty-icon"></ion-icon>
+    <p>还没有日记，去写一条吧</p>
+    <ion-button fill="outline" color="primary" (click)="newDiary()">新建日记</ion-button>
+  </div>
+</ion-content>

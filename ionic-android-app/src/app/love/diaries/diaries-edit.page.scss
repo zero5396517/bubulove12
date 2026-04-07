@@ -1,0 +1,31 @@
+.hint {
+  font-size: 13px;
+  color: var(--love-text-tertiary);
+  margin-bottom: 12px;
+}
+.section-label {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--love-text-secondary);
+}
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.photo-tile {
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  border: 1px solid var(--love-border-subtle);
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+.mt-16 { margin-top: 16px; }
+.mt-8 { margin-top: 8px; }
