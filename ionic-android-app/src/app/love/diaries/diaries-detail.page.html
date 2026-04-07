@@ -1,85 +1,89 @@
 <ion-header translucent="true">
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-button fill="clear" (click)="backToList()">
-          <ion-icon name="arrow-back" aria-hidden="true"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-title>日记详情</ion-title>
-      <ion-buttons slot="end">
-        <ion-button fill="clear" (click)="edit()">
-          <ion-icon name="create" aria-hidden="true"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" routerLink="/tabs/diaries">
+        <ion-icon name="arrow-back" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>日记详情</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="edit()">
+        <ion-icon name="create" color="primary" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-content class="ion-padding safe-pad-bottom">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>
-          {{ diary.title }}
-          <ion-badge
-            *ngIf="diary.privacy === 'private'"
-            color="tertiary"
-            class="ml-8"
-            >私密</ion-badge
-          >
-          <ion-badge
-            *ngIf="diary.privacy === 'public'"
-            color="primary"
-            class="ml-8"
-            >公开</ion-badge
-          >
-        </ion-card-title>
-        <div class="meta">{{ diary.date }}</div>
-      </ion-card-header>
-      <ion-card-content>
-        <div class="tags-row">
-          <ion-badge class="tag">心动</ion-badge>
-          <ion-badge class="tag">回看</ion-badge>
-          <ion-badge class="tag">故事</ion-badge>
+<ion-content class="ion-padding" *ngIf="diary">
+  <ion-card>
+    <ion-card-header>
+      <div class="detail-head">
+        <div>
+          <ion-card-title class="detail-title">{{ diary.title }}</ion-card-title>
+          <div class="detail-meta">{{ diary.date }}</div>
         </div>
-      </ion-card-content>
-    </ion-card>
+        <ion-badge [color]="diary.privacy === 'private' ? 'primary' : 'medium'">
+          {{ diary.privacy === 'private' ? '私密' : '公开' }}
+        </ion-badge>
+      </div>
+    </ion-card-header>
+    <ion-card-content *ngIf="diary.tags.length">
+      <div class="tags-row">
+        <span *ngFor="let t of diary.tags" class="tag">{{ t }}</span>
+      </div>
+    </ion-card-content>
+  </ion-card>
 
-    <ion-card class="mt-16">
-      <ion-card-header>
-        <ion-card-title>这一天</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <div class="body" [innerText]="diary.body"></div>
-      </ion-card-content>
-    </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>关于这一天</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="body">{{ diary.content }}</div>
+    </ion-card-content>
+  </ion-card>
 
-    <ion-card *ngIf="diary.photos.length" class="mt-16">
-      <ion-card-header>
+  <ion-card *ngIf="photoUrls.length">
+    <ion-card-header>
+      <div class="detail-head">
         <ion-card-title>照片</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <div class="photo-grid">
-          <div *ngFor="let p of diary.photos" class="photo-tile">
-            <ion-img [src]="p" alt="照片"></ion-img>
-          </div>
+        <span class="meta">{{ photoUrls.length }} 张</span>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="photo-grid">
+        <div *ngFor="let p of photoUrls; let i = index" class="photo-tile" (click)="openPreview(p)">
+          <img [src]="p" alt="照片" />
+          <div class="count-badge" *ngIf="i === 0">{{ photoUrls.length }}</div>
         </div>
-      </ion-card-content>
-    </ion-card>
+      </div>
+    </ion-card-content>
+  </ion-card>
 
-    <ion-card *ngIf="diary.voiceUrl" class="mt-16">
-      <ion-card-header>
-        <ion-card-title>语音</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <audio [src]="diary.voiceUrl" controls class="audio"></audio>
-      </ion-card-content>
-    </ion-card>
+  <ion-card *ngIf="voiceUrl">
+    <ion-card-header>
+      <ion-card-title>语音留言</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <audio [src]="voiceUrl" controls class="audio"></audio>
+    </ion-card-content>
+  </ion-card>
 
-    <ion-card class="mt-16">
-      <ion-card-content>
-        <ion-button expand="block" color="primary" [routerLink]="['/tabs/diaries']">
-          返回日记列表
-        </ion-button>
-      </ion-card-content>
-    </ion-card>
-  </ion-content>
+  <div class="action-row">
+    <ion-button color="primary" (click)="edit()" class="action-btn">
+      <ion-icon slot="start" name="create"></ion-icon>
+      编辑
+    </ion-button>
+    <ion-button fill="outline" routerLink="/tabs/diaries" class="action-btn">返回</ion-button>
+  </div>
 
+  <!-- Photo preview modal -->
+  <div class="modal-overlay" *ngIf="previewUrl" (click)="closePreview()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <img [src]="previewUrl" alt="预览大图" class="modal-img" />
+      <div class="modal-footer">
+        <ion-button fill="outline" (click)="closePreview()">关闭</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

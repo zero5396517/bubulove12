@@ -1,105 +1,76 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
-  IonBadge,
-  IonButton,
-  IonButtons,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonImg,
-  IonLabel,
-  IonList,
-  IonTitle,
-  IonToolbar,
+  IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle,
+  IonContent, IonHeader, IonIcon, IonTitle, IonToolbar,
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
-
-type AlbumDisplay = {
-  id: string;
-  name: string;
-  coverUrl: string;
-  photos: string[];
-};
+import { DbService, Album } from '../../services/db.service';
 
 @Component({
   selector: 'app-albums-detail',
   standalone: true,
   imports: [
-    CommonModule,
-    IonBadge,
-    IonButton,
-    IonButtons,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardTitle,
-    IonContent,
-    IonHeader,
-    IonIcon,
-    IonImg,
-    IonLabel,
-    IonList,
-    IonTitle,
-    IonToolbar,
+    CommonModule, RouterLink,
+    IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle,
+    IonContent, IonHeader, IonIcon, IonTitle, IonToolbar,
   ],
   templateUrl: './albums-detail.page.html',
   styleUrls: ['./albums-detail.page.scss'],
 })
 export class AlbumsDetailPage implements OnInit {
-  album: AlbumDisplay = {
-    id: '',
-    name: '',
-    coverUrl: '',
-    photos: [],
-  };
+  album: Album | null = null;
+  coverUrl = '';
+  photoUrls: string[] = [];
+  previewUrl: string | null = null;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router, private db: DbService) {}
 
-  ngOnInit() {
-    const state = this.router.getCurrentNavigation()?.extras?.state as
-      | { album?: Partial<AlbumDisplay> }
-      | undefined;
-    const fromState = state?.album;
-    if (fromState) {
-      this.album = {
-        id: fromState.id ?? 'unknown',
-        name: fromState.name ?? '未命名相册',
-        coverUrl: fromState.coverUrl ?? '',
-        photos: fromState.photos ?? [],
-      };
-      return;
-    }
-
+  async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.album = this.mockById(id);
+    if (!id) return;
+    this.album = (await this.db.getAlbum(id)) ?? null;
+    if (!this.album) return;
+    for (const pk of this.album.photoKeys) {
+      const p = await this.db.getPhoto(pk);
+      if (p) {
+        const url = URL.createObjectURL(p.blob);
+        this.photoUrls.push(url);
+        if (pk === this.album.coverPhotoKey || (!this.coverUrl && this.photoUrls.length === 1)) {
+          this.coverUrl = url;
+        }
+      }
+    }
   }
 
-  private mockById(id: string | null): AlbumDisplay {
-    return {
-      id: id ?? 'mock',
-      name: '甜品与电影',
-      coverUrl:
-        'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=800&q=70',
-      photos: [
-        'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=800&q=70',
-        'https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=800&q=70',
-        'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=70',
-      ],
-    };
+  async onUploadPhotos(ev: Event) {
+    if (!this.album) return;
+    const input = ev.target as HTMLInputElement;
+    const files = input.files ? Array.from(input.files) : [];
+    const now = Date.now();
+    for (const f of files) {
+      if (!f.type.startsWith('image/')) continue;
+      const pid = this.db.genId();
+      await this.db.addPhoto({ id: pid, albumId: this.album.id, blob: f, thumbnailBlob: null, createdAt: now });
+      this.album.photoKeys.push(pid);
+      this.photoUrls.push(URL.createObjectURL(f));
+    }
+    if (!this.album.coverPhotoKey && this.album.photoKeys.length) {
+      this.album.coverPhotoKey = this.album.photoKeys[0];
+    }
+    this.album.updatedAt = now;
+    await this.db.addAlbum(this.album);
   }
 
-  back() {
+  openPreview(url: string) { this.previewUrl = url; }
+  closePreview() { this.previewUrl = null; }
+
+  async deleteAlbum() {
+    if (!this.album) return;
+    for (const pk of this.album.photoKeys) await this.db.deletePhoto(pk);
+    await this.db.deleteAlbum(this.album.id);
     this.router.navigateByUrl('/tabs/albums');
   }
 
-  shareMock() {
-    // UI-only mock, no Web Share API yet.
-    this.router.navigateByUrl('/tabs/albums');
-  }
+  back() { this.router.navigateByUrl('/tabs/albums'); }
 }
-

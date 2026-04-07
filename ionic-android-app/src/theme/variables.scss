@@ -1,17 +1,82 @@
-// For information on how to create your own theme, please refer to:
-// https://ionicframework.com/docs/theming/
-
-/**
- * Love theme tuning (used by the custom pages in this repo).
- * All component styling should prefer Ionic variables (e.g. --ion-color-primary).
- */
 :root {
-  --ion-color-primary: #ff4fa6;
+  --ion-color-primary: #d9557a;
+  --ion-color-primary-rgb: 217, 85, 122;
   --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #c73d64;
+  --ion-color-primary-tint: #e06d8f;
 
-  --ion-color-secondary: #3de7ff;
-  --ion-color-secondary-contrast: #0b0b0f;
+  --ion-color-secondary: #f5a0b8;
+  --ion-color-secondary-rgb: 245, 160, 184;
+  --ion-color-secondary-contrast: #3a2a28;
+  --ion-color-secondary-contrast-rgb: 58, 42, 40;
+  --ion-color-secondary-shade: #d88da2;
+  --ion-color-secondary-tint: #f6aabf;
 
-  --ion-color-tertiary: #2dffb3;
-  --ion-color-tertiary-contrast: #0b0b0f;
+  --ion-color-tertiary: #4caf50;
+  --ion-color-tertiary-rgb: 76, 175, 80;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #429946;
+  --ion-color-tertiary-tint: #5eb862;
+
+  --ion-color-success: #4caf50;
+  --ion-color-success-rgb: 76, 175, 80;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #429946;
+  --ion-color-success-tint: #5eb862;
+
+  --ion-color-warning: #ff9800;
+  --ion-color-warning-rgb: 255, 152, 0;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #e08600;
+  --ion-color-warning-tint: #ffa21a;
+
+  --ion-color-danger: #f44336;
+  --ion-color-danger-rgb: 244, 67, 54;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #d73a2f;
+  --ion-color-danger-tint: #f5564a;
+
+  --ion-color-medium: #92817e;
+  --ion-color-medium-rgb: 146, 129, 126;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #80716f;
+  --ion-color-medium-tint: #9d8e8b;
+
+  --ion-color-light: #fff5f0;
+  --ion-color-light-rgb: 255, 245, 240;
+  --ion-color-light-contrast: #3a2a28;
+  --ion-color-light-contrast-rgb: 58, 42, 40;
+  --ion-color-light-shade: #e0d8d3;
+  --ion-color-light-tint: #fff7f2;
+
+  --ion-background-color: #fffbf7;
+  --ion-background-color-rgb: 255, 251, 247;
+  --ion-text-color: #3a2a28;
+  --ion-text-color-rgb: 58, 42, 40;
+
+  --ion-toolbar-background: rgba(255, 251, 247, 0.96);
+  --ion-toolbar-color: #3a2a28;
+  --ion-tab-bar-background: rgba(255, 251, 247, 0.96);
+  --ion-tab-bar-color: rgba(58, 42, 40, 0.52);
+  --ion-tab-bar-color-selected: #d9557a;
+
+  --ion-card-background: #ffffff;
+  --ion-item-background: #ffffff;
+
+  --love-accent: #d9557a;
+  --love-accent-hover: #c73d64;
+  --love-accent-muted: rgba(217, 85, 122, 0.14);
+  --love-accent-border: rgba(217, 85, 122, 0.38);
+  --love-accent-wash: #fff5f7;
+  --love-bg-peach: #ffeadd;
+  --love-bg-elevated-2: #fff3eb;
+  --love-border-subtle: rgba(200, 130, 110, 0.22);
+  --love-text-secondary: rgba(58, 42, 40, 0.78);
+  --love-text-tertiary: rgba(58, 42, 40, 0.52);
 }

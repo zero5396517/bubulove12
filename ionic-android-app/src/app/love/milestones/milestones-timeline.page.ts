@@ -1,83 +1,63 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import {
-  IonBadge,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
-  IonContent,
-  IonHeader,
-  IonItem,
-  IonLabel,
-  IonTitle,
-  IonToolbar,
+  IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle,
+  IonContent, IonHeader, IonIcon, IonTitle, IonToolbar,
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
-
-type Milestone = {
-  id: string;
-  title: string;
-  dateText: string;
-  badge: 'important' | 'primary' | 'normal';
-  countdownText: string;
-};
+import { DbService, Milestone } from '../../services/db.service';
 
 @Component({
   selector: 'app-milestones-timeline',
   standalone: true,
   imports: [
-    CommonModule,
-    IonBadge,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardTitle,
-    IonContent,
-    IonHeader,
-    IonItem,
-    IonLabel,
-    IonTitle,
-    IonToolbar,
+    CommonModule, RouterLink,
+    IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle,
+    IonContent, IonHeader, IonIcon, IonTitle, IonToolbar,
   ],
   templateUrl: './milestones-timeline.page.html',
   styleUrls: ['./milestones-timeline.page.scss'],
 })
-export class MilestonesTimelinePage {
-  milestones: Milestone[] = [
-    {
-      id: 'm1',
-      title: '第一次牵手纪念日',
-      dateText: '公历 · 2026-04-05',
-      badge: 'important',
-      countdownText: '还有 11 天',
-    },
-    {
-      id: 'm2',
-      title: '一起看海',
-      dateText: '公历 · 2026-03-30',
-      badge: 'primary',
-      countdownText: '还有 5 天',
-    },
-    {
-      id: 'm3',
-      title: '每月约会日',
-      dateText: '每月重复',
-      badge: 'normal',
-      countdownText: '今天',
-    },
-    {
-      id: 'm4',
-      title: '第一次共度周末',
-      dateText: '公历 · 2026-02-18',
-      badge: 'important',
-      countdownText: '已过去 36 天',
-    },
-  ];
+export class MilestonesTimelinePage implements OnInit {
+  milestones: (Milestone & { daysLeft: number })[] = [];
 
-  badgeColor(b: Milestone['badge']): string {
-    if (b === 'important') return 'tertiary';
-    if (b === 'primary') return 'primary';
+  constructor(private router: Router, private db: DbService) {}
+
+  async ngOnInit() { await this.load(); }
+  async ionViewWillEnter() { await this.load(); }
+
+  async load() {
+    const all = await this.db.getAllMilestones();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    this.milestones = all.map(m => {
+      const d = new Date(m.date);
+      d.setHours(0, 0, 0, 0);
+      return { ...m, daysLeft: Math.ceil((d.getTime() - today.getTime()) / 86400000) };
+    }).sort((a, b) => b.daysLeft - a.daysLeft);
+  }
+
+  countdownText(days: number): string {
+    if (days === 0) return '今天';
+    if (days > 0) return `还有 ${days} 天`;
+    return `已过去 ${Math.abs(days)} 天`;
+  }
+
+  countdownColor(days: number): string {
+    if (days > 0) return 'var(--love-accent)';
+    if (days === 0) return 'var(--love-accent)';
+    return 'var(--love-text-secondary)';
+  }
+
+  badgeText(m: Milestone & { daysLeft: number }): string {
+    if (m.important) return '重要';
+    if (m.daysLeft > 0 && m.remindDays > 0) return '提醒中';
+    return '记录';
+  }
+
+  badgeColor(m: Milestone & { daysLeft: number }): string {
+    if (m.important) return 'tertiary';
+    if (m.daysLeft > 0 && m.remindDays > 0) return 'primary';
     return 'medium';
   }
 }
-

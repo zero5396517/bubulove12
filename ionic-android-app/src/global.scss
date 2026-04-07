@@ -1,37 +1,42 @@
-/*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
- */
-
-/* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
-
-/* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
-
-/* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
+ion-content {
+  --background: #fffbf7;
+}
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+ion-card {
+  --background: #ffffff;
+  border: 1px solid rgba(200, 130, 110, 0.22);
+  box-shadow: 0 8px 24px rgba(140, 80, 60, 0.08);
+  border-radius: 12px;
+}
+
+ion-toolbar {
+  --border-color: rgba(200, 130, 110, 0.22);
+}
+
+ion-tab-bar {
+  border-top: 1px solid rgba(200, 130, 110, 0.22);
+  box-shadow: 0 -6px 24px rgba(160, 90, 70, 0.06);
+}
+
+ion-segment-button {
+  --indicator-color: var(--love-accent);
+  --color-checked: var(--love-accent);
+  font-weight: 600;
+}
+
+ion-searchbar {
+  --background: #ffffff;
+  --border-radius: 999px;
+  --box-shadow: 0 2px 8px rgba(140, 80, 60, 0.06);
+}

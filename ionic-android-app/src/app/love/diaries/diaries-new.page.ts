@@ -1,66 +1,22 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
-  IonButton,
-  IonButtons,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonImg,
-  IonInput,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonSegment,
-  IonSegmentButton,
-  IonTextarea,
-  IonTitle,
-  IonToolbar,
+  IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle,
+  IonContent, IonHeader, IonIcon, IonImg, IonInput, IonItem, IonLabel,
+  IonSegment, IonSegmentButton, IonTextarea, IonTitle, IonToolbar,
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-type Privacy = 'private' | 'public';
-
-type DiaryDraft = {
-  title: string;
-  date: string;
-  body: string;
-  privacy: Privacy;
-  photos: string[]; // object URLs
-  voiceUrl: string | null; // object URL
-};
+import { DbService, Diary, VoiceRecord } from '../../services/db.service';
 
 @Component({
   selector: 'app-diaries-new',
   standalone: true,
   imports: [
-    CommonModule,
-    FormsModule,
-    IonButton,
-    IonButtons,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardTitle,
-    IonContent,
-    IonHeader,
-    IonIcon,
-    IonImg,
-    IonInput,
-    IonItem,
-    IonLabel,
-    IonList,
-    IonSegment,
-    IonSegmentButton,
-    IonTextarea,
-    IonTitle,
-    IonToolbar,
-    RouterLink,
+    CommonModule, FormsModule, RouterLink,
+    IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle,
+    IonContent, IonHeader, IonIcon, IonImg, IonInput, IonItem, IonLabel,
+    IonSegment, IonSegmentButton, IonTextarea, IonTitle, IonToolbar,
   ],
   templateUrl: './diaries-new.page.html',
   styleUrls: ['./diaries-new.page.scss'],
@@ -69,33 +25,28 @@ export class DiariesNewPage {
   title = '';
   date = this.formatToday();
   body = '';
-  privacy: Privacy = 'private';
-
-  photos: string[] = [];
+  privacy: 'private' | 'public' = 'private';
+  photoFiles: { url: string; blob: Blob }[] = [];
   voiceUrl: string | null = null;
-
-  @ViewChild('fileInput', { static: false }) fileInput?: { nativeElement: HTMLInputElement };
-
-  // MediaRecorder can be missing on some browsers; we handle gracefully.
+  private voiceBlob: Blob | null = null;
   private mediaRecorder: MediaRecorder | null = null;
   recording = false;
   private voiceChunks: Blob[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private db: DbService) {}
 
   onSelectPhotos(ev: Event) {
     const input = ev.target as HTMLInputElement;
     const files = input.files ? Array.from(input.files) : [];
-    const urls: string[] = [];
     for (const f of files) {
       if (!f.type.startsWith('image/')) continue;
-      urls.push(URL.createObjectURL(f));
+      this.photoFiles.push({ url: URL.createObjectURL(f), blob: f });
     }
-    this.photos = [...this.photos, ...urls].slice(0, 9);
+    this.photoFiles = this.photoFiles.slice(0, 9);
   }
 
-  removePhoto(url: string) {
-    this.photos = this.photos.filter((p) => p !== url);
+  removePhoto(idx: number) {
+    this.photoFiles.splice(idx, 1);
   }
 
   async toggleRecording() {
@@ -104,53 +55,52 @@ export class DiariesNewPage {
       this.recording = false;
       return;
     }
-
     if (typeof navigator === 'undefined' || !navigator.mediaDevices) return;
     if (typeof MediaRecorder === 'undefined') return;
-
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       this.voiceChunks = [];
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const mr = new MediaRecorder(stream as any);
+      const mr = new MediaRecorder(stream);
       this.mediaRecorder = mr;
-      mr.ondataavailable = (e: BlobEvent) => {
-        if (e.data) this.voiceChunks.push(e.data);
-      };
+      mr.ondataavailable = (e: BlobEvent) => { if (e.data.size > 0) this.voiceChunks.push(e.data); };
       mr.onstop = () => {
-        const blob = new Blob(this.voiceChunks, { type: 'audio/webm' });
-        this.voiceUrl = URL.createObjectURL(blob);
-        // Stop tracks to release microphone.
-        stream.getTracks().forEach((t) => t.stop());
+        this.voiceBlob = new Blob(this.voiceChunks, { type: 'audio/webm' });
+        this.voiceUrl = URL.createObjectURL(this.voiceBlob);
+        stream.getTracks().forEach(t => t.stop());
       };
       mr.start();
       this.recording = true;
     } catch {
-      // Mock behavior: if permission denied or not supported, keep UI only.
       this.recording = false;
     }
   }
 
-  submitMock() {
-    const id = `d_new_${Date.now()}`;
-    const draft: DiaryDraft = {
-      title: this.title || '未命名的心动',
-      date: this.date,
-      body: this.body,
-      privacy: this.privacy,
-      photos: this.photos,
-      voiceUrl: this.voiceUrl,
+  async save() {
+    const id = this.db.genId();
+    const now = Date.now();
+    const photoKeys: string[] = [];
+    for (const pf of this.photoFiles) {
+      const pid = this.db.genId();
+      await this.db.addPhoto({ id: pid, albumId: '', blob: pf.blob, thumbnailBlob: null, createdAt: now });
+      photoKeys.push(pid);
+    }
+    let voiceKey: string | null = null;
+    if (this.voiceBlob) {
+      voiceKey = this.db.genId();
+      const vr: VoiceRecord = { id: voiceKey, blob: this.voiceBlob, duration: 0, createdAt: now };
+      await this.db.addVoice(vr);
+    }
+    const diary: Diary = {
+      id, title: this.title || '未命名的心动', content: this.body,
+      date: this.date, privacy: this.privacy, photoKeys, voiceKey, tags: [],
+      createdAt: now, updatedAt: now,
     };
-
-    this.router.navigateByUrl(`/diaries/detail/${id}`, { state: { draft } });
+    await this.db.addDiary(diary);
+    this.router.navigateByUrl(`/diaries/detail/${id}`);
   }
 
   private formatToday() {
     const d = new Date();
-    const y = d.getFullYear();
-    const m = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
-    return `${y}-${m}-${day}`;
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   }
 }
-

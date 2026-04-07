@@ -1,54 +1,83 @@
 <ion-header translucent="true">
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-button fill="clear" (click)="back()">
-          <ion-icon name="arrow-back" aria-hidden="true"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-title>相册详情</ion-title>
-      <ion-buttons slot="end">
-        <ion-button fill="clear" (click)="shareMock()">
-          <ion-icon name="share-social" aria-hidden="true"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="back()">
+        <ion-icon name="arrow-back" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>相册详情</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-content class="ion-padding safe-pad-bottom">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>
-          {{ album.name }}
-          <ion-badge color="primary" class="ml-8">{{ album.photos.length }} 张</ion-badge>
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <div class="cover-wrap">
-          <ion-img [src]="album.coverUrl" alt="封面"></ion-img>
+<ion-content class="ion-padding" *ngIf="album">
+  <ion-card>
+    <ion-card-header>
+      <div class="detail-head">
+        <div>
+          <ion-card-title>{{ album.name }}</ion-card-title>
+          <div class="detail-meta">{{ photoUrls.length }} 张照片</div>
         </div>
-      </ion-card-content>
-    </ion-card>
+      </div>
+    </ion-card-header>
+    <ion-card-content *ngIf="coverUrl">
+      <div class="cover-wrap">
+        <img [src]="coverUrl" alt="封面" />
+      </div>
+    </ion-card-content>
+  </ion-card>
 
-    <ion-card class="mt-16">
-      <ion-card-header>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>上传照片</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <input #fileInput type="file" accept="image/*" multiple style="display: none" (change)="onUploadPhotos($event)" />
+      <div class="upload-row">
+        <ion-button fill="outline" (click)="fileInput.click()">
+          <ion-icon slot="start" name="images-outline"></ion-icon>
+          选择相册
+        </ion-button>
+        <ion-button fill="outline" (click)="fileInput.click()">
+          <ion-icon slot="start" name="camera-outline"></ion-icon>
+          拍照
+        </ion-button>
+      </div>
+      <div class="perm-hint">
+        <div class="perm-title">如果权限被拒绝</div>
+        <div class="perm-body">提示用户去设置开启相册/相机权限；同时提供"仅展示已上传内容"的降级方案。</div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="photoUrls.length">
+    <ion-card-header>
+      <div class="detail-head">
         <ion-card-title>图片网格</ion-card-title>
-        <div class="muted">长按拖拽排序（UI mock 后续接真实逻辑）</div>
-      </ion-card-header>
-      <ion-card-content>
-        <div class="grid">
-          <div *ngFor="let p of album.photos" class="tile">
-            <ion-img [src]="p" alt="照片"></ion-img>
-          </div>
+        <span class="detail-meta">点击预览</span>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="photo-grid">
+        <div *ngFor="let p of photoUrls; let i = index" class="photo-tile" (click)="openPreview(p)">
+          <img [src]="p" alt="照片" />
+          <div class="cover-badge" *ngIf="i === 0">封面</div>
         </div>
-      </ion-card-content>
-    </ion-card>
+      </div>
+    </ion-card-content>
+  </ion-card>
 
-    <ion-card class="mt-16">
-      <ion-card-content>
-        <ion-button expand="block" fill="outline" (click)="back()">
-          返回相册列表
-        </ion-button>
-      </ion-card-content>
-    </ion-card>
-  </ion-content>
+  <ion-button expand="block" fill="outline" color="danger" class="mt-16" (click)="deleteAlbum()">
+    <ion-icon slot="start" name="trash"></ion-icon>
+    删除相册
+  </ion-button>
 
+  <!-- Preview modal -->
+  <div class="modal-overlay" *ngIf="previewUrl" (click)="closePreview()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <img [src]="previewUrl" alt="预览大图" class="modal-img" />
+      <div class="modal-footer">
+        <ion-button fill="outline" (click)="closePreview()">关闭</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

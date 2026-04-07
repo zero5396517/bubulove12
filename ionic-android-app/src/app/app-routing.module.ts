@@ -3,18 +3,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'onboarding',
-    loadComponent: () => import('./onboarding/onboarding.page').then(m => m.OnboardingPage),
-  },
-  {
-    path: 'paywall',
-    loadComponent: () => import('./paywall/paywall.page').then(m => m.PaywallPage),
-  },
-  {
-    path: 'settings',
-    loadComponent: () => import('./settings/settings.page').then(m => m.SettingsPage),
-  },
-  {
     path: 'confession',
     loadComponent: () => import('./love/confession/confession.page').then(m => m.ConfessionPage),
   },
@@ -27,8 +15,24 @@ const routes: Routes = [
     loadComponent: () => import('./love/diaries/diaries-detail.page').then(m => m.DiariesDetailPage),
   },
   {
+    path: 'diaries/edit/:id',
+    loadComponent: () => import('./love/diaries/diaries-edit.page').then(m => m.DiariesEditPage),
+  },
+  {
     path: 'albums/detail/:id',
     loadComponent: () => import('./love/albums/albums-detail.page').then(m => m.AlbumsDetailPage),
+  },
+  {
+    path: 'milestones/new',
+    loadComponent: () => import('./love/milestones/milestones-new.page').then(m => m.MilestonesNewPage),
+  },
+  {
+    path: 'milestones/detail/:id',
+    loadComponent: () => import('./love/milestones/milestones-detail.page').then(m => m.MilestonesDetailPage),
+  },
+  {
+    path: 'milestones/edit/:id',
+    loadComponent: () => import('./love/milestones/milestones-edit.page').then(m => m.MilestonesEditPage),
   },
   {
     path: 'tabs',
@@ -36,14 +40,15 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'onboarding',
+    redirectTo: 'tabs/home',
     pathMatch: 'full',
   },
   {
     path: '**',
-    redirectTo: 'onboarding',
+    redirectTo: 'tabs/home',
   },
 ];
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
