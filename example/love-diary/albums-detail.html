@@ -12,39 +12,15 @@
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <div class="app-container">
-      <div class="screen" role="application" aria-label="恋爱日记 - 相册详情">
-        <div
-          style="
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 0;
-            height: 220px;
-            background-image: url('https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1000&q=70');
-            background-size: cover;
-            background-position: center;
-            filter: saturate(1.1) brightness(0.95);
-          "
-          aria-hidden="true"
-        ></div>
-        <div
-          style="
-            position: absolute;
-            inset: 0;
-            height: 220px;
-            background: linear-gradient(to bottom, rgba(15, 15, 22, 0.92) 0%, rgba(15, 15, 22, 0.72) 60%, rgba(15, 15, 22, 0) 100%);
-          "
-          aria-hidden="true"
-        ></div>
-
-        <div class="header" style="position: relative">
+      <div class="screen screen-intro mag-immersive" role="application" aria-label="恋爱日记 - 相册详情">
+        <div class="header">
           <a class="icon-button" href="albums-list.html" aria-label="返回相册列表">
             <span class="material-icons">arrow_back</span>
           </a>
@@ -59,158 +35,117 @@
           </div>
         </div>
 
-        <div class="content safe-pad-bottom" style="padding-top: 140px">
-          <div class="card">
-            <div class="row-between" style="margin-bottom: var(--space-sm)">
-              <div>
-                <div style="font-weight: 950; font-size: 18px; margin-bottom: 6px">
-                  甜品与电影
+        <div class="content safe-pad-bottom magazine-content">
+          <section class="mag-spread" aria-label="相册封面主视觉">
+            <div class="mag-album-hero">
+              <img
+                src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=75"
+                alt=""
+                decoding="async"
+              />
+              <div class="mag-album-hero-scrim" aria-hidden="true"></div>
+              <div class="mag-album-hero-inner">
+                <p class="mag-album-issue">ALBUM · NO. 07</p>
+                <h1 class="mag-album-title">甜品<br />与电影</h1>
+                <div class="mag-album-meta-row">
+                  <span>封面已设 · 12 张</span>
+                  <span class="badge primary" style="border-color: rgba(255,255,255,0.25); background: rgba(0,0,0,0.25); color: #fff"
+                    >已收藏</span
+                  >
                 </div>
-                <div class="muted" style="font-size: 13px">封面已设置 · 12 张</div>
-              </div>
-              <div class="badge primary">收藏</div>
-            </div>
-
-            <div style="margin-top: var(--space-md)" class="row-between">
-              <a class="button outline" style="flex: 1; margin-right: var(--space-md)" href="albums-detail.html" aria-label="封面设置">
-                <span class="button-icon material-icons">image</span>
-                设为封面
-              </a>
-              <a class="button ghost" style="flex: 1; margin-left: 0" href="albums-detail.html#shareSheetModal" aria-label="分享按钮">
-                <span class="button-icon material-icons">share</span>
-                分享
-              </a>
-            </div>
-
-            <div class="muted" style="font-size: 12px; margin-top: 10px">
-              分享：优先使用 Web Share API，兜底提供“复制链接”。
-            </div>
-          </div>
-
-          <div class="card" aria-label="上传照片区域">
-            <div class="row-between" style="margin-bottom: var(--space-md)">
-              <div style="font-weight: 900">上传照片</div>
-              <div class="badge">权限提示（UI态）</div>
-            </div>
-
-            <div class="row-between" style="gap: var(--space-md)">
-              <a class="button ghost" style="flex: 1" href="albums-detail.html" aria-label="选择相册">
-                <span class="button-icon material-icons">photo_library</span>
-                选择相册
-              </a>
-              <a class="button ghost" style="flex: 1" href="albums-detail.html" aria-label="拍照">
-                <span class="button-icon material-icons">photo_camera</span>
-                拍照
-              </a>
-            </div>
-
-            <div style="margin-top: var(--space-md); padding: var(--space-md); border-radius: var(--radius-md); background: rgba(255, 79, 166, 0.08); border: 1px solid rgba(255, 79, 166, 0.20)">
-              <div style="font-weight: 800; margin-bottom: 6px">如果权限被拒绝</div>
-              <div class="muted" style="font-size: 13px">
-                提示用户去设置开启相册/相机权限；同时提供“仅展示已上传内容”的降级方案。
+                <div class="mag-album-actions">
+                  <a class="button outline" href="albums-detail.html" aria-label="封面设置">
+                    <span class="button-icon material-icons">image</span>
+                    设为封面
+                  </a>
+                  <a class="button primary" href="albums-detail.html#shareSheetModal" aria-label="分享相册">
+                    <span class="button-icon material-icons">share</span>
+                    分享
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
+            <p class="mag-album-caption">
+              优先 Web Share API；失败则走复制链接。以下为 UI 状态示意。
+            </p>
+          </section>
 
-          <div class="card" aria-label="图片网格与拖拽排序UI">
-            <div class="row-between" style="margin-bottom: var(--space-md)">
-              <div style="font-weight: 900">拖拽排序（长按）</div>
-              <div class="muted" style="font-size: 13px">示例态</div>
+          <section class="mag-spread" aria-label="上传照片">
+            <div class="mag-upload-panel">
+              <div class="mag-upload-glyph" aria-hidden="true">
+                <span class="material-icons" style="font-size: 28px">add_a_photo</span>
+              </div>
+              <h2 class="mag-upload-title">放进这一册</h2>
+              <p class="mag-upload-lead">
+                从相册挑选或现场拍一张。权限被拒时，引导去设置或仅浏览已上传内容。
+              </p>
+              <div class="mag-upload-btns">
+                <a class="button ghost" href="albums-detail.html" aria-label="选择相册">
+                  <span class="button-icon material-icons">photo_library</span>
+                  相册
+                </a>
+                <a class="button ghost" href="albums-detail.html" aria-label="拍照">
+                  <span class="button-icon material-icons">photo_camera</span>
+                  拍摄
+                </a>
+              </div>
+              <div class="mag-permission-note">
+                <strong>权限被拒绝时</strong>
+                <span class="muted" style="font-size: 12px; line-height: 1.5"
+                  >提示开启相册/相机；并提供「只看已上传」降级路径。</span
+                >
+              </div>
             </div>
+          </section>
 
-            <div class="img-grid">
+          <section class="mag-spread" aria-label="相册内页拼贴">
+            <p class="mag-collage-heading">内页拼贴 · 长按排序</p>
+            <div class="mag-collage">
               <a
-                class="img-tile"
+                class="mag-collage-feature"
                 href="albums-detail.html#albumImgPreview"
-                aria-label="预览照片1（封面态示例）"
+                aria-label="预览封面照片"
               >
                 <img
-                  src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=800&q=70"
-                  alt="照片1"
+                  src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=75"
+                  alt="封面"
                 />
                 <div class="count-badge">封面</div>
-                <div
-                  style="
-                    position: absolute;
-                    right: 8px;
-                    top: 8px;
-                    width: 36px;
-                    height: 36px;
-                    border-radius: var(--radius-full);
-                    background: rgba(0, 0, 0, 0.45);
-                    border: 1px solid rgba(255, 255, 255, 0.18);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                  "
-                  aria-hidden="true"
-                >
-                  <span class="material-icons" style="font-size: 18px; color: #fff">drag_handle</span>
+                <div class="mag-drag-fab" aria-hidden="true">
+                  <span class="material-icons" style="font-size: 18px">drag_handle</span>
                 </div>
               </a>
-              <a class="img-tile" href="albums-detail.html#albumImgPreview" aria-label="预览照片2">
-                <img
-                  src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=70"
-                  alt="照片2"
-                />
-                <div
-                  style="
-                    position: absolute;
-                    right: 8px;
-                    top: 8px;
-                    width: 36px;
-                    height: 36px;
-                    border-radius: var(--radius-full);
-                    background: rgba(0, 0, 0, 0.45);
-                    border: 1px solid rgba(255, 255, 255, 0.18);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                  "
-                  aria-hidden="true"
-                >
-                  <span class="material-icons" style="font-size: 18px; color: #fff">drag_handle</span>
-                </div>
-              </a>
-              <a class="img-tile" href="albums-detail.html#albumImgPreview" aria-label="预览照片3">
-                <img
-                  src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=70"
-                  alt="照片3"
-                />
-                <div
-                  style="
-                    position: absolute;
-                    right: 8px;
-                    top: 8px;
-                    width: 36px;
-                    height: 36px;
-                    border-radius: var(--radius-full);
-                    background: rgba(0, 0, 0, 0.45);
-                    border: 1px solid rgba(255, 255, 255, 0.18);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                  "
-                  aria-hidden="true"
-                >
-                  <span class="material-icons" style="font-size: 18px; color: #fff">drag_handle</span>
-                </div>
+              <div class="mag-collage-side">
+                <a class="mag-collage-tile" href="albums-detail.html#albumImgPreview" aria-label="预览照片2">
+                  <img
+                    src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=75"
+                    alt="照片2"
+                  />
+                  <div class="mag-drag-fab" aria-hidden="true">
+                    <span class="material-icons" style="font-size: 16px">drag_handle</span>
+                  </div>
+                </a>
+                <a class="mag-collage-tile" href="albums-detail.html#albumImgPreview" aria-label="预览照片3">
+                  <img
+                    src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=75"
+                    alt="照片3"
+                  />
+                  <div class="mag-drag-fab" aria-hidden="true">
+                    <span class="material-icons" style="font-size: 16px">drag_handle</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <p class="mag-collage-hint">
+              长按进入拖拽态；占位格可用虚线框 + 半透明蒙层提示（此处为静态示意）。
+            </p>
+            <div class="mag-album-footer">
+              <a class="button ghost full" href="albums-list.html" aria-label="删除相册（UI态）">
+                <span class="button-icon material-icons" style="color: var(--text-secondary)">delete</span>
+                删除相册（仅 UI 态）
               </a>
             </div>
-
-            <div class="muted" style="font-size: 12px; margin-top: var(--space-sm)">
-              UI说明：长按图片进入拖拽态；拖拽占位用虚线边框/透明蒙层提示（此处为示例）。
-            </div>
-          </div>
-
-          <div style="height: 24px"></div>
-
-          <a class="button ghost full" href="albums-list.html" aria-label="删除相册（UI态）">
-            <span class="button-icon material-icons" style="color: var(--text-secondary)">delete</span>
-            删除相册（仅UI态）
-          </a>
-
-          <div style="height: 80px"></div>
+          </section>
         </div>
 
         <div class="nav-bar" role="navigation" aria-label="底部导航">
@@ -222,11 +157,7 @@
             <span class="material-icons nav-icon">edit_note</span>
             <span>日记</span>
           </a>
-          <a
-            class="nav-item active"
-            href="albums-list.html"
-            aria-label="爱的相册"
-          >
+          <a class="nav-item active" href="albums-list.html" aria-label="爱的相册">
             <span class="material-icons nav-icon">photo_album</span>
             <span>相册</span>
           </a>
@@ -236,7 +167,6 @@
           </a>
         </div>
 
-        <!-- Preview modal -->
         <div id="albumImgPreview" class="modal" aria-label="相册图片预览弹层">
           <div class="modal-card">
             <div class="modal-media">
@@ -246,33 +176,27 @@
               />
             </div>
             <div class="modal-footer">
-              <a class="button ghost" href="albums-detail.html" aria-label="关闭预览">
-                关闭
-              </a>
-              <a class="button primary" href="albums-detail.html#shareSheetModal" aria-label="分享图片">
-                分享
-              </a>
+              <a class="button ghost" href="albums-detail.html" aria-label="关闭预览">关闭</a>
+              <a class="button primary" href="albums-detail.html#shareSheetModal" aria-label="分享图片">分享</a>
             </div>
           </div>
         </div>
 
-        <!-- Share sheet modal (UI mock) -->
-        <div
-          id="shareSheetModal"
-          class="modal"
-          aria-label="分享弹层"
-        >
+        <div id="shareSheetModal" class="modal" aria-label="分享弹层">
           <div class="modal-card" style="max-width: 320px">
             <div style="padding: var(--space-md)">
               <div class="row-between" style="margin-bottom: var(--space-md)">
-                <div style="font-weight: 950; font-size: 18px">分享</div>
-                <a class="icon-button" href="albums-detail.html" aria-label="关闭分享" style="width:44px;height:44px;background:rgba(255,255,255,0.06)">
+                <div style="font-family: var(--font-display); font-weight: 700; font-size: 22px">分享</div>
+                <a
+                  class="icon-button"
+                  href="albums-detail.html"
+                  aria-label="关闭分享"
+                  style="width: 44px; height: 44px; background: rgba(255, 255, 255, 0.06)"
+                >
                   <span class="material-icons">close</span>
                 </a>
               </div>
-              <div class="muted" style="font-size: 13px; margin-bottom: var(--space-md)">
-                选择分享方式（UI态示例）
-              </div>
+              <div class="muted" style="font-size: 13px; margin-bottom: var(--space-md)">选择分享方式（UI 态示例）</div>
               <div style="display: flex; flex-direction: column; gap: var(--space-sm)">
                 <a class="button ghost" href="albums-detail.html" aria-label="分享：微信">
                   <span class="button-icon material-icons">chat</span>
@@ -290,8 +214,14 @@
             </div>
           </div>
         </div>
+        <a
+          href="https://deerflow.tech"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="deerflow-badge"
+          title="Created By Deerflow"
+          >✦ Deerflow</a>
       </div>
     </div>
   </body>
 </html>
-
