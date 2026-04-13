@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#380c0f",
+                    "primary-fixed-dim": "#ffb2bf",
+                    "on-secondary-fixed": "#3f001b",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#3f0016",
+                    "surface-dim": "#ded9d5",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#4f1e20",
+                    "outline": "#897271",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#564241",
+                    "tertiary-container": "#c98283",
+                    "surface-bright": "#fef8f4",
+                    "outline-variant": "#dcc0bf",
+                    "inverse-primary": "#ffb2bf",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#f8f2ef",
+                    "surface-container-high": "#ede7e3",
+                    "on-tertiary-fixed-variant": "#6e3638",
+                    "surface": "#fef8f4",
+                    "on-error-container": "#93000a",
+                    "secondary": "#ab2c5d",
+                    "primary": "#bc004f",
+                    "surface-variant": "#e7e1de",
+                    "on-primary-fixed-variant": "#90003b",
+                    "primary-container": "#ff5986",
+                    "on-secondary-container": "#6e0034",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb3b3",
+                    "primary-fixed": "#ffd9de",
+                    "inverse-surface": "#32302e",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#8a4d4e",
+                    "secondary-container": "#fd6c9c",
+                    "secondary-fixed": "#ffd9e1",
+                    "on-secondary-fixed-variant": "#8b0e45",
+                    "secondary-fixed-dim": "#ffb1c5",
+                    "on-background": "#1d1b19",
+                    "on-surface": "#1d1b19",
+                    "background": "#fef8f4",
+                    "on-primary-container": "#620026",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ffdad9",
+                    "surface-container": "#f3ede9",
+                    "surface-container-highest": "#e7e1de",
+                    "inverse-on-surface": "#f5f0ec",
+                    "surface-tint": "#bc004f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .serif-editor {
+            font-family: 'Noto Serif', serif;
+        }
+        /* Custom scrollbar for distraction-free area */
+        textarea::-webkit-scrollbar {
+            width: 4px;
+        }
+        textarea::-webkit-scrollbar-thumb {
+            background: #dcc0bf;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl flex justify-between items-center px-6 h-16">
+<div class="flex items-center gap-2">
+<button class="material-symbols-outlined text-on-surface hover:opacity-70 transition-opacity" data-icon="close">close</button>
+</div>
+<h1 class="font-headline italic text-xl text-primary">布布与一二的恋爱日记</h1>
+<button class="font-bold text-primary hover:opacity-70 transition-opacity">Save</button>
+</header>
+<!-- Content Area -->
+<main class="pt-20 pb-32 px-6 max-w-2xl mx-auto">
+<!-- Prominent Date Display -->
+<div class="mb-10 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="flex flex-col items-center justify-center bg-primary/5 px-4 py-3 rounded-2xl border border-primary/10">
+<span class="font-headline text-4xl text-primary leading-none">24</span>
+<span class="font-label uppercase tracking-widest text-[9px] font-bold text-primary/60 mt-1">NOV</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label text-sm font-semibold text-on-surface">Friday</span>
+<span class="font-label text-xs text-on-surface-variant">November 2023</span>
+</div>
+</div>
+<!-- Mood Selector -->
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-low rounded-full border border-outline-variant/30 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="text-xs font-label font-bold text-on-surface-variant">Happy Mood</span>
+</button>
+</div>
+<!-- Distraction-free Editor Section -->
+<section class="space-y-4">
+<div class="relative">
+<input class="w-full bg-transparent border-none focus:ring-0 font-headline text-3xl text-on-surface placeholder-on-surface-variant/20 p-0" placeholder="An Unforgettable Day..." type="text"/>
+</div>
+<div class="min-h-[300px] relative">
+<textarea class="serif-editor w-full h-full bg-transparent border-none focus:ring-0 text-lg leading-relaxed text-on-surface placeholder-on-surface-variant/20 p-0 resize-none min-h-[350px]" placeholder="Start typing your heart out..."></textarea>
+</div>
+</section>
+<!-- Media & Meta Section (Bento Inspired) -->
+<section class="mt-8 space-y-4">
+<!-- Multiple Photos / Media Upload -->
+<div class="grid grid-cols-6 gap-2">
+<div class="col-span-4 aspect-video bg-surface-container rounded-2xl overflow-hidden relative group">
+<img class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" data-alt="romantic aesthetic photo of two coffee cups" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-tO07PrdwSh80YFB9xR0aplAOwMnE749QwuKdGlXWsO6xp7soGlRg-VQF4a9CPM0gQLvrPmFBxCIxJ-fr84G0oebzsWQ2CsIUt3bP_fmrGL2CFmgIKbnOQBKFMlr_KfWZGLIYxCor8fUL4xOgQE9yPXeZSgZFaRwDTM31wa7VPbQBDXvesM0Tn3QJKWXFr603Uzdv1rbuBd0iSa5o2FABr6-f_ezbDL70ohmw2DoO7NjSJZRkZ8-zVPeRNSDVS4r-Jke5OUNZhhY"/>
+<button class="absolute bottom-3 left-3 flex items-center gap-2 bg-black/30 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[10px] font-label">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span> Edit Cover
+                    </button>
+</div>
+<div class="col-span-2 flex flex-col gap-2">
+<button class="flex-1 bg-surface-container-low rounded-2xl border-2 border-dashed border-outline-variant flex flex-col items-center justify-center gap-1 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-primary/40" data-icon="add_a_photo">add_a_photo</span>
+<span class="text-[10px] font-label text-on-surface-variant">Add More</span>
+</button>
+</div>
+</div>
+<!-- Quick Meta Tags -->
+<div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+<button class="shrink-0 bg-surface-container-low px-4 py-3 rounded-2xl flex items-center gap-2 hover:bg-primary/5 border border-transparent hover:border-primary/10 transition-all">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="location_on">location_on</span>
+<span class="text-xs font-label text-on-surface-variant font-medium">Shanghai, China</span>
+</button>
+<button class="shrink-0 bg-surface-container-low px-4 py-3 rounded-2xl flex items-center gap-2 hover:bg-primary/5 border border-transparent hover:border-primary/10 transition-all">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="face">face</span>
+<span class="text-xs font-label text-on-surface-variant font-medium">Dreamy</span>
+</button>
+<button class="shrink-0 bg-surface-container-low px-4 py-3 rounded-2xl flex items-center gap-2 hover:bg-primary/5 border border-transparent hover:border-primary/10 transition-all">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="loyalty">loyalty</span>
+<span class="text-xs font-label text-on-surface-variant font-medium">Memories</span>
+</button>
+</div>
+</section>
+<!-- Primary Action Button -->
+<div class="mt-12 flex justify-center pb-12">
+<button class="group relative px-14 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-full font-label font-bold tracking-[0.2em] shadow-lg shadow-primary/20 transition-all active:scale-95">
+                SAVE ENTRY
+                <span class="absolute -top-3 -right-3 bg-secondary-container text-on-secondary-container text-[10px] px-3 py-1 rounded-full shadow-sm font-bold border-2 border-background">READY</span>
+</button>
+</div>
+</main>
+<!-- Contextual Bottom Tool Bar -->
+<nav class="fixed bottom-0 left-0 w-full bg-background/90 backdrop-blur-xl border-t border-outline-variant/20 flex justify-around items-center pt-3 pb-8 px-4 z-50">
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl" data-icon="image">image</span>
+<span class="font-label uppercase tracking-widest text-[9px] font-bold mt-1">Media</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl" data-icon="format_size">format_size</span>
+<span class="font-label uppercase tracking-widest text-[9px] font-bold mt-1">Font</span>
+</button>
+<div class="relative -mt-8">
+<button class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-full w-14 h-14 shadow-lg shadow-primary/30 transition-transform active:scale-90">
+<span class="material-symbols-outlined text-3xl" data-icon="auto_awesome">auto_awesome</span>
+</button>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 font-label uppercase tracking-widest text-[9px] font-extrabold text-primary">Magic</span>
+</div>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl" data-icon="sticker_heart">sticker_heart</span>
+<span class="font-label uppercase tracking-widest text-[9px] font-bold mt-1">Stick</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl" data-icon="more_horiz">more_horiz</span>
+<span class="font-label uppercase tracking-widest text-[9px] font-bold mt-1">Tools</span>
+</button>
+</nav>
+</body></html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#dcc0bf",
+                    "on-primary-fixed-variant": "#90003b",
+                    "surface-container-highest": "#e7e1de",
+                    "secondary-fixed": "#ffd9e1",
+                    "primary-fixed-dim": "#ffb2bf",
+                    "surface-bright": "#fef8f4",
+                    "secondary-fixed-dim": "#ffb1c5",
+                    "inverse-primary": "#ffb2bf",
+                    "on-secondary-container": "#6e0034",
+                    "surface": "#fef8f4",
+                    "error": "#ba1a1a",
+                    "secondary": "#ab2c5d",
+                    "on-background": "#1d1b19",
+                    "surface-container-low": "#f8f2ef",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#f5f0ec",
+                    "primary": "#bc004f",
+                    "tertiary-fixed": "#ffdad9",
+                    "on-secondary-fixed": "#3f001b",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#380c0f",
+                    "surface-variant": "#e7e1de",
+                    "tertiary-fixed-dim": "#ffb3b3",
+                    "on-primary": "#ffffff",
+                    "inverse-surface": "#32302e",
+                    "surface-dim": "#ded9d5",
+                    "on-tertiary-container": "#4f1e20",
+                    "background": "#fef8f4",
+                    "on-surface-variant": "#564241",
+                    "primary-container": "#ff5986",
+                    "outline": "#897271",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#bc004f",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#620026",
+                    "secondary-container": "#fd6c9c",
+                    "primary-fixed": "#ffd9de",
+                    "on-primary-fixed": "#3f0016",
+                    "on-tertiary-fixed-variant": "#6e3638",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#f3ede9",
+                    "tertiary": "#8a4d4e",
+                    "tertiary-container": "#c98283",
+                    "surface-container-high": "#ede7e3",
+                    "on-error": "#ffffff",
+                    "on-surface": "#1d1b19",
+                    "on-secondary-fixed-variant": "#8b0e45"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3 { font-family: 'Noto Serif', serif; }
+        
+        /* Smooth transitions for active states */
+        .active-press {
+            transform: scale(0.98);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-stone-900/80 backdrop-blur-md shadow-sm shadow-red-900/5">
+<div class="flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-red-400 dark:text-red-300" data-icon="favorite">favorite</span>
+<span class="font-['Noto_Serif'] font-bold text-red-500 dark:text-red-400 text-lg tracking-wide">布布与一二的恋爱日记</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 bg-primary text-on-primary px-4 py-1.5 rounded-full text-sm font-medium hover:opacity-80 transition-all active:scale-95 duration-200 shadow-md shadow-primary/20" onclick="document.getElementById('fileInput').click()">
+<span class="material-symbols-outlined text-sm" data-icon="upload">upload</span>
+<span>上传照片</span>
+</button>
+<input accept="image/*" class="hidden" id="fileInput" multiple="" onchange="alert('正在模拟上传照片...')" type="file"/>
+<span class="material-symbols-outlined text-stone-400 cursor-pointer p-1 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-full transition-colors" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-5xl mx-auto">
+<!-- Section Header -->
+<div class="mb-10 flex flex-col gap-1">
+<span class="text-secondary font-label text-xs uppercase tracking-[0.2em] font-bold">Memory Collection</span>
+<h1 class="text-4xl md:text-5xl font-headline text-on-surface">甜蜜相册</h1>
+<p class="text-on-surface-variant/60 font-body mt-2">在这里，每一张照片都是我们相遇、相识、相爱的见证。</p>
+</div>
+<!-- Album Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-6 gap-6">
+<!-- Large Featured Album -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer active:scale-[0.98]">
+<div class="aspect-[16/10] w-full overflow-hidden">
+<img alt="Our first trip" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Close up of a romantic couple holding hands walking on a beach at sunset, soft warm golden lighting, cinematic depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD55z-JRBqQ2qaokf4h_bm41_BNh8M_YKvVUa2cis0scNTZW8B0NZX2uFwYvSsHnM46AlDqUMPchtTg4MDy8o1TNYl1euuJaq_5z0DwpJUanQUhQSxXWn44K2D6suS4Sl0R1UqkXaM6fjQWvi2mHM-i43D0eE6YjbJzEPRh6I0oSR4r3OKc0RxGRqkfuj9zU938To6JVh3BWl2QxcwAxrvBEv2BeuKBys1QtgfPejcZ1DF09FKI4aXcEPki-OvEoh5p-cGqG2zeltU"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full flex justify-between items-end">
+<div class="text-white">
+<h3 class="text-2xl font-headline mb-1">第一次旅行：大理洱海</h3>
+<p class="font-body text-white/80 text-sm">2023年 秋天 • 洱海边的风</p>
+</div>
+<div class="bg-white/20 backdrop-blur-md rounded-full px-4 py-2 border border-white/30">
+<span class="text-white text-xs font-bold font-label">128 张</span>
+</div>
+</div>
+</div>
+<!-- Small Square Album 1 -->
+<div class="md:col-span-2 group relative overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer active:scale-[0.98]">
+<div class="aspect-square w-full overflow-hidden">
+<img alt="Daily life" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Top down view of two coffee cups on a wooden table with a small bouquet of wildflowers in a vase, cozy cafe atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB36tDvXdGVAuxw2_wmBiWxcci_TyHhcojwoxccSltx6Wna5ZLTbkbMdSbEHQi8unjIttGlsjMiwdcDkodzFpCHV1PWteE8y1U7mIn_hMhe0vYv4fiyS5tcNcooVc_anBPDIgwP-W2RKZKaKswyJG9GC2qeB_Lxj-qXJ-ib6e2cNbyFoI80-rVyKx-tmNg5yAVCY-FaLq6JqWwgmeVdh32jvd1GDj3O9aE1sNXdh6h8fAyE9ptUKbkxJxPe1BBmCrYs9MembrNGI84"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent opacity-40 group-hover:opacity-60 transition-opacity"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<h3 class="text-white text-lg font-headline mb-1">平淡而温馨的日常</h3>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/70 text-sm" data-icon="photo_library">photo_library</span>
+<span class="text-white/80 text-xs font-label uppercase">56 Photos</span>
+</div>
+</div>
+</div>
+<!-- Small Square Album 2 -->
+<div class="md:col-span-2 group relative overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer active:scale-[0.98]">
+<div class="aspect-square w-full overflow-hidden">
+<img alt="Dining together" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Elegant table setting with Italian pasta and wine glasses in a candlelit dinner setting, warm romantic glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtfLmZNEVlLqEGyiHWWwARkJnYMq7GVjCs7Qc5bavI4aMSTI-Ji5kOlhxhdEk5jolGUblg8vrEr3wxJPrOYJqaMdxHLevLznIS0dxycfXEQSRMKMpB5eeoUeCHh0Tnb_peiMrvMn2iZtEmynrGNjUF8_RlnavLHqPW_Wf2TZ3DX2KG4tKdOjf7NzNwOeCRWtfNFvOtGo-RV87JbpdLCF9flY8XtmThSkppvitV9S66HtGs5VM0YNXMGLiRwTR-Xq5C_3CTbcHbpJU"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-40 group-hover:opacity-60 transition-opacity"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<h3 class="text-white text-lg font-headline mb-1">美食打卡日记</h3>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/70 text-sm" data-icon="restaurant">restaurant</span>
+<span class="text-white/80 text-xs font-label uppercase">42 Photos</span>
+</div>
+</div>
+</div>
+<!-- Horizontal Medium Album -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer active:scale-[0.98]">
+<div class="aspect-[21/9] w-full overflow-hidden">
+<img alt="Sunset anniversary" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Wide shot of a couple standing on a hill overlooking a city at dusk, soft pastel sky colors, dreamy aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4Vwh-TYlbk3UZ_SuL08erbAuyDFoKeKxHVvS2hRax9aYWbufBePNqGFKlh4TNVNeMLJ5Z6kkMCOgFCMt1dLNDJE8i-D2x31qccLyZw9B4LQ2FhcOYI0OrFgRHhqiYU9uYDbuK3K1VEeYApV_R8iAxJn_tw5y4skHgyioNe4ESPGNDl7wrRdBXjcOa_yHljUWtk35XcDmgICLzmbSUnYFBQw8nowb9G8YoaGL7O0-mMs9QCToIMvILZuVTeHHZwVJkde-SXJ8ydyA"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full flex justify-between items-center">
+<div>
+<h3 class="text-2xl font-headline text-white mb-1">一周年纪念：北京之巅</h3>
+<p class="font-body text-white/80 text-sm italic">"此生不换的约定"</p>
+</div>
+<div class="bg-white/20 backdrop-blur-md rounded-full px-4 py-2 border border-white/30 text-white text-xs font-bold">
+                        31 张
+                    </div>
+</div>
+</div>
+<!-- Portrait High Album -->
+<div class="md:col-span-3 group relative overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer active:scale-[0.98]">
+<div class="aspect-[3/4] w-full overflow-hidden">
+<img alt="Portrait session" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Candid portrait of a smiling young woman with soft natural light coming from a window, artistic and warm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxyp7qaMq5LFOP-En2Dng4l11dy7hRsXF-Afnw8RaVnduqE5GwZww5I9s1_z3hKvF4k_GIbAm3nF2ChkFINuljqH2mMqCAxIHg5JKU9V8d8-rPDgZmV-HIZC94a3bMPtf_eH7JxmFJA9UvG7eK7KZUI6asmI1g4MG6FQqIXZqak3R6gNDQjbHLpJ-qQjso9FfF0IUdyjnjY-X8NeH9cF2RLeOhkUIjqBDOcQ9Re4noY0RQxg4K3b9Gy63FqexZW8tGiV0oT4yU2Qk"/>
+</div>
+<div class="absolute inset-0 bg-stone-900/20 group-hover:bg-stone-900/40 transition-colors"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full bg-gradient-to-t from-black/70 to-transparent">
+<h3 class="text-xl font-headline text-white mb-2">布布的个人特写</h3>
+<p class="text-white/60 text-xs font-label">BY YI ER • 89 PHOTOS</p>
+</div>
+</div>
+<!-- Portrait High Album 2 -->
+<div class="md:col-span-3 group relative overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer active:scale-[0.98]">
+<div class="aspect-[3/4] w-full overflow-hidden">
+<img alt="Portrait session 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Candid portrait of a thoughtful young man in a library setting, warm wood tones and soft focus background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcPfpBCjyJCezwNmGXJP-ruE5J2u6EX07e6TEC_hcR02qUFZAjhjwqmQW8GjjOv-M1IzwFjm_wkBpqhzuAi4z7f-LhPzMaoDmmn7BbKr2PMD0evNEXEPa1BR0zNd0QgPsrKrRqv0myXOCW0zOjFG4mS77FXdgyJGq_f31CWliHJZc1GFX9ocwOEjDWPWkuYCCsoboQdslvlgHvwAzyuFKk_0dY_oNiDcX67aJbMvJ2Gqi3iaLhXxsMfDSw89AMZ5H74Q7HsRhVnFI"/>
+</div>
+<div class="absolute inset-0 bg-stone-900/20 group-hover:bg-stone-900/40 transition-colors"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full bg-gradient-to-t from-black/70 to-transparent">
+<h3 class="text-xl font-headline text-white mb-2">一二的捕捉瞬间</h3>
+<p class="text-white/60 text-xs font-label">BY BU BU • 74 PHOTOS</p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-6 bg-white/90 dark:bg-stone-950/90 backdrop-blur-xl rounded-t-[3rem] z-50 shadow-[0_-4px_24px_rgba(229,115,115,0.08)]">
+<!-- 首页 -->
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:text-red-300 transition-colors active:scale-90 transition-transform duration-300 group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform" data-icon="home">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium uppercase tracking-tighter">首页</span>
+</a>
+<!-- 日记 -->
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:text-red-300 transition-colors active:scale-90 transition-transform duration-300 group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform" data-icon="menu_book">menu_book</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium uppercase tracking-tighter">日记</span>
+</a>
+<!-- 相册 (Active) -->
+<a class="flex flex-col items-center justify-center text-red-500 dark:text-red-300 bg-red-50 dark:bg-red-950/30 rounded-full px-6 py-1.5 active:scale-95 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mb-0.5" data-icon="photo_library" style="font-variation-settings: 'FILL' 1;">photo_library</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-tighter">相册</span>
+</a>
+<!-- 纪念日 -->
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:text-red-300 transition-colors active:scale-90 transition-transform duration-300 group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform" data-icon="event">event</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium uppercase tracking-tighter">纪念日</span>
+</a>
+</nav>
+</body></html>

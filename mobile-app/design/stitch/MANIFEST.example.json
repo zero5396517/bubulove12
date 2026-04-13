@@ -1,0 +1,12 @@
+{
+  "$comment": "Copy to MANIFEST.json and fill screenId from list_screens. Map each screen to a uni-app page path.",
+  "projectId": "3890258888620866149",
+  "screens": [
+    {
+      "screenId": "REPLACE_FROM_LIST_SCREENS",
+      "name": "Home",
+      "uniPage": "pages/index/index",
+      "htmlFile": "design/stitch/screens/home.html"
+    }
+  ]
+}

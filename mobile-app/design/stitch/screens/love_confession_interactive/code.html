@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>爱的告白 - 布布与一二的恋爱日记</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#380c0f",
+                        "primary-fixed-dim": "#ffb2bf",
+                        "on-secondary-fixed": "#3f001b",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#3f0016",
+                        "surface-dim": "#ded9d5",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#4f1e20",
+                        "outline": "#897271",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#564241",
+                        "tertiary-container": "#c98283",
+                        "surface-bright": "#fef8f4",
+                        "outline-variant": "#dcc0bf",
+                        "inverse-primary": "#ffb2bf",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f8f2ef",
+                        "surface-container-high": "#ede7e3",
+                        "on-tertiary-fixed-variant": "#6e3638",
+                        "surface": "#fef8f4",
+                        "on-error-container": "#93000a",
+                        "secondary": "#ab2c5d",
+                        "primary": "#bc004f",
+                        "surface-variant": "#e7e1de",
+                        "on-primary-fixed-variant": "#90003b",
+                        "primary-container": "#ff5986",
+                        "on-secondary-container": "#6e0034",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb3b3",
+                        "primary-fixed": "#ffd9de",
+                        "inverse-surface": "#32302e",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#8a4d4e",
+                        "secondary-container": "#fd6c9c",
+                        "secondary-fixed": "#ffd9e1",
+                        "on-secondary-fixed-variant": "#8b0e45",
+                        "secondary-fixed-dim": "#ffb1c5",
+                        "on-background": "#1d1b19",
+                        "on-surface": "#1d1b19",
+                        "background": "#fef8f4",
+                        "on-primary-container": "#620026",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffdad9",
+                        "surface-container": "#f3ede9",
+                        "surface-container-highest": "#e7e1de",
+                        "inverse-on-surface": "#f5f0ec",
+                        "surface-tint": "#bc004f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+        }
+        body {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            background-color: #fef8f4;
+            color: #1d1b19
+        }
+        .serif-text {
+            font-family: "Noto Serif", serif
+        }
+        .paper-texture {
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuD-HVyD4bOv11KJkEJnqg4Jg96itt1IMwD1RL43Y4l9_HaHs31879gLNNWaPg_po3Pvyfr-T2i56jXU8HB16JO8RHHgyJQE6hN-iDmJG7uFqUK_DeNnzpHnUe-hJoFcHutsOHXDV_5uhRbXy9oiKzqZ4ghvpRXTjv3Gy_NYZvu4Q-wTyVMwgih6Rt8pNSKsSDMXHpdeSA83EkMGmMM_GV_6clutWyrbhDB7CS2U5rbSIz6JyP6W3WoK9A5tiY44_K-Xf7afYrszAnk)
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(188, 0, 79, 0.1)
+        }
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(254, 248, 244, 0) 0%, rgba(254, 248, 244, 1) 100%);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background selection:bg-primary-fixed-dim selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-xl flex justify-between items-center px-6 h-16">
+<div class="flex items-center gap-2 text-red-400 dark:text-red-300 hover:opacity-70 transition-opacity cursor-pointer">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</div>
+<h1 class="serif-text italic text-xl text-red-500 dark:text-red-400">布布与一二的恋爱日记</h1>
+<div class="flex items-center text-stone-400 dark:text-stone-500 hover:opacity-70 transition-opacity cursor-pointer">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</div>
+</nav>
+<main class="pb-32 min-h-screen relative overflow-hidden">
+<!-- Hero Section -->
+<section class="relative h-[60vh] w-full overflow-hidden">
+<img alt="Romantic Couple" class="w-full h-full object-cover" data-alt="A romantic, high-quality cinematic shot of a couple walking together in a sun-drenched meadow at golden hour, soft focus, warm tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUYOYE3eHaXprsTo-dGLpTzqTvWBMS2zBMP0akeoFAK2TL6TDAtqbDcF7QTu_AU4k37OjXU7H1Wcydn3UM5EoRlCIGIE-gdJTCPWhHZ8bANHkjmapnqmJpaIqEpUxxVUMxjKdVHiyjrvFIOqE87Tj_flw9k5CVpLNxsXYhyJYF2Ww-f7BbYbyatE1zHBYHkp-C6u4HixlMz1z-iIUIIO0nW8okA9gFa0yXPAE1BBTvx5MmG2shvgV2zcTzkoitUBhVYdA6Bo1_tNo"/>
+<div class="absolute inset-0 hero-gradient"></div>
+<div class="absolute bottom-8 left-0 w-full px-6">
+<p class="text-[10px] uppercase tracking-widest font-bold text-primary mb-2">Private Sanctuary</p>
+<h2 class="serif-text text-5xl md:text-6xl font-bold text-on-surface leading-tight">爱的告白</h2>
+<p class="serif-text italic text-on-surface-variant mt-2 text-lg">Every whisper of the heart, captured in time.</p>
+</div>
+</section>
+<!-- Main Content Area -->
+<div class="px-6 max-w-4xl mx-auto -mt-4 relative z-10">
+<!-- Message of the Day / Long-form Confession -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<div class="md:col-span-8 bg-surface-container-lowest rounded-2xl p-8 md:p-12 paper-texture shadow-sm border border-stone-100 relative group transition-all duration-500">
+<div class="absolute top-6 right-6 text-primary/10">
+<span class="material-symbols-outlined text-7xl" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+</div>
+<article class="space-y-8 serif-text text-xl md:text-2xl leading-relaxed text-on-surface/90">
+<header class="mb-8">
+<span class="text-xs font-sans font-bold uppercase tracking-[0.3em] text-primary/60">Message of the Day</span>
+<div class="h-px w-12 bg-primary/20 mt-2"></div>
+</header>
+<p>致我最亲爱的：</p>
+<p class="indent-8">
+                        在这本日记里，每一页都写满了我们的故事。但有些话，我想用最郑重的方式告诉你。在那场夏天的午后，当光影穿过树叶洒在你的侧脸，我突然意识到，那一刻的宁静就是我追寻许久的永恒。
+                    </p>
+<p class="indent-8">
+                        爱你不仅仅是爱你的光芒，更是爱你面对风暴时的坚定，爱你平凡日子里的琐碎，爱你所有的不完美。
+                    </p>
+<div class="pt-12 flex flex-col items-end">
+<p class="italic text-primary font-bold">你的布布</p>
+<p class="text-[10px] font-sans tracking-widest opacity-40 uppercase mt-1">October 27, 2023 — 18:24</p>
+</div>
+</article>
+<!-- Write Message Action -->
+<div class="mt-16 flex justify-center">
+<button class="bg-primary text-on-primary px-10 py-5 rounded-full font-bold flex items-center gap-3 shadow-2xl hover:bg-primary-container hover:text-on-primary-container transition-all hover:scale-[1.02] active:scale-95 group" onclick="document.getElementById('write-modal').classList.remove('hidden'); document.body.style.overflow = 'hidden';">
+<span class="material-symbols-outlined transition-transform group-hover:rotate-12" data-icon="edit_note">edit_note</span>
+<span class="tracking-wide">Write a Message</span>
+</button>
+</div>
+</div>
+<!-- Side Editorial Content -->
+<div class="md:col-span-4 flex flex-col gap-8">
+<!-- Intimate Photo Card -->
+<div class="bg-surface-container-lowest p-3 rounded-2xl shadow-md border border-stone-50 transform rotate-2 hover:rotate-0 transition-all duration-700">
+<div class="aspect-[4/5] rounded-xl overflow-hidden mb-4">
+<img alt="Memory" class="w-full h-full object-cover filter sepia-[0.2]" data-alt="Close-up of two hands gently holding each other in soft afternoon sunlight with warm golden tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9wVhLHYwXT3oISBqhTfDveSbuWmIv8NAkpTivYIsR1kwWO9sUQbA-S0bSd3Gz808ozliXIXLGVIQLm1-e7mZFuU19j92twqCp3066RdqbAyAPKRsO2KjcemDzC_yZciwMgDMUe9qxByhBoVDh1zq4o1F3SiFde5PKR4mLwwNjNE_FP-1YcJAGWVQq66Wr_C16-tfeVeosbYECG-xzJV2W1MHZHP1KTo4oz_l4_SR_7kG8mlpjU0Os_RNZ-ri4J0j5X7TYLjqXzP8"/>
+</div>
+<p class="serif-text italic text-center text-sm text-on-surface-variant px-2 pb-2">"The way you hold my hand feels like home."</p>
+</div>
+<!-- Heartbeat Stats -->
+<div class="bg-stone-100/50 p-8 rounded-2xl border border-stone-200/50 backdrop-blur-sm">
+<h4 class="text-[10px] uppercase tracking-[0.2em] font-bold text-stone-500 mb-6">Editorial Note</h4>
+<div class="space-y-6">
+<div class="flex justify-between items-baseline border-b border-stone-200 pb-3">
+<span class="text-xs text-stone-400 italic">Whispers Shared</span>
+<span class="serif-text text-3xl font-bold text-primary">128</span>
+</div>
+<div class="flex justify-between items-baseline border-b border-stone-200 pb-3">
+<span class="text-xs text-stone-400 italic">Days Together</span>
+<span class="serif-text text-3xl font-bold text-primary">520</span>
+</div>
+</div>
+</div>
+<!-- Short Poetry -->
+<div class="bg-secondary/5 p-8 rounded-2xl border-none relative overflow-hidden group">
+<div class="absolute -right-6 -bottom-6 opacity-10 group-hover:scale-110 transition-transform duration-700">
+<span class="material-symbols-outlined text-9xl text-secondary" data-icon="auto_stories">auto_stories</span>
+</div>
+<p class="serif-text italic text-base text-secondary/80 leading-loose relative z-10">
+                        "I am yours, in all the ways that matter, in all the worlds that exist."
+                    </p>
+</div>
+</div>
+</div>
+<!-- Archive Section -->
+<section class="mt-24 mb-12">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h3 class="serif-text text-3xl text-on-surface">Echoes of Love</h3>
+<p class="text-xs text-stone-400 mt-1 italic uppercase tracking-wider">A journey through our past letters</p>
+</div>
+<button class="text-[10px] font-bold uppercase tracking-widest text-primary hover:text-primary-container transition-colors flex items-center gap-1 group">
+                    View Archive 
+                    <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<div class="flex gap-6 overflow-x-auto pb-8 snap-x no-scrollbar">
+<!-- Archive Card 1 -->
+<div class="snap-center min-w-[320px] bg-white p-8 rounded-2xl border border-stone-100 hover:shadow-lg hover:border-primary/10 transition-all cursor-pointer group">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary/40 group-hover:text-primary transition-colors" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<div class="h-px flex-1 bg-stone-100"></div>
+<span class="text-[10px] uppercase font-bold text-stone-300">Sep 15, 2023</span>
+</div>
+<p class="serif-text text-lg text-on-surface/80 line-clamp-4 leading-relaxed italic">"那天雨伞下的距离，是我这辈子走过最远也最短的路。谢谢你出现在我的生命里..."</p>
+</div>
+<!-- Archive Card 2 -->
+<div class="snap-center min-w-[320px] bg-white p-8 rounded-2xl border border-stone-100 hover:shadow-lg hover:border-primary/10 transition-all cursor-pointer group">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary/40 group-hover:text-primary transition-colors" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<div class="h-px flex-1 bg-stone-100"></div>
+<span class="text-[10px] uppercase font-bold text-stone-300">Aug 22, 2023</span>
+</div>
+<p class="serif-text text-lg text-on-surface/80 line-clamp-4 leading-relaxed italic">"你煮的面条虽然咸了点，但那是我吃过最暖心的味道。以后每一顿饭，我们都一起吃好吗？"</p>
+</div>
+<!-- Archive Card 3 -->
+<div class="snap-center min-w-[320px] bg-white p-8 rounded-2xl border border-stone-100 hover:shadow-lg hover:border-primary/10 transition-all cursor-pointer group">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary/40 group-hover:text-primary transition-colors" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<div class="h-px flex-1 bg-stone-100"></div>
+<span class="text-[10px] uppercase font-bold text-stone-300">Jul 04, 2023</span>
+</div>
+<p class="serif-text text-lg text-on-surface/80 line-clamp-4 leading-relaxed italic">"我想和你去所有没去过的地方，看所有没看过的风景。有你在，哪里都是终点..."</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Write Message Modal (The Functionality) -->
+<div class="fixed inset-0 z-[100] hidden" id="write-modal">
+<div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="this.parentElement.classList.add('hidden'); document.body.style.overflow = 'auto';"></div>
+<div class="absolute bottom-0 left-0 w-full bg-surface-container-lowest rounded-t-[3rem] p-8 shadow-2xl transition-transform transform translate-y-0 max-h-[90vh] overflow-y-auto">
+<div class="w-12 h-1.5 bg-stone-200 rounded-full mx-auto mb-8"></div>
+<div class="flex justify-between items-center mb-6">
+<h3 class="serif-text text-2xl font-bold">New Whisper</h3>
+<button class="text-stone-400 hover:text-primary transition-colors" onclick="document.getElementById('write-modal').classList.add('hidden'); document.body.style.overflow = 'auto';">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form class="space-y-6" onsubmit="event.preventDefault(); this.closest('#write-modal').classList.add('hidden'); document.body.style.overflow = 'auto';">
+<div>
+<label class="text-[10px] uppercase tracking-widest font-bold text-stone-400 block mb-2">To</label>
+<input class="w-full bg-stone-50 border-stone-100 rounded-xl px-4 py-3 focus:ring-primary focus:border-primary serif-text italic" placeholder="My Beloved" type="text"/>
+</div>
+<div>
+<label class="text-[10px] uppercase tracking-widest font-bold text-stone-400 block mb-2">Message</label>
+<textarea class="w-full bg-stone-50 border-stone-100 rounded-2xl px-4 py-3 focus:ring-primary focus:border-primary serif-text leading-relaxed" placeholder="Spill your heart out here..." rows="6"></textarea>
+</div>
+<button class="w-full bg-primary text-on-primary py-5 rounded-full font-bold shadow-xl hover:bg-primary-container hover:text-on-primary-container transition-all" type="submit">Send to the Stars</button>
+</form>
+</div>
+</div>
+<!-- BottomNavBar -->
+<footer class="fixed bottom-0 left-0 w-full flex justify-around items-center pt-3 pb-8 px-4 bg-stone-50/95 backdrop-blur-md dark:bg-stone-950/95 rounded-t-[3rem] z-50 shadow-[0_-8px_40px_rgba(0,0,0,0.05)] border-t border-stone-100 dark:border-stone-800">
+<button class="flex flex-col items-center justify-center text-primary rounded-full px-4 py-2 transition-all">
+<span class="material-symbols-outlined" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="font-sans uppercase tracking-widest text-[9px] font-bold mt-1">Love</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 px-4 py-2 hover:text-primary transition-colors group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="menu_book">menu_book</span>
+<span class="font-sans uppercase tracking-widest text-[9px] font-bold mt-1">Diary</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 px-4 py-2 hover:text-primary transition-colors group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="auto_stories">auto_stories</span>
+<span class="font-sans uppercase tracking-widest text-[9px] font-bold mt-1">Memories</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 px-4 py-2 hover:text-primary transition-colors group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="face_6">face_6</span>
+<span class="font-sans uppercase tracking-widest text-[9px] font-bold mt-1">Us</span>
+</button>
+</footer>
+</body></html>

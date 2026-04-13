@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#dcc0bf",
+                    "on-primary-fixed-variant": "#90003b",
+                    "surface-container-highest": "#e7e1de",
+                    "secondary-fixed": "#ffd9e1",
+                    "primary-fixed-dim": "#ffb2bf",
+                    "surface-bright": "#fef8f4",
+                    "secondary-fixed-dim": "#ffb1c5",
+                    "inverse-primary": "#ffb2bf",
+                    "on-secondary-container": "#6e0034",
+                    "surface": "#fef8f4",
+                    "error": "#ba1a1a",
+                    "secondary": "#ab2c5d",
+                    "on-background": "#1d1b19",
+                    "surface-container-low": "#f8f2ef",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#f5f0ec",
+                    "primary": "#bc004f",
+                    "tertiary-fixed": "#ffdad9",
+                    "on-secondary-fixed": "#3f001b",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#380c0f",
+                    "surface-variant": "#e7e1de",
+                    "tertiary-fixed-dim": "#ffb3b3",
+                    "on-primary": "#ffffff",
+                    "inverse-surface": "#32302e",
+                    "surface-dim": "#ded9d5",
+                    "on-tertiary-container": "#4f1e20",
+                    "background": "#fef8f4",
+                    "on-surface-variant": "#564241",
+                    "primary-container": "#ff5986",
+                    "outline": "#897271",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#bc004f",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#620026",
+                    "secondary-container": "#fd6c9c",
+                    "primary-fixed": "#ffd9de",
+                    "on-primary-fixed": "#3f0016",
+                    "on-tertiary-fixed-variant": "#6e3638",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#f3ede9",
+                    "tertiary": "#8a4d4e",
+                    "tertiary-container": "#c98283",
+                    "surface-container-high": "#ede7e3",
+                    "on-error": "#ffffff",
+                    "on-surface": "#1d1b19",
+                    "on-secondary-fixed-variant": "#8b0e45"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .serif { font-family: 'Noto Serif', serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-stone-900/80 backdrop-blur-md shadow-sm shadow-red-900/5 h-16 flex items-center justify-between px-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-red-400 dark:text-red-300" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<h1 class="font-['Noto_Serif'] font-bold text-red-500 dark:text-red-400 text-lg tracking-wide">布布与一二的恋爱日记</h1>
+</div>
+<button class="material-symbols-outlined text-stone-400 dark:text-stone-500 hover:opacity-80 transition-opacity active:scale-95 duration-200">more_vert</button>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-12 text-center relative">
+<div class="absolute -top-10 -left-4 w-32 h-32 bg-secondary-fixed/30 rounded-full blur-3xl -z-10"></div>
+<div class="absolute -bottom-10 -right-4 w-40 h-40 bg-primary-fixed/20 rounded-full blur-3xl -z-10"></div>
+<p class="font-label text-secondary font-semibold tracking-widest uppercase text-[10px] mb-4">Forever &amp; Always</p>
+<h2 class="serif text-4xl md:text-5xl text-on-surface mb-6 leading-tight">记录我们的<br/><span class="text-primary italic">每一寸心动</span></h2>
+<div class="inline-flex items-center gap-2 px-4 py-2 bg-surface-container-lowest rounded-full shadow-sm">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-surface shadow-sm object-cover" data-alt="close-up portrait of a smiling young woman with soft cinematic lighting and warm skin tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIBn2VO7jYkXdWcMGxGHyvprsaSVjx4BkSSimtGBzUqo0_AvBpXLc0QaODnZaOE0M_8G5KEYXt_JZcYNez_2F0YsoM_2jEOAqu5hwxIixgD-2-Uq7wayMprKfzRpF_F2SPo5WVVsgPiyelEyrTv-SsTO_9Oltfko1eZoMA6IoOWEUrK-iiLOpvSW-Dtyy21KFsGHJavKftHAlxbEhprFAXKSN8grXdK5p0_N5ZGWX6pLzbS13eO8Kw2GnNhb149_ZrIzsKO5K1fvQ"/>
+<img class="w-8 h-8 rounded-full border-2 border-surface shadow-sm object-cover" data-alt="close-up portrait of a handsome young man with gentle expression and soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8qizDiRKcYRi_wsZdyRe4NjpeAU3SH7IYTa-eyWwhLqzAK_rdbulepzNwKUjRUuJoktDknQGOW4uxT-Q13nA9GpBS_k2hFNMn1GBulQa3niZ2gbMIwJlHs237SH4JJj4-zVHMKtwZThfyF5b24E5XN3icthu91CpJrYacpo7BbxmQt0z6G_t19cpRhY47cghv7Hcjuu9Xcnqs6DJrJgeydIVZD39mgU1THc6gCLcxP0RamOBn7xwPzB_sv4LUX8zwyzL_z00WSMQ"/>
+</div>
+<span class="text-xs font-medium text-on-surface-variant">布布 &amp; 一二</span>
+</div>
+</section>
+<!-- Functional Grid (2x2) -->
+<section class="grid grid-cols-2 gap-4 mb-12">
+<!-- Grid Item 1 -->
+<button class="group flex flex-col items-center justify-center p-8 bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-all duration-300 active:scale-95 border border-outline-variant/10">
+<div class="w-16 h-16 bg-secondary-fixed rounded-full flex items-center justify-center mb-4 group-hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-on-secondary-container text-3xl" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+</div>
+<span class="font-headline font-semibold text-on-surface">恋爱日记</span>
+</button>
+<!-- Grid Item 2 -->
+<button class="group flex flex-col items-center justify-center p-8 bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-all duration-300 active:scale-95 border border-outline-variant/10">
+<div class="w-16 h-16 bg-primary-fixed rounded-full flex items-center justify-center mb-4 group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-on-primary-container text-3xl" style="font-variation-settings: 'FILL' 1;">photo_library</span>
+</div>
+<span class="font-headline font-semibold text-on-surface">爱的相册</span>
+</button>
+<!-- Grid Item 3 -->
+<button class="group flex flex-col items-center justify-center p-8 bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-all duration-300 active:scale-95 border border-outline-variant/10">
+<div class="w-16 h-16 bg-tertiary-fixed rounded-full flex items-center justify-center mb-4 group-hover:bg-tertiary-container transition-colors">
+<span class="material-symbols-outlined text-on-tertiary-container text-3xl" style="font-variation-settings: 'FILL' 1;">event</span>
+</div>
+<span class="font-headline font-semibold text-on-surface">相爱里程碑</span>
+</button>
+<!-- Grid Item 4 -->
+<button class="group flex flex-col items-center justify-center p-8 bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-all duration-300 active:scale-95 border border-outline-variant/10">
+<div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-pink-200 transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<span class="font-headline font-semibold text-on-surface">爱的告白</span>
+</button>
+</section>
+<!-- Current Milestone Card -->
+<section class="relative overflow-hidden bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/10 shadow-sm mb-12">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-6xl">favorite</span>
+</div>
+<div class="relative z-10 flex flex-col items-center text-center">
+<span class="font-label text-xs uppercase tracking-widest text-primary mb-2">Current Milestone</span>
+<div class="serif text-2xl text-on-surface leading-tight mb-2">
+                    We have been together for <span class="text-primary font-bold text-4xl block my-2">520 days</span>
+</div>
+<div class="w-12 h-1 bg-secondary-fixed-dim rounded-full mt-4"></div>
+</div>
+</section>
+<!-- Memory Polaroid Section (Signature Component) -->
+<section class="mb-8">
+<h3 class="serif text-xl mb-6 px-2">最近的记忆</h3>
+<div class="bg-surface-container-lowest p-4 pb-12 rounded-xl shadow-lg rotate-2 max-w-[280px] mx-auto transition-transform hover:rotate-0 duration-500">
+<div class="aspect-square bg-surface-container-low rounded-lg overflow-hidden mb-6">
+<img class="w-full h-full object-cover" data-alt="romantic couple walking hand in hand at sunset on a quiet beach with golden reflections in the water" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu6o2efpIzfUSKgTxb-4V0lV56lr8F6PIH9hnMi--keWNS7gVHLykA_Mv2pc048fvNfg0OV2BOtB4meHMq04FetHR0BrKyUFPPEuCah2XNBoutoJ8Q3tWhISL7Lio-y9jBqJ-V279aJ0gwn1wii0wKK62KLg5axh8udK0RadpvQkojiPfqU6g0khTJm78TIjqHujmWZqS7eSR1oPL6GYZlJtzO2eMEIIO71ZyVb6tA4KSITWsg7P1X2WNdjbhCTfqULOh50AcoQEQ"/>
+</div>
+<p class="serif text-center text-on-surface-variant italic">2023.10.24 — 初见落日</p>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-6 bg-white/90 dark:bg-stone-950/90 backdrop-blur-xl rounded-t-[3rem] z-50 shadow-[0_-4px_24px_rgba(229,115,115,0.08)]">
+<button class="flex flex-col items-center justify-center text-red-500 dark:text-red-300 bg-red-50 dark:bg-red-950/30 rounded-full px-4 py-1 transition-transform duration-300 active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium uppercase tracking-tighter mt-1">首页</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:text-red-300 transition-colors active:scale-90 duration-300">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium uppercase tracking-tighter mt-1">日记</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:text-red-300 transition-colors active:scale-90 duration-300">
+<span class="material-symbols-outlined">photo_library</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium uppercase tracking-tighter mt-1">相册</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:text-red-300 transition-colors active:scale-90 duration-300">
+<span class="material-symbols-outlined">event</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium uppercase tracking-tighter mt-1">纪念日</span>
+</button>
+</nav>
+<!-- Floating Heart FAB -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary/20 backdrop-blur-md rounded-full flex items-center justify-center shadow-xl border border-primary/20 transition-all duration-300 hover:scale-110 active:scale-95 group">
+<span class="material-symbols-outlined text-primary text-2xl group-hover:scale-125 transition-transform" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</body></html>

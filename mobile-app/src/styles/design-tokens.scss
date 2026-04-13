@@ -1,0 +1,16 @@
+/*
+ * Design source priority:
+ * 1) After Stitch MCP works: fetch HTML per design/stitch/README.md → map to uView Pro (skill stitch-uviewpro-components).
+ * 2) Fallback: example/ui.html Tailwind tokens in this file.
+ */
+$love-primary: #bc004f;
+$love-background: #fef8f4;
+$love-on-surface: #1d1b19;
+$love-on-surface-variant: #564241;
+$love-secondary: #ab2c5d;
+$love-surface-container-lowest: #ffffff;
+$love-surface-container-low: #f8f2ef;
+$love-outline-variant: #dcc0bf;
+$love-secondary-fixed: #ffd9e1;
+$love-tertiary-fixed: #ffdad9;
+$love-error: #ba1a1a;

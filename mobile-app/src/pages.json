@@ -1,0 +1,97 @@
+{
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"^u-(.*)": "uview-pro/components/u-$1/u-$1.vue"
+		}
+	},
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "布布与一二的恋爱日记"
+			}
+		},
+		{
+			"path": "pages/confession/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "爱的告白"
+			}
+		},
+		{
+			"path": "pages/diary/list",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "恋爱日记",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/diary/edit",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "编辑日记"
+			}
+		},
+		{
+			"path": "pages/diary/detail",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "日记详情"
+			}
+		},
+		{
+			"path": "pages/album/list",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "爱的相册",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/album/detail",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "相册"
+			}
+		},
+		{
+			"path": "pages/milestone/list",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "相爱里程碑",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/milestone/edit",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "编辑里程碑"
+			}
+		},
+		{
+			"path": "pages/milestone/detail",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "里程碑详情"
+			}
+		},
+		{
+			"path": "pages/about/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "隐私说明"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "恋爱日记",
+		"navigationBarBackgroundColor": "#fef8f4",
+		"backgroundColor": "#fef8f4",
+		"navigationStyle": "custom"
+	}
+}

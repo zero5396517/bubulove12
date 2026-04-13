@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#dcc0bf",
+                    "on-primary-fixed-variant": "#90003b",
+                    "surface-container-highest": "#e7e1de",
+                    "secondary-fixed": "#ffd9e1",
+                    "primary-fixed-dim": "#ffb2bf",
+                    "surface-bright": "#fef8f4",
+                    "secondary-fixed-dim": "#ffb1c5",
+                    "inverse-primary": "#ffb2bf",
+                    "on-secondary-container": "#6e0034",
+                    "surface": "#fef8f4",
+                    "error": "#ba1a1a",
+                    "secondary": "#ab2c5d",
+                    "on-background": "#1d1b19",
+                    "surface-container-low": "#f8f2ef",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#f5f0ec",
+                    "primary": "#bc004f",
+                    "tertiary-fixed": "#ffdad9",
+                    "on-secondary-fixed": "#3f001b",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#380c0f",
+                    "surface-variant": "#e7e1de",
+                    "tertiary-fixed-dim": "#ffb3b3",
+                    "on-primary": "#ffffff",
+                    "inverse-surface": "#32302e",
+                    "surface-dim": "#ded9d5",
+                    "on-tertiary-container": "#4f1e20",
+                    "background": "#fef8f4",
+                    "on-surface-variant": "#564241",
+                    "primary-container": "#ff5986",
+                    "outline": "#897271",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#bc004f",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#620026",
+                    "secondary-container": "#fd6c9c",
+                    "primary-fixed": "#ffd9de",
+                    "on-primary-fixed": "#3f0016",
+                    "on-tertiary-fixed-variant": "#6e3638",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#f3ede9",
+                    "tertiary": "#8a4d4e",
+                    "tertiary-container": "#c98283",
+                    "surface-container-high": "#ede7e3",
+                    "on-error": "#ffffff",
+                    "on-surface": "#1d1b19",
+                    "on-secondary-fixed-variant": "#8b0e45"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, .serif { font-family: 'Noto Serif', serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-stone-900/80 backdrop-blur-md shadow-sm shadow-red-900/5 h-16 flex items-center justify-between px-6">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-red-400 dark:text-red-300 mr-2">favorite</span>
+<h1 class="font-['Noto_Serif'] font-bold text-red-500 dark:text-red-400 text-lg tracking-wide">布布与一二的恋爱日记</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined text-stone-400 dark:text-stone-500">more_vert</span>
+</button>
+</header>
+<!-- Main Canvas -->
+<main class="pt-24 px-6 max-w-2xl mx-auto">
+<!-- Search & Filter Section -->
+<section class="mb-10 space-y-6">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full h-14 pl-12 pr-6 bg-surface-container-high border-none rounded-full focus:ring-2 focus:ring-primary/20 text-on-surface placeholder:text-outline/60 transition-all" placeholder="搜索那些心动时刻..." type="text"/>
+</div>
+<!-- Horizontal Year/Month Filter -->
+<div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+<button class="px-6 py-2 rounded-full bg-primary text-on-primary text-sm font-medium whitespace-nowrap shadow-md shadow-primary/20">2024 全部</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-medium whitespace-nowrap hover:bg-surface-container-highest transition-colors">十二月</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-medium whitespace-nowrap hover:bg-surface-container-highest transition-colors">十一月</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-medium whitespace-nowrap hover:bg-surface-container-highest transition-colors">十月</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-medium whitespace-nowrap hover:bg-surface-container-highest transition-colors">九月</button>
+</div>
+</section>
+<!-- Diary Entries List -->
+<div class="space-y-8">
+<!-- Entry Card 1: Image Left Layout -->
+<article class="relative flex flex-col md:flex-row gap-6 p-6 rounded-xl bg-surface-container-lowest shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-transform hover:-translate-y-1">
+<div class="md:w-1/3 h-48 md:h-auto overflow-hidden rounded-lg">
+<img alt="Romantic coffee date" class="w-full h-full object-cover" data-alt="close-up of two cups of latte art with a small red heart on the foam, warm morning sunlight, cozy cafe setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQ12o-RXN-r17cYcfW94ZyFkjiq00TRGhIcoY9X-Zgd1ez4uEBqJAT0ecwrnUFxe6sbOAGTyQ3Gqtd0umgakn_E4RHT87IQxJDVBjSs-4rcvG9sXERnwofP3jOirnLs-3os7TtSHgusPJYrPjt3Qsd1XUA3OHNvBbr4R18bCW2ua8qVnBE1uYpuluI5dwB9Dxb-UPvSnp8puK1N34eWpFQUXLFPmOuBR074DJ4wK0G3fHzjP3qa0n_EIZvNJiANR8fn7UjHPto810"/>
+</div>
+<div class="md:w-2/3 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary bg-primary-fixed px-2 py-0.5 rounded-full">12月14日</span>
+<span class="text-[10px] text-outline font-medium">14:20 PM</span>
+</div>
+<h2 class="text-xl font-bold mb-3 leading-tight">那个午后的拿铁拉花</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed line-clamp-3">
+                            今天和你一起去了那家心心念念很久的咖啡馆。阳光正好洒在你的发梢，你说要把那个拉花心心留到最后喝，结果一不小心就被我偷喝了一口...
+                        </p>
+</div>
+<div class="mt-4 flex items-center text-primary text-xs font-semibold gap-1 group cursor-pointer">
+                        继续阅读 <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+</article>
+<!-- Entry Card 2: Pure Text / Poetic Layout -->
+<article class="relative p-10 rounded-xl bg-surface-container-low flex flex-col items-center text-center">
+<div class="mb-4">
+<span class="material-symbols-outlined text-primary/40 scale-150">format_quote</span>
+</div>
+<div class="mb-6">
+<h3 class="serif text-2xl italic font-medium leading-relaxed mb-4">"如果思念有声音，那一定是今晚窗外的雨声。"</h3>
+<p class="text-on-surface-variant text-sm max-w-md">只是突然想你了。想念我们一起撑伞走过的那些街道，想念你手心的温度。</p>
+</div>
+<div class="text-[10px] font-bold text-outline tracking-tighter uppercase">12月10日 · 23:58</div>
+</article>
+<!-- Entry Card 3: Wide Layout -->
+<article class="group rounded-xl bg-surface-container-lowest overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+<div class="relative h-64">
+<img alt="Starry night sky" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="dramatic wide shot of a starry night sky over dark silhouettes of trees, deep navy and violet hues with bright glowing stars" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBY8AXi1VyYlM7TZt6HNIVCvUu9C0bog53LfSdK7yyHLMbbs9_lo4PCV4zz26RqnxRmgdC5MOr9AUYRkzu6FV6m2zC0fFbcbTJqi9eWQhXlpGXyZlqnXoRQoV_JznJgVG5D5yarLMfmu_fkF_NLNI8eF5XTUWxMRN_ElM6t8tRYe0l9OCrlRtLyR9uJdH11zzo7HSnBDJ_W9P-4piRI2_xI-t0U7SLcoIenBoGsrqz6D8KJapuF19xQa5v-iYQ9sNk7XpAofJhurfA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6">
+<div class="flex items-center gap-2 mb-2">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-primary bg-primary px-2 py-0.5 rounded-full">12月05日</span>
+</div>
+<h2 class="text-xl font-bold leading-tight">在天台看星星的那一晚</h2>
+</div>
+</div>
+<div class="p-6">
+<p class="text-on-surface-variant text-sm leading-relaxed mb-4">
+                        我们在天台坐了整整三个小时，聊着那些关于未来的琐碎梦想。原来最浪漫的事，不是去多远的地方，而是身边是你。
+                    </p>
+<div class="flex gap-2">
+<span class="bg-surface-container px-3 py-1 rounded-full text-[10px] text-outline"># 天台</span>
+<span class="bg-surface-container px-3 py-1 rounded-full text-[10px] text-outline"># 星星</span>
+<span class="bg-surface-container px-3 py-1 rounded-full text-[10px] text-outline"># 秘密</span>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- Floating Action Button (FAB) -->
+<button class="fixed right-6 bottom-24 w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary shadow-[0_12px_32px_rgba(188,0,79,0.25)] flex items-center justify-center active:scale-90 transition-transform duration-300 z-50">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full bg-white/90 dark:bg-stone-950/90 backdrop-blur-xl rounded-t-[3rem] z-50 shadow-[0_-4px_24px_rgba(229,115,115,0.08)] flex justify-around items-center px-4 pt-3 pb-6">
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:text-red-300 transition-colors active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium uppercase tracking-tighter mt-1">首页</span>
+</a>
+<a class="flex flex-col items-center justify-center text-red-500 dark:text-red-300 bg-red-50 dark:bg-red-950/30 rounded-full px-4 py-1 active:scale-90 transition-transform duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium uppercase tracking-tighter mt-1">日记</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:text-red-300 transition-colors active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined">photo_library</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium uppercase tracking-tighter mt-1">相册</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:text-red-300 transition-colors active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined">event</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium uppercase tracking-tighter mt-1">纪念日</span>
+</a>
+</nav>
+</body></html>
