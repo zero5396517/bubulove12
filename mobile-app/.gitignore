@@ -10,7 +10,13 @@ lerna-debug.log*
 node_modules
 .DS_Store
 dist
+.test-integrate
 *.local
+
+# Android release signing (offline packaging)
+keystore.properties
+*.keystore
+*.jks
 
 # Editor directories and files
 .idea

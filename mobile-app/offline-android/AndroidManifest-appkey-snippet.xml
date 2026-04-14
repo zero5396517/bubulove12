@@ -1,0 +1,8 @@
+<!--
+  Paste inside <application> (merge with SDK AndroidManifest.xml).
+  Replace REPLACE_WITH_DCLOUD_ANDROID_APPKEY with the Android AppKey from
+  https://dev.dcloud.net.cn/ → your app → 离线打包 / 原生应用配置
+-->
+    <meta-data
+        android:name="dcloud_appkey"
+        android:value="REPLACE_WITH_DCLOUD_ANDROID_APPKEY" />
