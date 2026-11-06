@@ -8,15 +8,16 @@
     root.GiftLines = api;
   }
 })(typeof self !== "undefined" ? self : this, function () {
-  var OPENING = "莹酱，今天不谈别的，只把心里的话说给你。";
-  var ROSES = "先让花开一会儿。";
-  var ENTRANCE = "一二，我穿过很多天，才走到你面前。";
+  var OPENING = "臭布布 和香一二是一对幸福的小熊熊";
+  var ROSES = "";
+  var ENTRANCE = " ";
   var LOVE = [
-    "喜欢你，是我做过最安静、也最确定的事。",
-    "世界再大，我也只要与你并肩的那一条路。",
-    "若岁月允许，我想把余生都交给你。"
+    " 幸福的花儿为你盛开~~",
+    " 有你的每天都很精彩~",
+    " 亲爱的一二，我 喜欢你啊~",
+    "愿你幸福永远，快乐永远~ ~"
   ];
-  var HOLD = "莹酱，这就是布布对一二说的。也是我对你说的。我爱你。";
+  var HOLD = "莹酱，我爱你。";
 
   function textFor(scene, lineIndex) {
     if (scene === 1) return OPENING;
