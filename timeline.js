@@ -7,9 +7,9 @@
     root.GiftTimeline = factory();
   }
 })(typeof self !== "undefined" ? self : this, function () {
-  // 点下之后才计时。第 5 幕没有时长，句子出现后停住。
-  var SCENE_ENDS = [8000, 20000, 32000, 56000];
+  // 点下之后才计时。第 1 句到第 5 句各约 8 秒。第 6 句没有时长，句子出现后停住。
   var LINE_MS = 8000;
+  var HOLD_AT = 40000;
 
   function createTimeline(options) {
     var now = options && typeof options.now === "function" ? options.now : function () {
@@ -20,19 +20,12 @@
     var runId = 0;
 
     function sceneFor(elapsed) {
-      if (elapsed < SCENE_ENDS[0]) return 1;
-      if (elapsed < SCENE_ENDS[1]) return 2;
-      if (elapsed < SCENE_ENDS[2]) return 3;
-      if (elapsed < SCENE_ENDS[3]) return 4;
-      return 5;
-    }
-
-    function lineIndexFor(elapsed, scene) {
-      if (scene !== 4) return null;
-      var index = Math.floor((elapsed - SCENE_ENDS[2]) / LINE_MS);
-      if (index < 0) return 0;
-      if (index > 2) return 2;
-      return index;
+      if (elapsed < LINE_MS) return 1;
+      if (elapsed < LINE_MS * 2) return 2;
+      if (elapsed < LINE_MS * 3) return 3;
+      if (elapsed < LINE_MS * 4) return 4;
+      if (elapsed < HOLD_AT) return 5;
+      return 6;
     }
 
     function snapshot() {
@@ -42,20 +35,18 @@
           playing: false,
           finished: false,
           muted: muted,
-          lineIndex: null,
           runId: runId
         };
       }
       var elapsed = now() - startedAt;
       if (elapsed < 0) elapsed = 0;
       var scene = sceneFor(elapsed);
-      var finished = scene === 5;
+      var finished = scene === 6;
       return {
         scene: scene,
         playing: !finished,
         finished: finished,
         muted: muted,
-        lineIndex: lineIndexFor(elapsed, scene),
         runId: runId
       };
     }

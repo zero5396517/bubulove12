@@ -3,7 +3,9 @@
 (function () {
   var theater = document.querySelector(".theater");
   var timeline = window.GiftTimeline.createTimeline();
-  var music = window.GiftMusic.createMusicBox();
+  var music = window.GiftMusic.createMusic({
+    element: document.querySelector("[data-music]")
+  });
   window.GiftGate.attach({
     timeline: timeline,
     music: music,
@@ -13,6 +15,7 @@
     timeline: timeline,
     music: music,
     script: window.GiftLines,
+    pictures: window.GiftPictures,
     root: theater
   });
 })();
