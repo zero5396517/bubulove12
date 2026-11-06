@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6efe6">
+  <title>给莹酱</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="room">
+    <div class="petals" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+    <div class="dust" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+    <main class="theater" data-scene="0">
+      <div class="daylight" aria-hidden="true"></div>
+      <figure class="cast" data-cast>
+        <img alt="">
+        <img alt="">
+        <canvas class="sky" data-sky aria-hidden="true"></canvas>
+      </figure>
+      <p class="line" data-line hidden></p>
+      <button class="replay" type="button" data-replay hidden>再看一次</button>
+      <button class="gate" type="button" data-gate>
+        <svg class="gate-rose" viewBox="0 0 64 86" aria-hidden="true"><path d="M32 48c7 9 9 16 7 28" fill="none" stroke="#7f9a74" stroke-width="2" stroke-linecap="round"/><circle cx="32" cy="34" r="9" fill="#e98996"/><circle cx="23" cy="29" r="8" fill="#f4b4be"/><circle cx="41" cy="30" r="8" fill="#d96d80"/><circle cx="32" cy="22" r="8" fill="#f7c5cc"/><circle cx="32" cy="31" r="3.5" fill="#f6dde1"/></svg>
+        <span class="gate-title">这是给莹酱的</span>
+        <span class="gate-rule" aria-hidden="true"></span>
+        <span class="gate-hint">点一下</span>
+      </button>
+      <button class="mute" type="button" data-mute hidden aria-pressed="false">静音</button>
+    </main>
+  </div>
+  <audio data-music loop preload="auto">
+    <source src="assets/chopin-nocturne-op9-no2.mp3" type="audio/mpeg">
+    <source src="assets/chopin-nocturne-op9-no2.ogg" type="audio/ogg">
+  </audio>
+  <audio data-pops preload="auto">
+    <source src="assets/sharp-explosion-1.mp3" type="audio/mpeg">
+  </audio>
+  <noscript><p class="noscript">请允许页面运行脚本，再点一下开始。</p></noscript>
+  <script src="lines.js"></script>
+  <script src="pictures.js"></script>
+  <script src="timeline.js"></script>
+  <script src="music.js"></script>
+  <script src="pops.js"></script>
+  <script src="fireworks.js"></script>
+  <script src="gate.js"></script>
+  <script src="stage.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
