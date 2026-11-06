@@ -7,9 +7,10 @@
     root.GiftTimeline = factory();
   }
 })(typeof self !== "undefined" ? self : this, function () {
-  // 点下之后才计时。第 1 句到第 5 句各约 8 秒。第 6 句没有时长，句子出现后停住。
+  // 点下之后才计时。第 1 幕到第 6 幕各约 8 秒。约 48 秒进入夜空，约 54 秒定住。
   var LINE_MS = 8000;
-  var HOLD_AT = 40000;
+  var NIGHT_AT = 48000;
+  var LOCK_AT = 54000;
 
   function createTimeline(options) {
     var now = options && typeof options.now === "function" ? options.now : function () {
@@ -24,8 +25,9 @@
       if (elapsed < LINE_MS * 2) return 2;
       if (elapsed < LINE_MS * 3) return 3;
       if (elapsed < LINE_MS * 4) return 4;
-      if (elapsed < HOLD_AT) return 5;
-      return 6;
+      if (elapsed < LINE_MS * 5) return 5;
+      if (elapsed < NIGHT_AT) return 6;
+      return 7;
     }
 
     function snapshot() {
@@ -41,7 +43,7 @@
       var elapsed = now() - startedAt;
       if (elapsed < 0) elapsed = 0;
       var scene = sceneFor(elapsed);
-      var finished = scene === 6;
+      var finished = elapsed >= LOCK_AT;
       return {
         scene: scene,
         playing: !finished,

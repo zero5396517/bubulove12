@@ -19,6 +19,7 @@
   ];
 
   function textFor(scene) {
+    if (scene === 7) return LINES[6];
     return LINES[scene] || "";
   }
 
