@@ -120,6 +120,24 @@
       document.documentElement.style.setProperty("--sky", value);
     }
 
+    function rgba(hex, alpha) {
+      var r = parseInt(hex.slice(1, 3), 16);
+      var g = parseInt(hex.slice(3, 5), 16);
+      var b = parseInt(hex.slice(5, 7), 16);
+      return "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
+    }
+
+    function drawOrb(ctx, x, y, radius, color, alpha) {
+      var glow = ctx.createRadialGradient(x, y, 0, x, y, radius);
+      glow.addColorStop(0, rgba(color, Math.min(1, alpha)));
+      glow.addColorStop(0.28, rgba(color, alpha * 0.55));
+      glow.addColorStop(1, rgba(color, 0));
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
     function drawSky(frame) {
       if (!skyEl || !frame) return;
       var ctx = skyEl.getContext("2d");
@@ -137,24 +155,31 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, w, h);
       ctx.globalCompositeOperation = "lighter";
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
       var sparks = frame.sparks || [];
+      var minSide = Math.min(w, h);
       var i;
+      var p;
       for (i = 0; i < sparks.length; i += 1) {
         var s = sparks[i];
         var x = s.x * w;
         var y = s.y * h;
-        var scale = s.kind === "burst" ? Math.max(Math.min(w, h), 340) : Math.min(w, h);
+        var isBurst = s.kind === "burst" || s.kind === "trace";
+        var scale = isBurst ? Math.max(minSide, 340) : minSide;
         var r = s.r * scale;
-        var glow = s.kind === "burst" ? 4.4 : 3.1;
-        ctx.globalAlpha = s.alpha * (s.kind === "burst" ? 0.5 : 0.42);
-        ctx.fillStyle = s.color;
-        ctx.beginPath();
-        ctx.arc(x, y, r * glow, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.globalAlpha = s.alpha;
-        ctx.beginPath();
-        ctx.arc(x, y, r, 0, Math.PI * 2);
-        ctx.fill();
+        var trail = s.trail;
+        if (trail && trail.length > 1) {
+          ctx.strokeStyle = rgba(s.color, s.alpha * 0.85);
+          ctx.lineWidth = Math.max(1.1, r * (s.kind === "trace" ? 0.7 : 1.15));
+          ctx.beginPath();
+          ctx.moveTo(trail[0].x * w, trail[0].y * h);
+          for (p = 1; p < trail.length; p += 1) {
+            ctx.lineTo(trail[p].x * w, trail[p].y * h);
+          }
+          ctx.stroke();
+        }
+        drawOrb(ctx, x, y, r * (isBurst ? 3.6 : 2.8), s.color, s.alpha);
       }
       ctx.globalAlpha = 1;
       ctx.globalCompositeOperation = "source-over";

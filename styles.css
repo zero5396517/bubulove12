@@ -6,10 +6,23 @@ html, body {
   overflow: hidden;
 }
 
+:root {
+  --ink: oklch(0.32 0.04 28);
+  --muted: oklch(0.48 0.04 30);
+  --paper: oklch(0.97 0.015 85);
+  --blush: oklch(0.88 0.045 18);
+  --gold: oklch(0.72 0.08 80);
+  --night: oklch(0.16 0.04 290);
+  --wax: oklch(0.55 0.13 18);
+  --font-letter: "Songti SC", "STSong", "Noto Serif SC", "SimSun", serif;
+  --font-ui: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --shadow-sheet: 0 1px 0 oklch(0.78 0.04 70 / 0.45), 0 22px 48px oklch(0.4 0.04 30 / 0.12);
+}
+
 body {
-  color: #5c3340;
-  font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-  background: color-mix(in srgb, #f3eadf calc((1 - var(--sky, 0)) * 100%), #120e28 calc(var(--sky, 0) * 100%));
+  color: var(--ink);
+  font-family: var(--font-letter);
+  background: color-mix(in srgb, oklch(0.93 0.02 70) calc((1 - var(--sky, 0)) * 100%), oklch(0.16 0.04 290) calc(var(--sky, 0) * 100%));
   -webkit-text-size-adjust: 100%;
 }
 
@@ -22,32 +35,31 @@ button { font: inherit; color: inherit; }
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: color-mix(in srgb, #f3eadf calc((1 - var(--sky, 0)) * 100%), #120e28 calc(var(--sky, 0) * 100%));
+  background: color-mix(in srgb, oklch(0.93 0.02 70) calc((1 - var(--sky, 0)) * 100%), oklch(0.16 0.04 290) calc(var(--sky, 0) * 100%));
 }
 
 .theater {
   position: relative;
   z-index: 1;
-  width: min(860px, calc(100vw - 140px));
-  height: min(640px, calc(100dvh - 88px));
+  width: min(760px, calc(100vw - 96px));
+  height: min(780px, calc(100dvh - 56px));
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 12px;
   padding:
     calc(env(safe-area-inset-top, 0px) + 28px)
-    calc(env(safe-area-inset-right, 0px) + 28px)
+    calc(env(safe-area-inset-right, 0px) + 32px)
     calc(env(safe-area-inset-bottom, 0px) + 24px)
-    calc(env(safe-area-inset-left, 0px) + 28px);
+    calc(env(safe-area-inset-left, 0px) + 32px);
   overflow: hidden;
-  border-radius: 28px;
-  border: 1px solid color-mix(in srgb, rgba(196, 148, 120, 0.38) calc((1 - var(--sky, 0)) * 100%), rgba(70, 58, 110, 0.45) calc(var(--sky, 0) * 100%));
+  border-radius: 2px;
+  border: 1px solid color-mix(in srgb, oklch(0.78 0.04 70 / 0.55) calc((1 - var(--sky, 0)) * 100%), oklch(0.3 0.04 290 / 0.2) calc(var(--sky, 0) * 100%));
   background:
-    linear-gradient(rgba(18, 14, 40, var(--sky, 0)), rgba(22, 16, 48, var(--sky, 0))),
-    radial-gradient(ellipse 78% 48% at 50% 0%, #fffaf4 0%, rgba(255, 250, 244, 0) 68%),
-    linear-gradient(180deg, #f8ebe4 0%, #f6d9d8 100%);
-  box-shadow: 0 18px 50px color-mix(in srgb, rgba(120, 72, 72, 0.08) calc((1 - var(--sky, 0)) * 100%), rgba(12, 8, 28, 0.45) calc(var(--sky, 0) * 100%));
+    linear-gradient(oklch(0.16 0.04 290 / var(--sky, 0)), oklch(0.16 0.04 290 / var(--sky, 0))),
+    var(--paper);
+  box-shadow: var(--shadow-sheet);
 }
 
 .daylight {
@@ -98,20 +110,28 @@ button { font: inherit; color: inherit; }
 
 .gate[hidden] { display: none !important; }
 
-.gate-rose { width: 54px; height: 72px; }
+.gate-seal {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 6px 10px oklch(0.4 0.08 18 / 0.28));
+}
+
+.gate-seal svg { width: 64px; height: 64px; display: block; }
 
 .gate-title {
-  font-size: clamp(32px, 6vw, 64px);
+  font-size: clamp(28px, 5.4vw, 44px);
   font-weight: 500;
-  letter-spacing: 0.08em;
-  line-height: 1.2;
+  letter-spacing: 0.16em;
+  line-height: 1.25;
   white-space: nowrap;
 }
 
 .gate-rule {
-  width: 36px;
+  width: 40px;
   height: 1px;
-  background: #d4b06a;
+  background: var(--gold);
 }
 
 .gate-hint {
@@ -120,11 +140,11 @@ button { font: inherit; color: inherit; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 22px;
-  border: 1px solid rgba(110, 61, 72, 0.28);
-  border-radius: 999px;
-  letter-spacing: 0.18em;
-  font-size: 18px;
+  padding: 8px 20px;
+  border: 1px solid oklch(0.45 0.05 30 / 0.28);
+  border-radius: 0;
+  letter-spacing: 0.32em;
+  font-size: 16px;
   animation: hint 2.4s ease-in-out infinite;
 }
 
@@ -156,17 +176,12 @@ button { font: inherit; color: inherit; }
   display: grid;
 }
 
-.theater[data-scene="6"] .cast {
-  background: #e8e8e8;
-  border-radius: 18px;
-}
-
 .cast img {
   grid-area: 1 / 1;
-  width: auto;
-  height: auto;
-  max-width: min(92%, 560px);
-  max-height: min(52vh, 380px);
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
   object-fit: contain;
   opacity: 0;
   pointer-events: none;
@@ -208,24 +223,30 @@ button { font: inherit; color: inherit; }
   flex: 0 0 auto;
   width: min(22em, 100%);
   margin: 0;
-  padding: 8px 4px 4px;
+  padding: 12px 4px 4px;
   text-align: center;
   text-wrap: balance;
   white-space: pre-wrap;
-  font-size: clamp(24px, 3.4vw, 34px);
+  font-size: clamp(20px, 3vw, 28px);
   font-weight: 500;
-  line-height: 1.65;
-  letter-spacing: 0.02em;
-  text-shadow: 0 0 12px #fff8f4, 0 0 2px #fff8f4;
+  line-height: 1.7;
+  letter-spacing: 0.06em;
 }
 
 .line[hidden] { display: none !important; }
 
 .line.is-shown { animation: line-in 0.7s ease both; }
 
+.theater[data-scene="7"] {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
 .theater[data-scene="7"] .line {
-  color: #f4ebe3;
-  text-shadow: 0 0 14px rgba(18, 12, 36, 0.85), 0 0 2px rgba(18, 12, 36, 0.7);
+  color: oklch(0.93 0.02 80);
 }
 
 @keyframes line-in {
@@ -237,14 +258,15 @@ button { font: inherit; color: inherit; }
   z-index: 6;
   min-width: 44px;
   min-height: 44px;
-  border-radius: 999px;
-  border: 1px solid rgba(120, 70, 78, 0.28);
-  background: rgba(255, 248, 244, 0.9);
-  letter-spacing: 0.08em;
-  font-size: 15px;
+  border-radius: 0;
+  border: 1px solid oklch(0.45 0.05 30 / 0.22);
+  background: transparent;
+  letter-spacing: 0.16em;
+  font-size: 14px;
+  font-family: var(--font-ui);
   cursor: pointer;
   touch-action: manipulation;
-  -webkit-tap-highlight-color: rgba(228, 139, 150, 0.28);
+  -webkit-tap-highlight-color: oklch(0.58 0.12 18 / 0.2);
 }
 
 .mute[hidden], .replay[hidden] { display: none !important; }
@@ -253,8 +275,12 @@ button { font: inherit; color: inherit; }
   position: absolute;
   top: calc(env(safe-area-inset-top, 0px) + 12px);
   right: calc(env(safe-area-inset-right, 0px) + 12px);
-  padding: 0 16px;
+  padding: 0 14px;
+  border: 0;
+  opacity: 0.5;
 }
+
+.mute:hover, .mute:focus-visible { opacity: 1; }
 
 .replay {
   flex: 0 0 auto;
@@ -265,8 +291,13 @@ button { font: inherit; color: inherit; }
 .gate:focus-visible,
 .mute:focus-visible,
 .replay:focus-visible {
-  outline: 2px solid #c45d6e;
+  outline: 2px solid var(--wax);
   outline-offset: 3px;
+}
+
+.theater[data-scene="7"] .replay {
+  border-color: oklch(0.93 0.02 80 / 0.35);
+  color: oklch(0.93 0.02 80);
 }
 
 .petals, .dust {
@@ -331,7 +362,7 @@ button { font: inherit; color: inherit; }
 }
 
 @media (min-width: 901px) and (min-height: 640px) {
-  .petals, .dust { display: block; }
+  .petals { display: block; }
 }
 
 .room:has(.theater[data-scene="6"]) .petals i {
@@ -352,9 +383,6 @@ button { font: inherit; color: inherit; }
 }
 
 @media (orientation: portrait) and (max-width: 900px) {
-  .room {
-    background: color-mix(in srgb, #f6d9d8 calc((1 - var(--sky, 0)) * 100%), #120e28 calc(var(--sky, 0) * 100%));
-  }
   .theater {
     width: 100%;
     height: 100dvh;
@@ -385,11 +413,10 @@ button { font: inherit; color: inherit; }
     padding-top: calc(env(safe-area-inset-top, 0px) + 12px);
     padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 10px);
   }
-  .cast img { max-height: 42vh; }
   .theater[data-scene="7"] .cast { flex: 1 1 46%; min-height: 0; }
-  .line { font-size: clamp(16px, 4.6vh, 26px); }
-  .gate-title { font-size: clamp(28px, 6vh, 48px); }
-  .gate-rose { width: 36px; height: 48px; }
+  .line { font-size: clamp(16px, 4.6vh, 24px); }
+  .gate-title { font-size: clamp(24px, 5.4vh, 36px); }
+  .gate-seal, .gate-seal svg { width: 48px; height: 48px; }
 }
 
 @media (max-width: 420px) {
@@ -401,8 +428,7 @@ button { font: inherit; color: inherit; }
 }
 
 @media (max-height: 740px) and (orientation: portrait) {
-  .cast img { max-height: 38vh; }
-  .line { font-size: 22px; }
+  .line { font-size: 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -426,5 +452,5 @@ button { font: inherit; color: inherit; }
   bottom: 12px;
   margin: 0;
   text-align: center;
-  color: #5c3340;
+  color: var(--ink);
 }
