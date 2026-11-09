@@ -16,6 +16,8 @@
     var fireworks = options.fireworks;
     var script = options.script;
     var pictures = options.pictures;
+    var voices = options.voices;
+    var reveal = options.reveal;
     var lineEl = rootEl.querySelector("[data-line]");
     var gate = rootEl.querySelector("[data-gate]");
     var muteBtn = rootEl.querySelector("[data-mute]");
@@ -27,6 +29,8 @@
     var lastText = null;
     var ticking = false;
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    var LINE_MS = 8000;
+    var NIGHT_AT = 48000;
 
     Array.prototype.forEach.call(layers, function (img) {
       img.addEventListener("error", function () {
@@ -39,21 +43,22 @@
       timeline.setMuted(next);
       music.setMuted(next);
       if (pops) pops.setMuted(next);
+      if (voices) voices.setMuted(next);
       paint();
     });
 
     replayBtn.addEventListener("click", function () {
       if (!timeline.snapshot().finished) return;
       timeline.replay();
+      if (pops) pops.stop();
+      lastText = null;
+      lastScene = null;
+      paint();
       try {
         music.restart();
       } catch (err) {
         /* 重播时换掉声音失败，画面仍从头走 */
       }
-      if (pops) pops.stop();
-      lastText = null;
-      lastScene = null;
-      paint();
       startTick();
     });
 
@@ -158,16 +163,24 @@
         var r = s.r * scale;
         var trail = s.trail;
         if (trail && trail.length > 1) {
-          ctx.strokeStyle = rgba(s.color, s.alpha * 0.85);
-          ctx.lineWidth = Math.max(1.1, r * (s.kind === "trace" ? 0.7 : 1.15));
           ctx.beginPath();
           ctx.moveTo(trail[0].x * w, trail[0].y * h);
           for (p = 1; p < trail.length; p += 1) {
             ctx.lineTo(trail[p].x * w, trail[p].y * h);
           }
+          if (isBurst) {
+            ctx.strokeStyle = rgba(s.color, s.alpha * 0.45);
+            ctx.lineWidth = Math.max(2.6, r * 3.4);
+            ctx.stroke();
+          }
+          ctx.strokeStyle = rgba(isBurst ? "#fff6e4" : s.color, s.alpha * (isBurst ? 0.92 : 0.85));
+          ctx.lineWidth = Math.max(1.1, r * (s.kind === "trace" ? 1.15 : isBurst ? 1.35 : 1.15));
           ctx.stroke();
         }
-        drawOrb(ctx, x, y, r * (isBurst ? 3.6 : 2.8), s.color, s.alpha);
+        drawOrb(ctx, x, y, r * (isBurst ? 4.2 : 2.8), s.color, s.alpha);
+        if (isBurst && s.r >= 0.008) {
+          drawOrb(ctx, x, y, r * 1.5, "#fffaf2", s.alpha * 0.9);
+        }
       }
       ctx.globalAlpha = 1;
       ctx.globalCompositeOperation = "source-over";
@@ -181,9 +194,58 @@
       ctx.clearRect(0, 0, skyEl.width, skyEl.height);
     }
 
+    function lineElapsed(snap, duration) {
+      if (snap.scene === 6) return duration;
+      if (snap.scene === 7) return (snap.elapsed || 0) - NIGHT_AT;
+      if (snap.scene >= 1) return (snap.elapsed || 0) - (snap.scene - 1) * LINE_MS;
+      return 0;
+    }
+
+    function opacityText(value) {
+      if (value >= 1) return "1";
+      if (value <= 0) return "0";
+      return String(Math.round(value * 1000) / 1000);
+    }
+
+    function paintLine(snap) {
+      var spec = script.lineFor ? script.lineFor(snap.scene) : null;
+      var text = spec ? spec.text : script.textFor(snap.scene);
+      if (!text) {
+        lastText = "";
+        lineEl.textContent = "";
+        lineEl.hidden = true;
+        return;
+      }
+      var duration = voices && spec ? voices.durationMs(spec.index) : 0;
+      var chars = reveal
+        ? reveal.fade(text, lineElapsed(snap, duration), duration, reduceMotion.matches)
+        : [{ char: text, opacity: 1 }];
+      lineEl.hidden = false;
+      if (text !== lastText) {
+        lastText = text;
+        lineEl.textContent = "";
+        var i;
+        for (i = 0; i < chars.length; i += 1) {
+          var span = document.createElement("span");
+          span.className = "ch";
+          span.textContent = chars[i].char;
+          span.style.opacity = opacityText(chars[i].opacity);
+          lineEl.appendChild(span);
+        }
+        return;
+      }
+      var spans = lineEl.children;
+      var j;
+      for (j = 0; j < chars.length; j += 1) {
+        if (!spans[j]) continue;
+        var next = opacityText(chars[j].opacity);
+        if (spans[j].style.opacity !== next) spans[j].style.opacity = next;
+      }
+    }
+
     function paint() {
       var snap = timeline.snapshot();
-      var text = script.textFor(snap.scene);
+      if (voices) voices.sync(snap);
       var elapsed = nightMs(snap);
       var frame = null;
       if (snap.scene === 7 && fireworks) {
@@ -209,16 +271,7 @@
           reduceMotion: reduceMotion.matches
         });
       }
-      if (text !== lastText) {
-        lastText = text;
-        lineEl.textContent = text;
-        lineEl.hidden = text === "";
-        lineEl.classList.remove("is-shown");
-        if (text) {
-          void lineEl.offsetWidth;
-          lineEl.classList.add("is-shown");
-        }
-      }
+      paintLine(snap);
     }
 
     function tick() {

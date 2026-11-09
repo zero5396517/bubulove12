@@ -10,14 +10,24 @@
   function createMusic(options) {
     var audio = options && options.element;
     var muted = false;
+    var ducked = false;
+    var QUIET = 0.22;
+    var SOFTER = 0.06;
+
+    function applyLevel() {
+      if (!audio) return;
+      audio.volume = ducked ? SOFTER : QUIET;
+      audio.muted = muted;
+    }
+
     if (audio) {
       audio.loop = true;
-      audio.volume = 0.22;
+      applyLevel();
     }
 
     function start() {
       if (!audio) return;
-      audio.muted = muted;
+      applyLevel();
       try {
         audio.currentTime = 0;
       } catch (err) {
@@ -39,13 +49,25 @@
 
     function setMuted(value) {
       muted = Boolean(value);
-      if (audio) audio.muted = muted;
+      applyLevel();
+    }
+
+    function duck() {
+      ducked = true;
+      applyLevel();
+    }
+
+    function unduck() {
+      ducked = false;
+      applyLevel();
     }
 
     return {
       start: start,
       restart: restart,
-      setMuted: setMuted
+      setMuted: setMuted,
+      duck: duck,
+      unduck: unduck
     };
   }
 

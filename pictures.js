@@ -17,9 +17,34 @@
     6: { src: "assets/06-hug.gif", animated: true, still: "assets/06-hug-still.png" }
   };
 
+  var cache = [];
+
   function pictureFor(scene) {
     return PICTURES[scene] || null;
   }
 
-  return { pictureFor: pictureFor };
+  // 换幕时再取图会空一拍。开场门还亮着时就把六张图和静帧取进缓存。
+  function preload() {
+    if (cache.length || typeof Image !== "function") return;
+    var scene;
+    for (scene in PICTURES) {
+      if (!Object.prototype.hasOwnProperty.call(PICTURES, scene)) continue;
+      keep(PICTURES[scene].src);
+      if (PICTURES[scene].still) keep(PICTURES[scene].still);
+    }
+  }
+
+  function keep(src) {
+    var img = new Image();
+    img.decoding = "async";
+    img.src = src;
+    cache.push(img);
+    if (typeof img.decode === "function") {
+      img.decode().catch(function () {
+        /* 这张没解码成功，换幕时再试一次 */
+      });
+    }
+  }
+
+  return { pictureFor: pictureFor, preload: preload };
 });
