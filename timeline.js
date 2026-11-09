@@ -34,6 +34,7 @@
       if (startedAt === null) {
         return {
           scene: 0,
+          elapsed: 0,
           playing: false,
           finished: false,
           muted: muted,
@@ -46,6 +47,7 @@
       var finished = elapsed >= LOCK_AT;
       return {
         scene: scene,
+        elapsed: elapsed,
         playing: !finished,
         finished: finished,
         muted: muted,

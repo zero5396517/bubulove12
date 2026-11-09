@@ -37,6 +37,7 @@ test("没点的时候停在邀请", function () {
   c.set(120000);
   const snap = tl.snapshot();
   assert.equal(snap.scene, 0);
+  assert.equal(snap.elapsed, 0);
   assert.equal(snap.playing, false);
   assert.equal(snap.finished, false);
 });
@@ -84,6 +85,7 @@ test("把时钟向前拨过约 8 秒，句子跟着换", function () {
   marks.forEach(function (mark) {
     c.set(mark[0]);
     const snap = tl.snapshot();
+    assert.equal(snap.elapsed, mark[0], "elapsed t=" + mark[0]);
     assert.equal(snap.scene, mark[1], "t=" + mark[0]);
     assert.equal(snap.playing, mark[2], "playing t=" + mark[0]);
     assert.equal(snap.finished, mark[3], "finished t=" + mark[0]);
@@ -97,16 +99,19 @@ test("大约 48 秒进入夜空且仍在播、不能重播，大约 54 秒定住
   c.set(48000);
   const night = tl.snapshot();
   assert.equal(night.scene, 7);
+  assert.equal(night.elapsed, 48000);
   assert.equal(night.playing, true);
   assert.equal(night.finished, false);
   assert.equal(tl.replay(), false);
   c.set(54000);
   const locked = tl.snapshot();
   assert.equal(locked.scene, 7);
+  assert.equal(locked.elapsed, 54000);
   assert.equal(locked.playing, false);
   assert.equal(locked.finished, true);
   c.set(180000);
   assert.equal(tl.snapshot().scene, 7);
+  assert.equal(tl.snapshot().elapsed, 180000);
   assert.equal(tl.snapshot().finished, true);
   assert.equal(tl.replay(), true);
 });

@@ -33,7 +33,30 @@
       silence();
     }
 
-    function playOnce() {
+    function unlock() {
+      if (!audio) return;
+      var volume = audio.volume;
+      audio.volume = 0;
+      var play = audio.play();
+      function reset() {
+        audio.pause();
+        audio.volume = volume;
+        try {
+          audio.currentTime = 0;
+        } catch (err) {
+          /* 停在开头失败也不挡后面的轻响 */
+        }
+      }
+      if (play && typeof play.then === "function") {
+        play.then(reset).catch(function () {
+          audio.volume = volume;
+        });
+      } else {
+        reset();
+      }
+    }
+
+    function playOnce(id) {
       if (!audio || muted) return;
       audio.muted = false;
       try {
@@ -44,7 +67,7 @@
       var play = audio.play();
       if (play && typeof play.catch === "function") {
         play.catch(function () {
-          /* 轻响播不出来时，舞台继续画 */
+          if (id !== undefined) delete heard[id];
         });
       }
     }
@@ -68,14 +91,15 @@
         var id = bursting[i];
         if (heard[id]) continue;
         heard[id] = true;
-        if (!state.muted) playOnce();
+        if (!state.muted) playOnce(id);
       }
     }
 
     return {
       tick: tick,
       setMuted: setMuted,
-      stop: stop
+      stop: stop,
+      unlock: unlock
     };
   }
 

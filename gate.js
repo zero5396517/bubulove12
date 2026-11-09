@@ -22,6 +22,13 @@
       } catch (err) {
         /* 音乐起不来时，话仍然往下说 */
       }
+      if (options.pops && typeof options.pops.unlock === "function") {
+        try {
+          options.pops.unlock();
+        } catch (err) {
+          /* 轻响解不开时，夜空仍然会画 */
+        }
+      }
       button.hidden = true;
       return true;
     }

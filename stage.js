@@ -25,8 +25,7 @@
     var front = 0;
     var lastScene = null;
     var lastText = null;
-    var nightRun = 0;
-    var nightOrigin = null;
+    var ticking = false;
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     Array.prototype.forEach.call(layers, function (img) {
@@ -52,10 +51,10 @@
         /* 重播时换掉声音失败，画面仍从头走 */
       }
       if (pops) pops.stop();
-      nightOrigin = null;
       lastText = null;
       lastScene = null;
       paint();
+      startTick();
     });
 
     function srcFor(pic) {
@@ -95,22 +94,11 @@
     }
 
     function nightMs(snap) {
-      if (snap.scene !== 7) {
-        nightOrigin = null;
-        nightRun = snap.runId;
-        return 0;
-      }
-      if (nightRun !== snap.runId || nightOrigin === null) {
-        nightRun = snap.runId;
-        if (snap.finished) {
-          nightOrigin = "still";
-          return 6000;
-        }
-        nightOrigin = Date.now();
-        return 0;
-      }
-      if (nightOrigin === "still") return 6000;
-      return Date.now() - nightOrigin;
+      if (snap.scene !== 7) return 0;
+      var ms = (snap.elapsed || 0) - 48000;
+      if (ms < 0) return 0;
+      if (snap.finished || ms > 6000) return 6000;
+      return ms;
     }
 
     function setSky(amount) {
@@ -199,7 +187,7 @@
       var elapsed = nightMs(snap);
       var frame = null;
       if (snap.scene === 7 && fireworks) {
-        frame = reduceMotion.matches ? fireworks.stillFrame() : fireworks.frameAt(elapsed);
+        frame = reduceMotion.matches || snap.finished ? fireworks.stillFrame() : fireworks.frameAt(elapsed);
       }
       rootEl.dataset.scene = String(snap.scene);
       gate.hidden = snap.scene !== 0;
@@ -233,13 +221,24 @@
       }
     }
 
-    function frame() {
+    function tick() {
       paint();
-      window.requestAnimationFrame(frame);
+      if (timeline.snapshot().finished) {
+        ticking = false;
+        return;
+      }
+      window.requestAnimationFrame(tick);
     }
 
+    function startTick() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(tick);
+    }
+
+    window.addEventListener("resize", paint);
     paint();
-    window.requestAnimationFrame(frame);
+    startTick();
     return { paint: paint };
   }
 

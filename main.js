@@ -12,6 +12,7 @@
   window.GiftGate.attach({
     timeline: timeline,
     music: music,
+    pops: pops,
     button: theater.querySelector("[data-gate]")
   });
   window.GiftStage.attach({

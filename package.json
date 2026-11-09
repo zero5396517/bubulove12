@@ -2,6 +2,6 @@
   "name": "yingjiang-surprise",
   "private": true,
   "scripts": {
-    "test": "node --test"
+    "test": "node test/timeline.test.js && node test/fireworks.test.js"
   }
 }

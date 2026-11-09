@@ -340,6 +340,7 @@
   }
 
   function frameAt(ms) {
+    if (ms >= LOCK_MS) return stillFrame();
     return gather(ms, { still: false });
   }
 

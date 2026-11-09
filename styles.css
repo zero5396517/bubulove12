@@ -246,7 +246,7 @@ button { font: inherit; color: inherit; }
 }
 
 .theater[data-scene="7"] .line {
-  color: oklch(0.93 0.02 80);
+  color: color-mix(in srgb, var(--ink) calc((1 - var(--sky, 0)) * 100%), oklch(0.93 0.02 80) calc(var(--sky, 0) * 100%));
 }
 
 @keyframes line-in {
@@ -293,6 +293,10 @@ button { font: inherit; color: inherit; }
 .replay:focus-visible {
   outline: 2px solid var(--wax);
   outline-offset: 3px;
+}
+
+.theater[data-scene="7"] .mute {
+  color: color-mix(in srgb, var(--ink) calc((1 - var(--sky, 0)) * 100%), oklch(0.93 0.02 80) calc(var(--sky, 0) * 100%));
 }
 
 .theater[data-scene="7"] .replay {
